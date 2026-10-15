@@ -1,0 +1,15 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# External data repos: clone them as described in README.md
+data/concepticon-data/
+data/norare-data/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

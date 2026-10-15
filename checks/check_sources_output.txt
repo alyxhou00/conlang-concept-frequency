@@ -1,0 +1,125 @@
+
+== Calude: coverage, distinct values, range per language
+  ENGLISH    200/200 filled  161 distinct  min= 0.30 max= 4.43
+  SPANISH    200/200 filled  189 distinct  min=-0.53 max= 4.40
+  RUSSIAN    200/200 filled  196 distinct  min= 0.22 max= 4.56
+  GREEK      200/200 filled  195 distinct  min=-0.76 max= 4.55
+  PORTUGUESE 200/200 filled  197 distinct  min=-0.33 max= 4.54
+  CHINESE    184/200 filled  133 distinct  min= 1.30 max= 4.02
+  SWAHILI    200/200 filled  176 distinct  min= 0.00 max= 4.46
+  CHILEAN    192/200 filled  190 distinct  min=-1.75 max= 5.02
+  FINNISH    197/200 filled  181 distinct  min=-0.85 max= 4.41
+  ESTONIAN   200/200 filled  173 distinct  min= 0.60 max= 4.44
+  FRENCH     200/200 filled  187 distinct  min=-0.39 max= 4.26
+  TURKISH    197/200 filled  170 distinct  min= 0.00 max= 4.24
+  CZECH      200/200 filled  195 distinct  min=-0.17 max= 4.51
+  POLISH     200/200 filled  200 distinct  min= 0.14 max= 4.22
+  BASQUE     195/200 filled  182 distinct  min=-0.40 max= 4.58
+  MAORI      194/200 filled  150 distinct  min= 0.00 max= 4.78
+  TOK_PISIN  171/200 filled  151 distinct  min= 0.36 max= 4.80
+
+== Calude: mean pairwise correlation (paper reports 0.73)
+  Pearson 0.706 (min 0.42, max 0.89), Spearman 0.703, 136 pairs
+  lowest per-language mean r: TOK_PISIN 0.56, TURKISH 0.57, SWAHILI 0.65, CHINESE 0.66, MAORI 0.66
+
+== Calude: identical values within a language, value >= 2.5 (likely polysemy double-counting)
+  ENGLISH    2.51  NAME / TO STAND
+  ENGLISH    2.67  FOUR / TO TURN (VEER)
+  RUSSIAN    2.86  FOOT / LEG
+  GREEK      3.90  AT / IN
+  PORTUGUESE 2.92  WIFE / WOMAN
+  CHINESE    2.54  HAND / RIGHT (HAND)
+  CHINESE    3.05  TO GIVE / YEAR
+  CHINESE    3.46  THOU / YE
+  CHINESE    3.86  AND / WITH (ACCOMPANYING)
+  SWAHILI    2.54  FOOT / LEG / WHO
+  SWAHILI    2.67  TO LIE (ON SIDE) / TO SLEEP
+  FINNISH    2.71  HUSBAND / MAN (MALE)
+  ESTONIAN   2.56  BLACK / DIRTY / FIRE
+  ESTONIAN   2.69  FOOT / LEG
+  ESTONIAN   3.38  HUSBAND / MAN (MALE)
+  FRENCH     2.60  WIFE / WOMAN / WOODS
+  FRENCH     3.06  OTHER / PERSON
+  TURKISH    2.51  PERSON / WIDE
+  TURKISH    3.23  HE / THAT
+  CZECH      2.89  HUSBAND / MAN (MALE)
+  CZECH      2.89  WIFE / WOMAN
+  CZECH      3.32  THOU / YE
+  CZECH      4.08  HE / THEY
+  BASQUE     2.95  TO DIE / TO KILL
+  BASQUE     3.07  ROAD / THERE
+  BASQUE     3.90  THAT / YELLOW
+  MAORI      2.53  BIRD / MOTHER
+  MAORI      2.59  HUSBAND / MAN (MALE) / NEAR
+  MAORI      2.81  WIFE / WOMAN
+  MAORI      3.12  WATER / WHO
+  MAORI      3.55  THOU / YE
+  TOK_PISIN  2.51  SMOKE / WIND (BREEZE)
+  TOK_PISIN  2.77  TO BITE / TO EAT
+  TOK_PISIN  2.87  FOOT / LEG
+  TOK_PISIN  3.20  ANIMAL / MEAT (FLESH)
+  TOK_PISIN  3.31  TO WALK / WHAT
+  TOK_PISIN  3.43  TO LIE (ON SIDE) / TO SLEEP
+  TOK_PISIN  3.53  TREE / WOODS
+  TOK_PISIN  3.58  RIVER / WATER
+  TOK_PISIN  4.11  PERSON / WIFE / WOMAN
+
+== Calude: known colexification pairs, languages with identical values
+  FOOT = LEG: RUSSIAN, GREEK, SWAHILI, FINNISH, ESTONIAN, CZECH, MAORI, TOK_PISIN
+  MAN (MALE) = HUSBAND: FINNISH, ESTONIAN, CZECH, MAORI
+  WOMAN = WIFE: PORTUGUESE, FRENCH, CZECH, MAORI, TOK_PISIN
+  THOU = YE: GREEK, CHINESE, FRENCH, TURKISH, CZECH, MAORI
+  TREE = WOODS: TOK_PISIN
+
+== Calude: biggest single-language outliers (z-score within the concept's row)
+  TO BREATHE     MAORI       4.55 (row mean 1.61, |z| 3.6)
+  FIVE           TOK_PISIN   1.14 (row mean 2.43, |z| 3.3)
+  ROTTEN (LOG)   FINNISH     3.42 (row mean 1.05, |z| 3.3)
+  BAD            CHILEAN    -0.70 (row mean 2.06, |z| 3.3)
+  TWO            TOK_PISIN   4.25 (row mean 3.22, |z| 3.3)
+  YELLOW         BASQUE      3.90 (row mean 1.75, |z| 3.1)
+  SUN            MAORI       3.88 (row mean 2.25, |z| 3.1)
+  PERSON         SWAHILI     0.30 (row mean 2.79, |z| 3.1)
+  WE             CZECH       0.50 (row mean 3.00, |z| 3.1)
+  NOT            SWAHILI     2.17 (row mean 3.76, |z| 3.0)
+
+== Calude: CHINESE column
+  36 of 184 values are below 1.5; min 1.30
+  DAY (NOT NIGHT) per language: ENGLISH 2.97, SPANISH 3.16, RUSSIAN 3.11, GREEK 2.92, PORTUGUESE 3.23, CHINESE 1.34, SWAHILI 3.26, CHILEAN 3.06, FINNISH 2.05, ESTONIAN 3.14, FRENCH 2.75, TURKISH 2.97, CZECH 3.06, POLISH 2.98, BASQUE 2.19, MAORI 3.10, TOK_PISIN 3.17
+  concepts sharing DAY's Chinese value: BLOOD, DAY (NOT NIGHT), EGG, FEATHER (LARGE), TO SMELL (PERCEIVE ODOR)
+
+== NoRaRe frequency lists vs Calude vs wordfreq (Pearson r on log10 per million)
+  dataset                        concepts  ∩Calude  Cal~NoRaRe  Cal~wf  NoRaRe~wf
+  Brysbaert-2009-Frequency           2612      193        0.90    0.93       0.94
+  Cuetos-2011-Frequency              1607      189        0.87    0.89       0.94
+  Cai-2010-Frequency                 1952      190        0.70    0.76       0.86
+  Dimitropoulou-2010-Frequency        265       50        0.69    0.68       0.89
+  Mandera-2015-Frequency             1076      135        0.80    0.86       0.94
+  Brysbaert-2011-Frequency           1919      188     (not in Calude)       0.94
+  Keuleers-2010-Frequency             823      144     (not in Calude)       0.95
+  Crepaldi-2015-Frequency            1104      184     (not in Calude)       0.93
+  union of concepts across these lists: 3149 (covers 200 of Calude-200)
+
+== Chinese: largest gaps between Calude and SUBTLEX-CH (Cai-2010)
+  concept            Calude  word   Cai    wf
+  COLD (WEATHER)       1.86  涼    -1.52  1.04
+  TO THINK             1.74  想     3.80  3.03
+  RIGHT (CORRECT)      1.67  对     3.60  3.63
+  MANY                 1.38  多     3.20  3.21
+  DRY (SUBSTANCE)      1.30  干     3.09  2.52
+  PERSON               2.06  人     3.76  3.74
+  RIVER                2.48  江     0.78  1.40
+  KNOW (FACTS)         2.14  知道    3.77  2.97
+
+== Chinese: single vs two-character words in wordfreq for concepts at Calude's 1.34
+  DAY (NOT NIGHT)            Calude 1.34  天 2.55  白天 1.28  日 3.30
+  BLOOD                      Calude 1.34  血 1.77  血液 1.36
+  EGG                        Calude 1.34  蛋 1.49  鸡蛋 1.26
+  FEATHER (LARGE)            Calude 1.34  毛 1.89  羽毛 0.77
+  TO SMELL (PERCEIVE ODOR)   Calude 1.34  闻 1.37  闻到 0.82
+
+== English: Calude vs wordfreq on the gloss itself (strips 'TO' and parentheses)
+  r = 0.89; mean(wordfreq - Calude) = -0.10 (near 0, so Calude is log10 per million)
+
+== Wu-2020 core vocabulary (dictionary coverage) vs mean Calude frequency
+  2692 concepts, 194 shared with Calude, Spearman 0.23

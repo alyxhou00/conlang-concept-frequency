@@ -1,0 +1,7 @@
+# Python 3.13. Install with:  pip install -r requirements.txt
+wordfreq[cjk]==3.1.1   # word frequencies for 40+ languages; [cjk] adds Chinese/Japanese/Korean tokenisers
+pysem==1.3.0           # map glosses to Concepticon concept IDs
+pyconcepticon==4.0.0   # read concepticon-data (concept lists, concept sets)
+pynorare==1.1.0        # read norare-data (norms, ratings, frequencies per concept)
+pybtex==0.26.1         # needed by pynorare but not declared by it
+pandas==3.0.6
