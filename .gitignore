@@ -3,10 +3,15 @@
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+.pytest_cache/
 
 # External data repos: clone them as described in README.md
 data/concepticon-data/
 data/norare-data/
+data/omw-1.4.zip
+
+# Generated tables: derived from NoRaRe (CC BY-NC) and wordfreq (CC BY-SA), see ATTRIBUTION.md
+out/
 
 # OS / editor
 .DS_Store

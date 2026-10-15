@@ -5,3 +5,4 @@ pyconcepticon==4.0.0   # read concepticon-data (concept lists, concept sets)
 pynorare==1.1.0        # read norare-data (norms, ratings, frequencies per concept)
 pybtex==0.26.1         # needed by pynorare but not declared by it
 pandas==3.0.6
+pytest==9.1.1          # tests

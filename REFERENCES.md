@@ -4,6 +4,10 @@ APA 7th edition, alphabetical within each section. Bibliographic details were ch
 
 ## Datasets and tools we use
 
+Bond, F., & Foster, R. (2013). Linking and extending an open multilingual wordnet. In *Proceedings of the 51st Annual Meeting of the Association for Computational Linguistics* (pp. 1352–1362). Association for Computational Linguistics.
+
+Isahara, H., Bond, F., Uchimoto, K., Utiyama, M., & Kanzaki, K. (2008). Development of the Japanese WordNet. In *Proceedings of the Sixth International Conference on Language Resources and Evaluation (LREC 2008)*. European Language Resources Association.
+
 List, J.-M. (2026). *PySeM: A Python library for handling semantic data in linguistics* (Version 1.3.0) [Computer software]. With contributions by J. Englisch & R. Forkel. University of Passau. https://pypi.org/project/pysem
 
 List, J.-M., Cysouw, M., & Forkel, R. (2016). Concepticon: A resource for the linking of concept lists. In *Proceedings of the Tenth International Conference on Language Resources and Evaluation (LREC 2016)* (pp. 2393–2400). European Language Resources Association.
