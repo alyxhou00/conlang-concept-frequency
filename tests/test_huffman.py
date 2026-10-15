@@ -4,7 +4,6 @@ import random
 import pytest
 
 from huffman import nary_huffman
-from build_lexicon import cvc_syllables
 
 
 def is_prefix_free(codes):
@@ -58,12 +57,54 @@ def test_most_frequent_never_longer():
     assert lens == sorted(lens)  # weights are sorted descending, so lengths must not decrease
 
 
-def test_cvc_inventory_default_size():
-    syl = cvc_syllables("ptkbdgmnslfh", "aeiou")
-    assert len(syl) == 12 * 5 * 12 == len(set(syl))
-    assert all(len(s) == 3 for s in syl)
+# --- different number of symbols in the first position (root_n) -------------
+
+def brute_force_best(w, n, root_n, max_len=8):
+    """Smallest average length over all length assignments that fit the tree."""
+    best = math.inf
+    order = sorted(range(len(w)), key=lambda i: -w[i])
+    def fits(lens):  # Kraft-type condition for root_n first symbols and n later ones
+        return sum(1 / (root_n * n ** (L - 1)) for L in lens) <= 1 + 1e-12
+    def rec(i, prev, lens):
+        nonlocal best
+        if i == len(order):
+            if fits(lens):
+                best = min(best, sum(w[order[k]] * L for k, L in enumerate(lens)) / sum(w))
+            return
+        for L in range(prev, max_len + 1):  # more frequent items are never longer
+            rec(i + 1, L, lens + [L])
+    rec(0, 1, [])
+    return best
 
 
-def test_cvc_rejects_overlapping_letters():
-    with pytest.raises(ValueError):
-        cvc_syllables("pta", "aei")
+@pytest.mark.parametrize("n,root_n", [(2, 3), (3, 2), (2, 5), (3, 4)])
+def test_root_n_is_optimal_on_small_cases(n, root_n):
+    rnd = random.Random(n * 10 + root_n)
+    for _ in range(20):
+        w = [rnd.paretovariate(1.0) for _ in range(rnd.randint(2, 8))]
+        codes = nary_huffman(w, n, root_n=root_n)
+        assert avg_len(w, codes) == pytest.approx(brute_force_best(w, n, root_n))
+
+
+@pytest.mark.parametrize("N", [1, 5, 385, 386, 1875, 5000])
+def test_root_n_symbol_ranges_and_prefix_free(N):
+    rnd = random.Random(N)
+    w = [rnd.paretovariate(1.2) for _ in range(N)]
+    codes = nary_huffman(w, 350, root_n=385)
+    assert is_prefix_free(codes)
+    assert all(c[0] < 385 and all(s < 350 for s in c[1:]) for c in codes)
+    assert sum(1 / (385 * 350 ** (len(c) - 1)) for c in codes) <= 1 + 1e-12
+
+
+def test_root_n_count_of_one_syllable_words():
+    # 1875 concepts, 385 first syllables, 350 later ones: (385 - k) * 350 >= 1875 - k
+    # allows at most k = 380 one-syllable words
+    w = [1 / (i + 1) for i in range(1875)]
+    lens = [len(c) for c in nary_huffman(w, 350, root_n=385)]
+    assert lens.count(1) == 380 and lens.count(2) == 1495
+
+
+def test_root_n_equal_to_n_is_plain_huffman():
+    rnd = random.Random(0)
+    w = [rnd.random() for _ in range(300)]
+    assert avg_len(w, nary_huffman(w, 7, root_n=7)) == pytest.approx(avg_len(w, nary_huffman(w, 7)))

@@ -52,12 +52,37 @@ Planned (from the discussion doc): `mapping/`, `notebooks/`.
 .venv/Scripts/python -X utf8 encode/build_lexicon.py
 ```
 
-The first writes `out/concept_freq_by_lang.tsv` and `out/concept_freq.tsv`; the second writes `out/lexicon.tsv`. Options:
+The first writes `out/concept_freq_by_lang.tsv` and `out/concept_freq.tsv`; the second writes `out/lexicon.tsv`. `-X utf8` is needed on Windows consoles that are not set to UTF-8.
 
-- `build_concept_freq.py --min-langs 3`: keep concepts with data in at least this many of the 5 languages.
-- `build_lexicon.py --consonants ptkbdgmnslfh --vowels aeiou`: the sound inventory, one letter each. The defaults give 12 × 5 × 12 = 720 CVC syllables.
+### `freq/build_concept_freq.py` options
 
-`-X utf8` is needed on Windows consoles that are not set to UTF-8.
+**`--min-langs N`** (default 3): keep only concepts that have frequency data in at least N of the 5 languages (en, es, de, zh, ja). Concepts with data in fewer languages are left out of the lexicon entirely.
+
+- Higher N means the frequency of each kept concept rests on more languages, so it is less biased by one language and less affected by one bad word mapping. But fewer concepts are kept.
+- Lower N keeps more concepts. But some of them get their frequency from one or two languages only, often English, which has the largest list.
+- Results with the default sound inventory:
+
+| `--min-langs` | Concepts | Average word length |
+| --- | --- | --- |
+| 1 | 3,165 | 1.136 syllables, 2.27 letters |
+| 2 | 2,505 | 1.119 syllables, 2.20 letters |
+| 3 (default) | 1,875 | 1.095 syllables, 2.09 letters |
+| 4 | 1,258 | 1.067 syllables, 1.94 letters |
+| 5 | 569 | 1.031 syllables, 2.11 letters |
+
+**`--outlier-factor F`** (default 10): when averaging a concept over its languages, ignore a language whose value is more than F times above or below the median of that concept's languages (compared on a log scale). This catches bad word mappings, such as Japanese 水 for WATER BUFFALO or German *Oheim* for UNCLE. If every language of a concept would be dropped, all are kept. `0` turns this off. Dropped languages are listed in the `outliers` column of `out/concept_freq.tsv`.
+
+### `encode/build_lexicon.py` options
+
+**`--onsets`** (default `Ømnptkshvrl`), **`--vowels`** (default `iöeuëoa`), **`--codas`** (default `nthlØ`): the sound inventory, one letter per sound. `Ø` is the zero consonant: it counts as a consonant slot but is not written in the word.
+
+| Slot | IPA | Letters |
+| --- | --- | --- |
+| Onset (syllable start) | ∅ m n p t k ɕ x ʋ ʀ l | Ø m n p t k s h v r l |
+| Vowel | i ø ɛ u ɤ ɔ ɑ | i ö e u ë o a |
+| Coda (syllable end) | n t x l ∅ | n t h l Ø |
+
+A zero onset is allowed only in a word's first syllable, so every written word splits into syllables in exactly one way. The first syllable of a word has 11 × 7 × 5 = 385 options; later syllables have 10 × 7 × 5 = 350. `out/lexicon.tsv` shows each word as written (`word`), with syllable breaks (`word_hyphenated`), and with the zero consonants (`cvc`, e.g. `ØöØ.hiØ` for *öhi*).
 
 ## Tests and checks
 

@@ -11,12 +11,15 @@ Steps (see the discussion doc, steps 1-3):
   2. naive polysemy split: a lexeme mapped to k concepts gives each 1/k of its
      frequency and is flagged `ambiguous`
   3. keep concepts present in at least --min-langs languages, normalise each
-     language to a probability distribution over those concepts, and average
-     the languages that have the concept (missing = no data, not 0)
+     language to a probability distribution over those concepts
+  4. per concept, drop languages whose value is more than --outlier-factor
+     times above or below the median of that concept's languages (on a log
+     scale), then average the remaining languages (missing = no data, not 0)
 
 Outputs (not committed, see ATTRIBUTION.md):
   out/concept_freq_by_lang.tsv  concept_id, gloss, lang, lexeme, freq_pm, ambiguous, source
-  out/concept_freq.tsv          concept_id, gloss, p, n_langs, langs, p_<lang>...
+  out/concept_freq.tsv          concept_id, gloss, p, n_langs, langs, outliers, p_<lang>...
+                                (p_<lang> keeps the outlier values for inspection)
 
 Run:  .venv/Scripts/python -X utf8 freq/build_concept_freq.py
 """
@@ -24,6 +27,7 @@ import argparse
 import zipfile
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 from wordfreq import tokenize, zipf_frequency
 
@@ -96,18 +100,35 @@ def split_polysemy(df):
     return df.assign(freq_pm=df.freq_pm / k, ambiguous=k > 1)
 
 
-def combine(df, min_langs):
+def outlier_mask(p_lang, factor):
+    """True where a language's value is more than `factor` times above or below
+    the median of that concept's languages. factor <= 1 disables the check."""
+    if factor <= 1:
+        return p_lang.notna() & False
+    log = np.log10(p_lang)
+    mask = log.sub(log.median(axis=1), axis=0).abs() > np.log10(factor)
+    # with an even number of languages the median lies between two values, so
+    # every language can be "far" from it; then keep them all
+    all_dropped = mask.sum(axis=1) == p_lang.notna().sum(axis=1)
+    mask[all_dropped] = False
+    return mask
+
+
+def combine(df, min_langs, outlier_factor):
     wide = df.pivot_table(index="concept_id", columns="lang", values="freq_pm", aggfunc="sum")
     wide = wide[wide.notna().sum(axis=1) >= min_langs]
     p_lang = wide / wide.sum()                      # each language sums to 1 over kept concepts
-    p = p_lang.mean(axis=1, skipna=True)            # missing = no data, not 0
+    outliers = outlier_mask(p_lang, outlier_factor)
+    p = p_lang.mask(outliers).mean(axis=1, skipna=True)  # missing = no data, not 0
     p = p / p.sum()
     gloss = df.drop_duplicates("concept_id").set_index("concept_id").gloss
+    langs_where = lambda m: m.apply(lambda r: ",".join(l for l in m.columns if r[l]), axis=1)
     out = pd.DataFrame({
         "gloss": gloss.reindex(p.index),
         "p": p,
         "n_langs": wide.notna().sum(axis=1),
-        "langs": wide.notna().apply(lambda r: ",".join(l for l in wide.columns if r[l]), axis=1),
+        "langs": langs_where(wide.notna()),
+        "outliers": langs_where(outliers),
     })
     out = out.join(p_lang.add_prefix("p_"))
     return out.sort_values("p", ascending=False).rename_axis("concept_id").reset_index()
@@ -117,6 +138,9 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--min-langs", type=int, default=3,
                     help="keep concepts that have data in at least this many languages (default 3)")
+    ap.add_argument("--outlier-factor", type=float, default=10,
+                    help="per concept, ignore a language whose value is more than this many times above or "
+                         "below the median of the concept's languages (default 10; 0 turns it off)")
     args = ap.parse_args()
 
     parts = [norare_lang(l) for l in NORARE_FREQ] + [japanese()]
@@ -128,13 +152,14 @@ def main():
     cols = ["concept_id", "gloss", "lang", "lexeme", "freq_pm", "ambiguous", "source"]
     df[cols].sort_values(["lang", "freq_pm"], ascending=[True, False]).to_csv(
         OUT / "concept_freq_by_lang.tsv", sep="\t", index=False)
-    combined = combine(df, args.min_langs)
+    combined = combine(df, args.min_langs, args.outlier_factor)
     combined.to_csv(OUT / "concept_freq.tsv", sep="\t", index=False, float_format="%.6g")
 
-    print("per language: concepts, ambiguous lexemes")
+    print("per language: concepts, ambiguous lexemes, outliers dropped in the average")
     for lang in LANGS:
         d = df[df.lang == lang]
-        print(f"  {lang}  {len(d):5d}  {d.ambiguous.sum():4d}")
+        dropped = combined.outliers.str.split(",").apply(lambda x: lang in x).sum()
+        print(f"  {lang}  {len(d):5d}  {d.ambiguous.sum():4d}  {dropped:4d}")
     print(f"combined: {len(combined)} concepts in >= {args.min_langs} languages")
     print("top 15:", ", ".join(combined.gloss.head(15)))
     print(f"wrote {OUT / 'concept_freq_by_lang.tsv'} and {OUT / 'concept_freq.tsv'}")
