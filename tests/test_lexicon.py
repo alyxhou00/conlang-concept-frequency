@@ -1,6 +1,6 @@
 import pytest
 
-from build_lexicon import CODAS, ONSETS, VOWELS, ZERO, render, syllable_inventory
+from build_lexicon import CODAS, ONSETS, VOWELS, ZERO, render, syllable_inventory, vary
 
 
 def test_default_inventory_sizes():
@@ -19,6 +19,35 @@ def test_shortest_syllables_come_first():
     first, _ = syllable_inventory(ONSETS, VOWELS, CODAS)
     lengths = [len(render(s)) for s in first]
     assert lengths == sorted(lengths) and lengths[0] == 1
+
+
+def test_each_syllable_handed_out_once():
+    first, later = syllable_inventory(ONSETS, VOWELS, CODAS)
+    assert len(set(first)) == len(first) and len(set(later)) == len(later)
+
+
+def test_coprime_slot_counts_give_the_simple_cycle():
+    # 3, 4, 5 share no factor: syllable k is (onset k, vowel k, coda k), every combination once
+    o, v, c = "ptk", "aeiu", "mnslr"
+    ordered, _ = vary([(x, y, z) for x in o for y in v for z in c])
+    assert ordered == [(o[k % 3], v[k % 4], c[k % 5]) for k in range(60)]
+
+
+def test_shared_factor_still_covers_everything_and_varies():
+    # 10 and 5 share a factor, so the simple cycle would repeat; vary must not
+    o, v, c = "mnptkshvrl", "iöeuëoa", "nthlg"
+    every = [(x, y, z) for x in o for y in v for z in c]
+    ordered, _ = vary(every)
+    assert sorted(ordered) == sorted(every)
+    assert all(all(x != y for x, y in zip(a, b)) for a, b in zip(ordered, ordered[1:]))
+
+
+@pytest.mark.parametrize("which", [0, 1])
+def test_neighbours_of_the_same_length_share_no_written_letter(which):
+    sylls = syllable_inventory(ONSETS, VOWELS, CODAS)[which]
+    for a, b in zip(sylls, sylls[1:]):
+        if len(render(a)) == len(render(b)):
+            assert not any(x == y != ZERO for x, y in zip(a, b)), (render(a), render(b))
 
 
 def test_every_one_and_two_syllable_word_is_spelled_uniquely():

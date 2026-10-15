@@ -82,6 +82,11 @@ The first writes `out/concept_freq_by_lang.tsv` and `out/concept_freq.tsv`; the 
 | Vowel | i ø ɛ u ɤ ɔ ɑ | i ö e u ë o a |
 | Coda (syllable end) | n t x l ∅ | n t h l Ø |
 
+Within each node of the code tree, the most frequent concepts get syllables in this order:
+
+1. Fewer letters first, so frequent words are shorter on paper.
+2. Within the same number of letters, each slot cycles: the next syllable takes the onset, vowel and coda used least recently. Neighbouring syllables then share no written letter, so the most frequent words don't sound alike (*in mö nu ëh po al ti …* rather than *in it il ön öt …*). When the onset, vowel and coda counts share no common factor, this is the simple cycle "syllable k = onset k, vowel k, coda k". When they do (10 onsets and 5 codas share 5), the simple cycle would repeat, but this rule still uses every syllable once.
+
 A zero onset is allowed only in a word's first syllable, so every written word splits into syllables in exactly one way. The first syllable of a word has 11 × 7 × 5 = 385 options; later syllables have 10 × 7 × 5 = 350. `out/lexicon.tsv` shows each word as written (`word`), with syllable breaks (`word_hyphenated`), and with the zero consonants (`cvc`, e.g. `ØöØ.hiØ` for *öhi*).
 
 ## Tests and checks

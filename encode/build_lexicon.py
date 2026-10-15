@@ -9,9 +9,16 @@ exactly one way (otherwise "ana" could be an+a or a+na). This gives
   first syllable:  onsets x vowels x codas
   later syllables: (onsets - Ø) x vowels x codas
 
-Within each node of the code tree, syllables with fewer letters go to the more
-frequent concepts. That does not change the number of syllables, only makes
-frequent words shorter on paper.
+Syllable order (which syllables the most frequent concepts get, within each
+node of the code tree):
+  1. fewer letters first: this does not change the number of syllables, only
+     makes frequent words shorter on paper
+  2. within the same number of letters, each slot cycles: the next syllable
+     takes the onset, vowel and coda used least recently, so neighbours differ
+     as much as possible (i, e, u ... then ön, et, uh ... instead of in, it, ih).
+     When the onset, vowel and coda counts share no common factor this is the
+     simple walk k -> (onset k, vowel k, coda k); otherwise it still covers
+     every syllable once.
 
 Input:  out/concept_freq.tsv  (from freq/build_concept_freq.py)
 Output: out/lexicon.tsv       concept_id, gloss, p, syllables, letters, word, word_hyphenated, cvc
@@ -42,8 +49,41 @@ def letters(s):
     return [unicodedata.normalize("NFC", c) for c in unicodedata.normalize("NFC", s)]
 
 
+def vary(sylls, last_used=None):
+    """Order syllables so that each slot cycles through its values.
+
+    At every step take the syllable whose onset, vowel and coda were used least
+    recently (compare the most recently used slot first; ties go to the
+    earliest syllable in the input). `last_used` maps (slot, value) to the step
+    it was last used, so the cycle can continue from a previous group.
+    Returns (ordered syllables, updated last_used).
+    """
+    last = dict(last_used or {})
+    start = max(last.values(), default=-1) + 1
+    remaining = list(sylls)
+    ordered = []
+    for step in range(start, start + len(sylls)):
+        def ages(s):
+            return sorted(step - last.get((i, x), -math.inf) for i, x in enumerate(s))
+        j = max(range(len(remaining)), key=lambda j: (ages(remaining[j]), -j))
+        s = remaining.pop(j)
+        ordered.append(s)
+        for i, x in enumerate(s):
+            last[(i, x)] = step
+    return ordered, last
+
+
+def by_letters_then_varied(sylls):
+    """Fewer letters first; within each length, cycle the slots (see vary)."""
+    ordered, last = [], {}
+    for n in sorted({len(render(s)) for s in sylls}):
+        group, last = vary([s for s in sylls if len(render(s)) == n], last)
+        ordered += group
+    return ordered
+
+
 def syllable_inventory(onsets, vowels, codas):
-    """Return (first, later): syllables as (onset, vowel, coda) tuples, fewest letters first."""
+    """Return (first, later): syllables as (onset, vowel, coda) tuples, in the order they are handed out."""
     onsets, vowels, codas = letters(onsets), letters(vowels), letters(codas)
     for name, xs in [("onsets", onsets), ("vowels", vowels), ("codas", codas)]:
         if len(set(xs)) != len(xs):
@@ -52,12 +92,11 @@ def syllable_inventory(onsets, vowels, codas):
         raise ValueError("vowels cannot be zero")
     if set(vowels) & (set(onsets) | set(codas)):
         raise ValueError("a letter cannot be both a consonant and a vowel")
-    first = [(o, v, c) for o in onsets for v in vowels for c in codas]
-    first.sort(key=lambda s: len(render(s)))  # stable: keeps the given order within a length
-    later = [s for s in first if s[0] != ZERO]
+    every = [(o, v, c) for o in onsets for v in vowels for c in codas]
+    later = [s for s in every if s[0] != ZERO]
     if not later:
         raise ValueError("need at least one non-zero onset")
-    return first, later
+    return by_letters_then_varied(every), by_letters_then_varied(later)
 
 
 def render(*syllables):
