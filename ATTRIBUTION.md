@@ -15,10 +15,10 @@ This repository does not redistribute any of the datasets below: `data/` is not 
 
 ### NoRaRe: CC BY-NC 4.0 (non-commercial)
 
-- **What we use:** `norare-data` at commit `4b8901d` (2026-10-07). This includes the frequency datasets Brysbaert-2009, Brysbaert-2011, Cai-2010, Cuetos-2011, Dimitropoulou-2010, Keuleers-2010, Mandera-2015, Crepaldi-2015 and the Wu-2020 core vocabulary.
+- **What we use:** `norare-data` at commit `4b8901d` (2026-10-07). This includes the frequency datasets Brysbaert-2009, Brysbaert-2011, Cai-2010, Cuetos-2011, Dimitropoulou-2010, Keuleers-2010, Mandera-2015, Crepaldi-2015 and the Wu-2020 core vocabulary. For root families (goal 2) we also use List-2023-Colexifications, Zalizniak-2024-DatSemShift and Rubehn-2025-ConceptEmbeddings.
 - **License:** [Creative Commons Attribution-NonCommercial 4.0 International](https://creativecommons.org/licenses/by-nc/4.0/) (the `LICENSE` file in `norare-data`).
 - **Statement:**
-  > Word frequencies and norms mapped to Concepticon from NoRaRe (Tjuka, Forkel & List 2022, https://norare.clld.org), licensed under CC BY-NC 4.0. Original datasets: Brysbaert & New (2009); Brysbaert et al. (2011); Cai & Brysbaert (2010); Cuetos et al. (2011); Dimitropoulou et al. (2010); Keuleers et al. (2010); Mandera et al. (2015); Crepaldi et al. (2015); Wu, Nicolai & Yarowsky (2020).
+  > Word frequencies and norms mapped to Concepticon from NoRaRe (Tjuka, Forkel & List 2022, https://norare.clld.org), licensed under CC BY-NC 4.0. Original datasets: Brysbaert & New (2009); Brysbaert et al. (2011); Cai & Brysbaert (2010); Cuetos et al. (2011); Dimitropoulou et al. (2010); Keuleers et al. (2010); Mandera et al. (2015); Crepaldi et al. (2015); Wu, Nicolai & Yarowsky (2020); List (2023); Zalizniak et al. (2024, Database of Semantic Shifts); Rubehn & List (2025).
 - **Note:** anything derived from NoRaRe can't be used commercially.
 
 ### wordfreq data: CC BY-SA 4.0 (share-alike)

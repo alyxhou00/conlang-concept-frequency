@@ -36,6 +36,14 @@ Mandera, P., Keuleers, E., Wodniecka, Z., & Brysbaert, M. (2015). SUBTLEX-PL: Su
 
 Wu, W., Nicolai, G., & Yarowsky, D. (2020). Multilingual dictionary based construction of core vocabulary. In *Proceedings of the 12th Language Resources and Evaluation Conference* (pp. 4211–4217). European Language Resources Association. https://aclanthology.org/2020.lrec-1.519
 
+## Concept relations (goal 2: root families)
+
+List, J.-M. (2023). Inference of partial colexifications from multilingual wordlists. *Frontiers in Psychology, 14*, 1156540. https://doi.org/10.3389/fpsyg.2023.1156540
+
+Rubehn, A., & List, J.-M. (2025). Partial colexifications improve concept embeddings. In *Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)* (pp. 20571–20586). Association for Computational Linguistics. https://doi.org/10.18653/v1/2025.acl-long.1004
+
+Zalizniak, A., Smirnitskaya, A., Russo, M., Gruntov, I., Maisak, T., Ganenkov, D., Bulakh, M., Orlova, M., Bobrik-Fremke, M., Dereza, O., Mikhailova, T., Bibaeva, M., & Voronov, M. (2024). *Database of Semantic Shifts* (Version 3.0) [Data set]. Institute of Linguistics, Russian Academy of Sciences. https://datsemshift.ru
+
 ## Background
 
 Calude, A. S., & Pagel, M. (2014). Frequency of use and basic vocabulary. In L. Filipović & M. Pütz (Eds.), *Multilingual cognition and language use: Processing and typological perspectives* (pp. 45–72). John Benjamins. https://doi.org/10.1075/hcp.44.02cal
