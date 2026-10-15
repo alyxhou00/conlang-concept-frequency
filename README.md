@@ -54,21 +54,34 @@ Planned (from the discussion doc): `mapping/`, `notebooks/`.
 
 The first writes `out/concept_freq_by_lang.tsv` and `out/concept_freq.tsv`; the second writes `out/lexicon.tsv`. `-X utf8` is needed on Windows consoles that are not set to UTF-8.
 
+### Where the frequencies come from
+
+The lexicon covers all 4,165 Concepticon concept sets. For each concept and language (en, es, de, zh, ja), in order of preference:
+
+1. **A frequency list**: NoRaRe subtitle frequencies for en, es, de, zh; for ja, the Japanese WordNet word (via Bond-2013-OMW) looked up in wordfreq.
+2. **Otherwise wordfreq**: candidate words for the concept come from the word columns of all Concepticon concept lists and NoRaRe datasets (522 lists have English, about 50 each Spanish and Chinese, 36 German, 8 Japanese), plus the Concepticon name itself for English. Notes in brackets are removed and alternatives are split (`ronsoco, carpincho`, `arm or hand`). The chosen candidate is a single word if possible, then the one most lists agree on, then the most frequent. Phrases with spaces are not used, because wordfreq rates a phrase almost as frequent as its rarest word.
+3. **No data at all** (140 concepts, mostly compounds such as COCONUT TREE or FATHER'S SISTER): the concept gets the lowest frequency in the table, so it gets one of the longest words.
+
+The `source` column of `out/concept_freq_by_lang.tsv` shows which case applies.
+
 ### `freq/build_concept_freq.py` options
 
-**`--min-langs N`** (default 3): keep only concepts that have frequency data in at least N of the 5 languages (en, es, de, zh, ja). Concepts with data in fewer languages are left out of the lexicon entirely.
+**`--min-langs N`** (default 0): keep only concepts that have frequency data in at least N of the 5 languages. With 0, every Concepticon concept is kept, including those with no data (case 3 above). Concepts below N are left out of the lexicon entirely.
 
-- Higher N means the frequency of each kept concept rests on more languages, so it is less biased by one language and less affected by one bad word mapping. But fewer concepts are kept.
-- Lower N keeps more concepts. But some of them get their frequency from one or two languages only, often English, which has the largest list.
+- Higher N means each kept concept's frequency rests on more languages, so it is less biased by one language and less affected by one bad word mapping. But fewer concepts are kept.
+- Lower N keeps more concepts. But some get their frequency from one or two languages only, often English, which has the most word lists.
 - Results with the default sound inventory:
 
 | `--min-langs` | Concepts | Average word length |
 | --- | --- | --- |
-| 1 | 3,165 | 1.136 syllables, 2.27 letters |
-| 2 | 2,505 | 1.119 syllables, 2.20 letters |
-| 3 (default) | 1,875 | 1.095 syllables, 2.09 letters |
-| 4 | 1,258 | 1.067 syllables, 1.94 letters |
-| 5 | 569 | 1.031 syllables, 2.11 letters |
+| 0 (default) | 4,165 | 1.183 syllables, 2.44 letters |
+| 1 | 4,025 | 1.183 syllables, 2.44 letters |
+| 2 | 3,385 | 1.173 syllables, 2.40 letters |
+| 3 | 2,510 | 1.140 syllables, 2.27 letters |
+| 4 | 1,812 | 1.113 syllables, 2.16 letters |
+| 5 | 944 | 1.053 syllables, 1.88 letters |
+
+0 and 1 give the same average, because the concepts without data are so rare that they barely affect it.
 
 **`--outlier-factor F`** (default 10): when averaging a concept over its languages, ignore a language whose value is more than F times above or below the median of that concept's languages (compared on a log scale). This catches bad word mappings, such as Japanese 水 for WATER BUFFALO or German *Oheim* for UNCLE. If every language of a concept would be dropped, all are kept. `0` turns this off. Dropped languages are listed in the `outliers` column of `out/concept_freq.tsv`.
 
