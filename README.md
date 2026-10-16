@@ -114,7 +114,7 @@ The average is per word, weighted by how often each word is used.
 
 | Slot | IPA | Letters |
 | --- | --- | --- |
-| Onset (syllable start) | ∅ m n p t k ɕ x ʋ ʀ l | Ø m n p t k s h v r l |
+| Onset (syllable start) | ∅ m n p t k ɕ x ʋ ʁ l | Ø m n p t k s h v r l |
 | Vowel | i ø ɛ u ɤ ɔ ɑ | i ö e u ë o a |
 | Coda (syllable end) | n t x l ∅ | n t h l Ø |
 

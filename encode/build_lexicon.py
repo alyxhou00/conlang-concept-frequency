@@ -48,13 +48,13 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "out"
 ZERO = "Ø"
 
-# /m n p t k ɕ x ʋ ʀ l/ written m n p t k s h v r l, plus the zero onset
+# /m n p t k ɕ x ʋ ʁ l/ written m n p t k s h v r l, plus the zero onset
 ONSETS = "Ømnptkshvrl"
 # /i ø ɛ u ɤ ɔ ɑ/
 VOWELS = "iöeuëoa"
 CODAS = "nthlØ"
 GLOTTAL_STOP = "ʔ"
-IPA = {"s": "ɕ", "h": "x", "v": "ʋ", "r": "ʀ", "ö": "ø", "e": "ɛ", "ë": "ɤ", "o": "ɔ", "a": "ɑ"}
+IPA = {"s": "ɕ", "h": "x", "v": "ʋ", "r": "ʁ", "ö": "ø", "e": "ɛ", "ë": "ɤ", "o": "ɔ", "a": "ɑ"}
 
 
 def letters(s):
