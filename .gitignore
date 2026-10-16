@@ -20,3 +20,6 @@ out/
 Thumbs.db
 .vscode/
 .idea/
+
+# Personal to-do list (kept locally, not in git)
+TODO.md
