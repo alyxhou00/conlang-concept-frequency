@@ -1,6 +1,9 @@
 # 00. Introduction
 
-- Name / 名稱: not decided yet
+- Name / 名稱: {{w: LANGUAGE SHORT}} {{ipa: LANGUAGE SHORT}}, literally LANGUAGE SHORT, "short language" / 短的語言
+  - A compound like any other, written as two words. Like every word, it can still change until 1.0.0.
+  - SHORT here is SHORT (length), concept 1645, not SHORT (TIME).
+  - No slot is reserved for it: no word added later can sound the same, because no word can begin with the word for LANGUAGE.
 - Language code / 語言代碼: not decided yet
 - Type / 類型: constructed language, analytic (isolating) / 人造語言，分析語（孤立語）
 
@@ -34,4 +37,5 @@ Before 1.0.0: root families, a check of common texts for missing concepts, the n
 
 - Phonology, orthography and core grammar: decided.
 - Vocabulary: generated for 4,108 concepts.
-- Root families (goal 2), numbers, tense details, name: not decided.
+- Name: LANGUAGE SHORT (decided 2026-10-16).
+- Root families (goal 2), numbers, tense details, language code: not decided.

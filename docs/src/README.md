@@ -1,6 +1,6 @@
-# (Name not decided yet)
+# {{w: LANGUAGE SHORT}}
 
-A constructed language whose most frequent concepts get the shortest words. Word lengths come from how often each concept is used across English, Spanish, German, Chinese and Japanese, assigned with Huffman coding. The grammar is analytic and aims for the shortest possible sentences.
+LANGUAGE SHORT, "short language": a constructed language whose most frequent concepts get the shortest words. Word lengths come from how often each concept is used across English, Spanish, German, Chinese and Japanese, assigned with Huffman coding. The grammar is analytic and aims for the shortest possible sentences.
 
 一種人造語言：越常用的概念，詞越短。
 
