@@ -14,12 +14,12 @@
 
 ## Vowels / 母音
 
-| | Front | Back unrounded | Back rounded |
-| --- | --- | --- | --- |
-| Close | i | | u |
-| Close-mid | ø | ɤ | |
-| Open-mid | ɛ | | ɔ |
-| Open | | | ɑ |
+| | Front unrounded | Front rounded | Back unrounded | Back rounded |
+| --- | ----------- | ------------- | -------------- | ------------ |
+| Close | i         |               |                | u |
+| Close-mid |       | ø             | ɤ              |   |
+| Open-mid | ɛ      |               |                | ɔ |
+| Open |   |        |               | ɑ              |   |
 
 - 7 vowels: /i ø ɛ u ɤ ɔ ɑ/. No length contrast, no diphthongs.
 
