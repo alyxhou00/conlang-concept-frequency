@@ -4,6 +4,8 @@ We want to create a constructed language (conlang) in which the concepts people 
 
 The plan and our discussion are in [人造語言：跨語言概念頻率與編碼.md](人造語言：跨語言概念頻率與編碼.md).
 
+The language itself (phonology, orthography, grammar, vocabulary, texts) is described in [docs/](docs/README.md).
+
 ## Setup
 
 Python 3.13.
@@ -42,6 +44,7 @@ curl -L -o data/omw-1.4.zip https://raw.githubusercontent.com/nltk/nltk_data/gh-
 | `encode/build_lexicon.py` | Step 4: give every concept a word made of CVC syllables |
 | `encode/render.py` | Turn a concept-tagged text into our language |
 | `texts/` | Concept-tagged texts, e.g. UDHR Article 1 |
+| `docs/` | Pages about the language: 00 Introduction … 06 Culture, A Pipeline |
 | `tests/` | Tests (`pytest`) |
 | `out/` | Generated tables (not committed, see Licenses) |
 | `checks/check_sources.py` | Sanity checks on Calude-2011-200, NoRaRe and wordfreq |
