@@ -5,7 +5,9 @@ written Ø in the options and in the `cvc` column, and as nothing in the word.
 
 A zero onset is allowed only in a word's first syllable. Every later syllable
 starts with a real consonant, so a written word splits into syllables in
-exactly one way (otherwise "ana" could be an+a or a+na). This gives
+exactly one way (otherwise "ana" could be an+a or a+na). At the start of a
+word the zero onset is pronounced as a glottal stop [ʔ] (not written), so in
+speech "et e" [ʔɛt ʔɛ] cannot be heard as "e te" [ʔɛ tɛ]. This gives
   first syllable:  onsets x vowels x codas
   later syllables: (onsets - Ø) x vowels x codas
 
@@ -20,8 +22,15 @@ node of the code tree):
      simple walk k -> (onset k, vowel k, coda k); otherwise it still covers
      every syllable once.
 
-Input:  out/concept_freq.tsv  (from freq/build_concept_freq.py)
-Output: out/lexicon.tsv       concept_id, gloss, p, syllables, letters, word, word_hyphenated, cvc
+Only "units" get a code (see units.py): pronouns and other merged concepts
+use their target's word, compounds use their parts' words.
+
+Input:  out/concept_freq.tsv  (from freq/build_concept_freq.py),
+        mapping/merges.tsv, mapping/compounds.tsv
+Output: out/lexicon.tsv       one row per concept: concept_id, gloss, kind (word,
+                              merged, compound), p, p_word (frequency of the word
+                              itself, for kind=word), syllables, letters, word,
+                              word_hyphenated, cvc (with Ø), ipa
 
 Run:  .venv/Scripts/python -X utf8 encode/build_lexicon.py
 """
@@ -33,6 +42,7 @@ from pathlib import Path
 import pandas as pd
 
 from huffman import nary_huffman
+from units import Units, load_compounds, load_merges
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "out"
@@ -43,6 +53,8 @@ ONSETS = "Ømnptkshvrl"
 # /i ø ɛ u ɤ ɔ ɑ/
 VOWELS = "iöeuëoa"
 CODAS = "nthlØ"
+GLOTTAL_STOP = "ʔ"
+IPA = {"s": "ɕ", "h": "x", "v": "ʋ", "r": "ʀ", "ö": "ø", "e": "ɛ", "ë": "ɤ", "o": "ɔ", "a": "ɑ"}
 
 
 def letters(s):
@@ -103,6 +115,15 @@ def render(*syllables):
     return "".join(x for s in syllables for x in s if x != ZERO)
 
 
+def ipa(*syllables):
+    """IPA with syllable dots; a word-initial zero onset is a glottal stop."""
+    out = []
+    for i, (o, v, c) in enumerate(syllables):
+        o = GLOTTAL_STOP if (o == ZERO and i == 0) else "" if o == ZERO else IPA.get(o, o)
+        out.append(o + IPA.get(v, v) + ("" if c == ZERO else IPA.get(c, c)))
+    return ".".join(out)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--onsets", default=ONSETS, help=f"syllable-initial consonants, one letter each, {ZERO} = none (default {ONSETS})")
@@ -113,33 +134,51 @@ def main():
     args = ap.parse_args()
 
     first, later = syllable_inventory(args.onsets, args.vowels, args.codas)
-    freq = pd.read_csv(args.input, sep="\t")
-    p = (freq.p / freq.p.sum()).to_numpy()
+    freq = pd.read_csv(args.input, sep="\t", keep_default_na=False, na_values=[""])
+    p = pd.Series(freq.p.to_numpy(), index=freq.concept_id)
+    gloss = pd.Series(freq.gloss.to_numpy(), index=freq.concept_id)
 
-    codes = nary_huffman(p, len(later), root_n=len(first))
-    sylls = [[first[c[0]], *(later[s] for s in c[1:])] for c in codes]
-    lex = pd.DataFrame({
-        "concept_id": freq.concept_id,
-        "gloss": freq.gloss,
-        "p": p,
-        "syllables": [len(s) for s in sylls],
-        "word": [render(*s) for s in sylls],
-        "word_hyphenated": ["-".join(render(x) for x in s) for s in sylls],
-        "cvc": [".".join("".join(x) for x in s) for s in sylls],
-    })
-    lex.insert(4, "letters", lex.word.str.len())
-    dupes = lex.word[lex.word.duplicated()]
+    units = Units(p.index, load_merges(), load_compounds())
+    up = units.unit_p(p)
+    codes = nary_huffman(up.to_numpy(), len(later), root_n=len(first))
+    sylls_of = {u: [first[c[0]], *(later[s] for s in c[1:])] for u, c in zip(up.index, codes)}
+
+    rows = []
+    for cid in p.index:
+        words = [sylls_of[u] for u in units.expression(cid)]
+        rows.append({
+            "concept_id": cid,
+            "gloss": gloss[cid],
+            "kind": units.kind(cid),
+            "p": p[cid],
+            "p_word": up.get(cid) if units.kind(cid) == "word" else None,
+            "syllables": sum(len(w) for w in words),
+            "word": " ".join(render(*w) for w in words),
+            "word_hyphenated": " ".join("-".join(render(x) for x in w) for w in words),
+            "cvc": " ".join(".".join("".join(x) for x in w) for w in words),
+            "ipa": " ".join(ipa(*w) for w in words),
+        })
+    lex = pd.DataFrame(rows)
+    lex.insert(6, "letters", lex.word.str.replace(" ", "").str.len())
+    own = lex[lex.kind == "word"]
+    dupes = own.word[own.word.duplicated()]
     if len(dupes):
         raise RuntimeError(f"words spelled the same: {', '.join(dupes.head(10))}")
+    lex["_order"] = lex.p_word.fillna(lex.p)
+    lex = lex.sort_values(["kind", "_order"], ascending=[False, False]).drop(columns="_order")
     lex.to_csv(args.output, sep="\t", index=False, float_format="%.6g")
 
-    avg_syl = float((lex.p * lex.syllables).sum())
-    avg_let = float((lex.p * lex.letters).sum())
-    entropy = -sum(x * math.log(x) for x in p if x > 0) / math.log(len(first))
-    print(f"{len(lex)} concepts; {len(first)} first syllables, {len(later)} later syllables")
-    print(f"average length {avg_syl:.3f} syllables, {avg_let:.2f} letters; entropy lower bound {entropy:.3f} syllables")
-    print("words per length:", ", ".join(f"{k} syl: {v}" for k, v in lex.syllables.value_counts().sort_index().items()))
-    print("most frequent:", ", ".join(f"{g}={w}" for g, w in lex[["gloss", "word_hyphenated"]].head(12).itertuples(index=False)))
+    avg_syl = float((own.p_word * own.syllables).sum())
+    avg_let = float((own.p_word * own.letters).sum())
+    entropy = -sum(x * math.log(x) for x in up if x > 0) / math.log(len(first))
+    own = own.sort_values("p_word", ascending=False)
+    print(f"{len(lex)} concepts: {len(own)} with their own word, "
+          f"{(lex.kind == 'merged').sum()} merged, {(lex.kind == 'compound').sum()} compounds")
+    print(f"{len(first)} first syllables, {len(later)} later syllables")
+    print(f"average word length {avg_syl:.3f} syllables, {avg_let:.2f} letters; "
+          f"entropy lower bound {entropy:.3f} syllables")
+    print("words per length:", ", ".join(f"{k} syl: {v}" for k, v in own.syllables.value_counts().sort_index().items()))
+    print("most frequent:", ", ".join(f"{g}={w}" for g, w in own[["gloss", "word_hyphenated"]].head(12).itertuples(index=False)))
     print(f"wrote {args.output}")
 
 

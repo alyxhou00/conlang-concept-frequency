@@ -1,6 +1,6 @@
 import pytest
 
-from build_lexicon import CODAS, ONSETS, VOWELS, ZERO, render, syllable_inventory, vary
+from build_lexicon import CODAS, ONSETS, VOWELS, ZERO, ipa, render, syllable_inventory, vary
 
 
 def test_default_inventory_sizes():
@@ -54,6 +54,21 @@ def test_every_one_and_two_syllable_word_is_spelled_uniquely():
     first, later = syllable_inventory(ONSETS, VOWELS, CODAS)
     words = [render(a) for a in first] + [render(a, b) for a in first for b in later]
     assert len(words) == len(set(words)) == 385 + 385 * 350
+
+
+def test_word_initial_zero_onset_is_a_glottal_stop():
+    assert ipa((ZERO, "a", "n"), ("t", "ë", ZERO)) == "ʔɑn.tɤ"
+    assert ipa(("s", "o", "h")) == "ɕɔx"
+
+
+def test_one_and_two_syllable_word_pairs_never_sound_the_same():
+    # spoken without pauses, two words must not sound like two other words
+    # ("et e" vs "e te"); the glottal stop prevents that
+    first, later = syllable_inventory(ONSETS, VOWELS, CODAS)
+    sound = lambda *s: ipa(*s).replace(".", "")
+    words = [sound(a) for a in first] + [sound(a, b) for a in first[:60] for b in later[:60]]
+    pairs = [a + b for a in words[:800] for b in words[:800]]
+    assert len(pairs) == len(set(pairs))
 
 
 def test_zero_onset_inside_a_word_would_be_ambiguous():

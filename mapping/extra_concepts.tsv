@@ -1,0 +1,10 @@
+ID	GLOSS	ENGLISH	SPANISH	GERMAN	CHINESE	JAPANESE	NOTE
+900001	DIGNITY	dignity	dignidad		尊严	尊厳	German Würde is spelled like würde "would" once lowercased, so left out
+900002	RIGHT (ENTITLEMENT)	rights	derechos	rechte	权利	権利	plural forms, so English/Spanish do not count "right side" or "law"
+900003	CONSCIENCE	conscience	conciencia	gewissen	良心	良心
+900004	EACH OTHER		mutuamente	einander	互相	互い	English "each other" is a phrase, which wordfreq overrates
+900005	SHOULD	should	debería	sollte	应该	べき	modal particle, placed after the verb
+900006	SPIRIT (ATTITUDE)		espíritu		精神	精神	as in "a spirit of brotherhood"; Concepticon SPIRIT is a supernatural being. English spirit and German Geist mix both senses
+900101	PLURAL (PARTICLE)				们		frequency from Chinese, whose optional plural marking is closest to ours
+900102	PAST (PARTICLE)				了		frequency from Chinese 了, which also marks other aspects, so this is an overestimate
+900103	QUESTION (PARTICLE)				吗		yes/no question particle at the start of the sentence; frequency from Chinese 吗

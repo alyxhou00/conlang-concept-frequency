@@ -1,0 +1,6 @@
+# Universal Declaration of Human Rights, Article 1
+# All human beings are born free and equal in dignity and rights.
+PERSON ALL BE_BORN FREE AND EQUAL DIGNITY AND RIGHT_(ENTITLEMENT) IN .
+# They are endowed with reason and conscience and should act towards one another in a spirit of brotherhood.
+# "are endowed with" is said as "have" (no passive needed); "brotherhood" as "spirit (of) brother".
+THEY HAVE REASON AND CONSCIENCE , AND DO SHOULD EACH_OTHER TOWARDS SPIRIT_(ATTITUDE) BROTHER IN .

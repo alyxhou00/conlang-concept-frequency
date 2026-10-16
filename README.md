@@ -34,52 +34,75 @@ curl -L -o data/omw-1.4.zip https://raw.githubusercontent.com/nltk/nltk_data/gh-
 | --- | --- |
 | `data/` | Concepticon and NoRaRe clones, OMW zip (not committed) |
 | `freq/build_concept_freq.py` | Step 1–3: concept frequencies per language (en, es, de, zh, ja) and combined |
+| `mapping/extra_concepts.tsv` | Our own concepts that Concepticon lacks (DIGNITY, SHOULD, grammar particles …), with a word per language |
+| `mapping/merges.tsv` | Concepts said with another concept's word (the 33 pronoun concepts → 7 pronouns) |
+| `mapping/compounds.tsv` | Concepts said with existing words (COCONUT TREE → TREE COCONUT); made by `mapping/find_compounds.py`, edit by hand |
 | `encode/huffman.py` | n-ary Huffman coding |
+| `encode/units.py` | Which concepts get their own word; frequencies of merged and compound concepts |
 | `encode/build_lexicon.py` | Step 4: give every concept a word made of CVC syllables |
-| `tests/` | Tests for the encoder (`pytest`) |
+| `encode/render.py` | Turn a concept-tagged text into our language |
+| `texts/` | Concept-tagged texts, e.g. UDHR Article 1 |
+| `tests/` | Tests (`pytest`) |
 | `out/` | Generated tables (not committed, see Licenses) |
 | `checks/check_sources.py` | Sanity checks on Calude-2011-200, NoRaRe and wordfreq |
 | `checks/check_sources_output.txt` | Output of the last run |
 | `ATTRIBUTION.md` | Licenses and attribution statements for the data we use |
 | `REFERENCES.md` | Literature (參考文獻) |
 
-Planned (from the discussion doc): `mapping/`, `notebooks/`.
+Planned (from the discussion doc): `notebooks/`.
 
 ## Running the pipeline
 
 ```bash
 .venv/Scripts/python -X utf8 freq/build_concept_freq.py
 .venv/Scripts/python -X utf8 encode/build_lexicon.py
+.venv/Scripts/python -X utf8 encode/render.py texts/udhr-article-1.txt
 ```
 
-The first writes `out/concept_freq_by_lang.tsv` and `out/concept_freq.tsv`; the second writes `out/lexicon.tsv`. `-X utf8` is needed on Windows consoles that are not set to UTF-8.
+The first writes `out/concept_freq_by_lang.tsv` and `out/concept_freq.tsv`; the second writes `out/lexicon.tsv`; the third prints the text in our language, with IPA and glosses. `-X utf8` is needed on Windows consoles that are not set to UTF-8.
+
+`mapping/compounds.tsv` is generated once and then edited by hand. To regenerate it from scratch (this overwrites hand edits):
+
+```bash
+.venv/Scripts/python -X utf8 mapping/find_compounds.py
+```
+
+### Writing texts
+
+A text in `texts/` names concepts, not words, so it stays valid when the lexicon changes. One sentence per line; lines starting with `# ` are comments. A token is a concept gloss with `_` for spaces (`BE_BORN`, `SPIRIT_(ATTITUDE)`), or `#` + a concept ID (`#1209`). Punctuation `. , ? ! ; :` is kept. Word order follows the grammar in the discussion doc (SVO; modifiers, particles and postpositions after their word):
+
+```
+PERSON ALL BE_BORN FREE AND EQUAL DIGNITY AND RIGHT_(ENTITLEMENT) IN .
+```
 
 ### Where the frequencies come from
 
-The lexicon covers all 4,165 Concepticon concept sets. For each concept and language (en, es, de, zh, ja), in order of preference:
+The lexicon covers all 4,099 active Concepticon concept sets plus our 9 concepts in `mapping/extra_concepts.tsv`. Retired Concepticon concepts (66 sets that have a `REPLACEMENT_ID`) count for their replacement. For each concept and language (en, es, de, zh, ja), in order of preference:
 
 1. **A frequency list**: NoRaRe subtitle frequencies for en, es, de, zh; for ja, the Japanese WordNet word (via Bond-2013-OMW) looked up in wordfreq.
-2. **Otherwise wordfreq**: candidate words for the concept come from the word columns of all Concepticon concept lists and NoRaRe datasets (522 lists have English, about 50 each Spanish and Chinese, 36 German, 8 Japanese), plus the Concepticon name itself for English. Notes in brackets are removed and alternatives are split (`ronsoco, carpincho`, `arm or hand`). The chosen candidate is a single word if possible, then the one most lists agree on, then the most frequent. Phrases with spaces are not used, because wordfreq rates a phrase almost as frequent as its rarest word.
-3. **No data at all** (140 concepts, mostly compounds such as COCONUT TREE or FATHER'S SISTER): the concept gets the lowest frequency in the table, so it gets one of the longest words.
+2. **Otherwise wordfreq**: candidate words for the concept come from the word columns of all Concepticon concept lists and NoRaRe datasets (522 lists have English, about 50 each Spanish and Chinese, 36 German, 8 Japanese), plus the Concepticon name itself for English, and `mapping/extra_concepts.tsv` for our own concepts. Notes in brackets are removed and alternatives are split (`ronsoco, carpincho`, `arm or hand`). The chosen candidate is a single word if possible, then the one most lists agree on, then the most frequent. Phrases with spaces are not used, because wordfreq rates a phrase almost as frequent as its rarest word.
+3. **No data at all** (124 concepts, mostly compounds such as COCONUT TREE): the concept gets the lowest frequency in the table. Many of these are said with existing words anyway (see compounds below).
 
 The `source` column of `out/concept_freq_by_lang.tsv` shows which case applies.
 
 ### `freq/build_concept_freq.py` options
 
-**`--min-langs N`** (default 0): keep only concepts that have frequency data in at least N of the 5 languages. With 0, every Concepticon concept is kept, including those with no data (case 3 above). Concepts below N are left out of the lexicon entirely.
+**`--min-langs N`** (default 0): keep only concepts that have frequency data in at least N of the 5 languages. With 0, every concept is kept, including those with no data (case 3 above). Concepts below N are left out of the lexicon entirely.
 
 - Higher N means each kept concept's frequency rests on more languages, so it is less biased by one language and less affected by one bad word mapping. But fewer concepts are kept.
 - Lower N keeps more concepts. But some get their frequency from one or two languages only, often English, which has the most word lists.
 - Results with the default sound inventory:
 
-| `--min-langs` | Concepts | Average word length |
-| --- | --- | --- |
-| 0 (default) | 4,165 | 1.183 syllables, 2.44 letters |
-| 1 | 4,025 | 1.183 syllables, 2.44 letters |
-| 2 | 3,385 | 1.173 syllables, 2.40 letters |
-| 3 | 2,510 | 1.140 syllables, 2.27 letters |
-| 4 | 1,812 | 1.113 syllables, 2.16 letters |
-| 5 | 944 | 1.053 syllables, 1.88 letters |
+| `--min-langs` | Concepts | With their own word | Average word length |
+| --- | --- | --- | --- |
+| 0 (default) | 4,108 | 3,752 | 1.159 syllables, 2.32 letters |
+| 1 | 3,984 | 3,681 | 1.159 syllables, 2.32 letters |
+| 2 | 3,393 | 3,206 | 1.157 syllables, 2.31 letters |
+| 3 | 2,521 | 2,468 | 1.134 syllables, 2.21 letters |
+| 4 | 1,819 | 1,795 | 1.110 syllables, 2.16 letters |
+| 5 | 948 | 946 | 1.053 syllables, 1.88 letters |
+
+The average is per word, weighted by how often each word is used.
 
 0 and 1 give the same average, because the concepts without data are so rare that they barely affect it.
 
@@ -100,7 +123,15 @@ Within each node of the code tree, the most frequent concepts get syllables in t
 1. Fewer letters first, so frequent words are shorter on paper.
 2. Within the same number of letters, each slot cycles: the next syllable takes the onset, vowel and coda used least recently. Neighbouring syllables then share no written letter, so the most frequent words don't sound alike (*in mö nu ëh po al ti …* rather than *in it il ön öt …*). When the onset, vowel and coda counts share no common factor, this is the simple cycle "syllable k = onset k, vowel k, coda k". When they do (10 onsets and 5 codas share 5), the simple cycle would repeat, but this rule still uses every syllable once.
 
-A zero onset is allowed only in a word's first syllable, so every written word splits into syllables in exactly one way. The first syllable of a word has 11 × 7 × 5 = 385 options; later syllables have 10 × 7 × 5 = 350. `out/lexicon.tsv` shows each word as written (`word`), with syllable breaks (`word_hyphenated`), and with the zero consonants (`cvc`, e.g. `ØöØ.hiØ` for *öhi*).
+A zero onset is allowed only in a word's first syllable, so every written word splits into syllables in exactly one way. At the start of a word it is pronounced as a glottal stop [ʔ] but not written. Without that, continuous speech would be ambiguous across words: "et e" would sound like "e te". With it they are [ʔɛt ʔɛ] and [ʔɛ tɛ]. The first syllable of a word has 11 × 7 × 5 = 385 options; later syllables have 10 × 7 × 5 = 350.
+
+### Which concepts get their own word
+
+- **Merged** (`mapping/merges.tsv`): the 33 Concepticon pronoun concepts become 7 pronouns: I, THOU (you, singular), YOU (you, plural), WE (EXCLUSIVE), WE (INCLUSIVE), HE OR SHE OR IT, THEY. Case and possessive forms (ME, MY, HIS …), duals (WE TWO …) and honorifics merge into these. Their frequency is added to the target; WE, US, OUR and WE TWO, which don't say whether the listener is included, are split half and half.
+- **Compounds** (`mapping/compounds.tsv`, 331 used): a concept whose name consists of existing concepts is said with those words in our word order, e.g. COCONUT TREE → TREE COCONUT, NOT HAVE → HAVE NOT, PUT IN ORDER → PUT ORDER IN. Each part gets the compound's frequency on top of its own.
+- Everything else (3,752 concepts) gets its own word.
+
+`out/lexicon.tsv` has one row per concept: `kind` (word, merged, compound), `p` (the concept's frequency), `p_word` (the frequency of the word itself, including what merged and compound concepts add), and the word as written (`word`), with syllable breaks (`word_hyphenated`), with the zero consonants (`cvc`, e.g. `ØöØ.hiØ`), and in IPA (`ipa`).
 
 ## Tests and checks
 

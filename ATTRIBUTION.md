@@ -8,7 +8,7 @@ This repository does not redistribute any of the datasets below: `data/` and the
 
 ### Concepticon: CC BY 4.0
 
-- **What we use:** `concepticon-data` at commit `a89063d` (2026-08-27), including the concept list `Calude-2011-200`.
+- **What we use:** `concepticon-data` at commit `a89063d` (2026-08-27): the concept sets, the word columns of the concept lists, and the concept list `Calude-2011-200`. `mapping/merges.tsv` and `mapping/compounds.tsv` in this repository contain Concepticon concept IDs and glosses, so the statement below applies to them.
 - **License:** [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/) (stated in `concepticon-data/metadata.json`).
 - **Statement:**
   > Concept lists and concept sets from Concepticon (List et al. 2026, version 3.4.0, https://concepticon.clld.org), licensed under CC BY 4.0. The Calude-2011-200 list is based on Calude & Pagel (2011).

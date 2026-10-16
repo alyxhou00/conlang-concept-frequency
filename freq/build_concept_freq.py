@@ -1,13 +1,16 @@
 """Build per-language and combined concept frequencies.
 
-Covers every Concepticon concept set. Sources, in order of preference:
+Covers every active Concepticon concept set (retired ones are merged into
+their replacement) plus our own concepts in mapping/extra_concepts.tsv.
+Sources, in order of preference:
   en, es, de, zh  NoRaRe subtitle frequency lists (per million words)
   ja              Japanese WordNet lemmas (via the NoRaRe Bond-2013-OMW synset
                   mapping), looked up in wordfreq; the most frequent lemma of a
                   synset stands for the concept
   any language    otherwise: words for the concept in that language from the
                   word columns of Concepticon concept lists and NoRaRe datasets
-                  (English also from the Concepticon gloss), looked up in
+                  (English also from the Concepticon gloss) and, for our own
+                  concepts, mapping/extra_concepts.tsv, looked up in
                   wordfreq. Of the candidates, single words beat phrases, then
                   the spelling most lists agree on wins, then the most frequent.
 
@@ -45,6 +48,7 @@ from wordfreq import tokenize, zipf_frequency
 ROOT = Path(__file__).resolve().parent.parent
 NORARE = ROOT / "data/norare-data/datasets"
 CONCEPTICON = ROOT / "data/concepticon-data/concepticondata"
+EXTRA_CONCEPTS = ROOT / "mapping/extra_concepts.tsv"
 OMW_ZIP = ROOT / "data/omw-1.4.zip"
 OUT = ROOT / "out"
 
@@ -67,13 +71,39 @@ WORD_COLUMNS = {
 }
 
 
+# read words as text: without this pandas turns words like "nan" or "null" into missing values
+TEXT = dict(keep_default_na=False, na_values=[""])
+
+
+def concepticon():
+    return pd.read_csv(CONCEPTICON / "concepticon.tsv", sep="\t", **TEXT,
+                       usecols=["ID", "GLOSS", "REPLACEMENT_ID"])
+
+
+def replacements():
+    """Retired concept ID -> the active concept that replaces it."""
+    cs = concepticon().dropna(subset=["REPLACEMENT_ID"])
+    repl = dict(zip(cs.ID, cs.REPLACEMENT_ID.astype(int)))
+    for k in repl:  # follow chains of replacements
+        while repl[k] in repl and repl[k] != k:
+            repl[k] = repl[repl[k]]
+    return repl
+
+
+def extra_concepts():
+    return pd.read_csv(EXTRA_CONCEPTS, sep="\t", **TEXT)
+
+
 def concept_glosses():
-    cs = pd.read_csv(CONCEPTICON / "concepticon.tsv", sep="\t", usecols=["ID", "GLOSS"])
-    return cs.set_index("ID").GLOSS
+    """Glosses of active Concepticon concepts and our own extra concepts, by ID."""
+    cs = concepticon()
+    cs = cs[cs.REPLACEMENT_ID.isna()]
+    extra = extra_concepts()
+    return pd.concat([cs.set_index("ID").GLOSS, extra.set_index("ID").GLOSS])
 
 
 def load_norare(name):
-    d = pd.read_csv(NORARE / name / f"{name}.tsv", sep="\t", encoding="utf-8-sig", low_memory=False)
+    d = pd.read_csv(NORARE / name / f"{name}.tsv", sep="\t", encoding="utf-8-sig", low_memory=False, **TEXT)
     d = d.dropna(subset=["CONCEPTICON_ID"])
     return d.assign(CONCEPTICON_ID=d.CONCEPTICON_ID.astype(int))
 
@@ -153,11 +183,18 @@ def list_words():
         for lang, cols in WORD_COLUMNS.items():
             for col in (c for c in cols if c in header):
                 d = pd.read_csv(f, sep="\t", usecols=["CONCEPTICON_ID", col], encoding="utf-8-sig",
-                                dtype=str).dropna()
+                                dtype=str, **TEXT).dropna()
                 for cid, cell in zip(d.CONCEPTICON_ID, d[col]):
                     if cid.isdigit():
                         for w in set(clean_words(cell, lang)):
                             words[lang][int(cid)][w] += 1
+    extra = extra_concepts()
+    for lang, cols in WORD_COLUMNS.items():
+        for col in (c for c in cols if c in extra.columns):
+            for cid, cell in zip(extra.ID, extra[col]):
+                if isinstance(cell, str):
+                    for w in clean_words(cell, lang):
+                        words[lang][int(cid)][w] += 1
     return words
 
 
@@ -185,18 +222,25 @@ def pick_word(counts, lang):
 def wordfreq_fill(have, glosses):
     """Rows for (concept, language) pairs that have no frequency yet."""
     words = list_words()
-    for cid, gloss in glosses.items():  # the gloss is one more English candidate
-        for w in clean_words(gloss, "en"):
-            words["en"][cid][w] += 0  # present, but no extra vote
+    extra_ids = set(extra_concepts().ID)
+    for cid, gloss in glosses.items():  # a Concepticon gloss is one more English candidate
+        if cid not in extra_ids:     # our own glosses are labels like "PLURAL (PARTICLE)", not words
+            for w in clean_words(gloss, "en"):
+                words["en"][cid][w] += 0  # present, but no extra vote
+    repl = replacements()
     rows = []
     for lang, by_concept in words.items():
+        merged = defaultdict(Counter)  # word lists may still use retired IDs
         for cid, counts in by_concept.items():
+            merged[repl.get(cid, cid)].update(counts)
+        for cid, counts in merged.items():
             if (cid, lang) in have or cid not in glosses.index:
                 continue
             w, zipf = pick_word(counts, lang)
             if w is None:
                 continue
-            source = "Concepticon gloss + wordfreq" if counts[w] == 0 else "concept lists + wordfreq"
+            source = ("our word list + wordfreq" if cid in extra_ids
+                      else "Concepticon gloss + wordfreq" if counts[w] == 0 else "concept lists + wordfreq")
             rows.append((cid, lang, w, 10 ** (zipf - 3), source))
     return pd.DataFrame(rows, columns=["concept_id", "lang", "lexeme", "freq_pm", "source"])
 
@@ -257,6 +301,7 @@ def main():
     glosses = concept_glosses()
     parts = [norare_lang(l) for l in NORARE_FREQ] + [japanese()]
     df = pd.concat(parts, ignore_index=True).dropna(subset=["freq_pm"])
+    df["concept_id"] = df.concept_id.replace(replacements())  # retired concepts count for their replacement
     df = df[(df.freq_pm > 0) & df.concept_id.isin(glosses.index)]
     have = set(zip(df.concept_id, df.lang))
     df = pd.concat([df, wordfreq_fill(have, glosses)], ignore_index=True)
@@ -274,10 +319,12 @@ def main():
           "outliers dropped in the average")
     for lang in LANGS:
         d = df[df.lang == lang]
-        filled = d.source.isin(["concept lists + wordfreq", "Concepticon gloss + wordfreq"])
+        filled = d.source.isin(["concept lists + wordfreq", "Concepticon gloss + wordfreq",
+                                "our word list + wordfreq"])
         dropped = combined.outliers.str.split(",").apply(lambda x: lang in x).sum()
         print(f"  {lang}  {len(d):5d} ({len(d) - filled.sum()} + {filled.sum()})  {d.ambiguous.sum():4d}  {dropped:4d}")
-    print(f"combined: {len(combined)} of {len(glosses)} Concepticon concepts in >= {args.min_langs} languages")
+    print(f"combined: {len(combined)} of {len(glosses)} concepts (Concepticon + our own) "
+          f"in >= {args.min_langs} languages")
     print("languages per concept:", combined.n_langs.value_counts().sort_index().to_dict())
     print("top 15:", ", ".join(combined.gloss.head(15)))
     print(f"wrote {OUT / 'concept_freq_by_lang.tsv'} and {OUT / 'concept_freq.tsv'}")
