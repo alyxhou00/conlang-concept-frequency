@@ -1,0 +1,30 @@
+# The Tower of Babel, Genesis 11:1-9 (King James Version, public domain)
+# Draft for the coverage check (2026-10-16). Tokens starting with ? mark grammar that is not decided yet
+# (?REL relative clause, ?WHEN "when"-clause, ?HORT "let us", ?PURP "in order to", ?LEST "so that not",
+# ?FUT future, ?THEREFORE "so", ?NAME_ a foreign name, to be written NAME Sinar NAME once the NAME particle exists).
+# 1 And the whole earth was of one language, and of one speech.
+WORLD WHOLE HAVE LANGUAGE ONE AND SPEECH ONE PAST_(PARTICLE) .
+# 2 And it came to pass, as they journeyed from the east, that they found a plain in the land of Shinar; and they dwelt there.
+?WHEN THEY JOURNEY EAST FROM , THEY FIND PLAIN LAND ?NAME_SHINAR IN , AND DWELL_(LIVE,_RESIDE) THERE .
+# 3 And they said one to another, Go to, let us make brick, and burn them thoroughly.
+THEY SAY EACH_OTHER TOWARDS : ?HORT WE_(INCLUSIVE) MAKE BRICK , AND BURN_(SOMETHING) THEY GOOD .
+# And they had brick for stone, and slime had they for morter.
+THEY USE_(VERB) BRICK STONE INSTEAD , AND USE_(VERB) MUD MORTAR_BINDER INSTEAD .
+# 4 And they said, Go to, let us build us a city and a tower, whose top may reach unto heaven;
+THEY SAY : ?HORT WE_(INCLUSIVE) BUILD CITY AND TOWER ?REL TOP HE ARRIVE HEAVEN TOWARDS ;
+# and let us make us a name, lest we be scattered abroad upon the face of the whole earth.
+AND ?HORT WE_(INCLUSIVE) MAKE NAME WE_(INCLUSIVE) , ?LEST WE_(INCLUSIVE) SCATTER WORLD WHOLE ATOP .
+# 5 And the LORD came down to see the city and the tower, which the children of men builded.
+LORD GO_DOWN_(DESCEND) ?PURP SEE CITY AND TOWER ?REL CHILD_(DESCENDANT) PERSON BUILD .
+# 6 And the LORD said, Behold, the people is one, and they have all one language; and this they begin to do:
+LORD SAY : LOOK , PEOPLE ONE , AND THEY ALL HAVE LANGUAGE ONE ; AND THEY BEGIN DO THIS ;
+# and now nothing will be restrained from them, which they have imagined to do.
+NOW THING ALL ?REL THEY IMAGINE DO , THEY BE_ABLE DO ?FUT .
+# 7 Go to, let us go down, and there confound their language, that they may not understand one another's speech.
+?HORT WE_(INCLUSIVE) GO_DOWN_(DESCEND) , AND MIX LANGUAGE THEY THERE , ?PURP THEY UNDERSTAND NOT SPEECH EACH_OTHER .
+# 8 So the LORD scattered them abroad from thence upon the face of all the earth: and they left off to build the city.
+?THEREFORE LORD SCATTER THEY THERE FROM WORLD ALL ATOP ; AND THEY STOP_DOING BUILD CITY .
+# 9 Therefore is the name of it called Babel; because the LORD did there confound the language of all the earth:
+?THEREFORE NAME CITY BE ?NAME_BABEL , BECAUSE LORD MIX LANGUAGE WORLD ALL THERE ;
+# and from thence did the LORD scatter them abroad upon the face of all the earth.
+AND LORD SCATTER THEY THERE FROM WORLD ALL ATOP .

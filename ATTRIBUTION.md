@@ -43,6 +43,24 @@ This repository does not redistribute any of the datasets below: `data/` and the
   > The name of the National Institute of Information and Communications Technology may not be used in advertising or publicity pertaining to distribution of the software and/or database. Title to copyright in this software, database and any associated documentation shall at all times remain with National Institute of Information and Communications Technology and LICENSEE agrees to preserve same.
 - **Cite:** Isahara et al. (2008); Bond & Foster (2013) for the Open Multilingual Wordnet.
 
+### Tatoeba: CC BY 2.0 FR
+
+- **What we use:** all English sentences, `eng_sentences.tsv.bz2` from https://downloads.tatoeba.org/exports/per_language/eng/ (export of 2026-10-10, 2,038,719 sentences), saved as `data/tatoeba/eng_sentences.tsv.bz2`. Used only for the coverage check of 2026-10-16 (word counts, see the discussion doc); no sentences are copied into this repository.
+- **License:** [Creative Commons Attribution 2.0 France](https://creativecommons.org/licenses/by/2.0/fr/) ("These files are released under CC BY 2.0 FR", Tatoeba downloads page). Part of the sentences is also offered under CC0 1.0 in a separate file, which we did not use.
+- **Statement:**
+  > Example sentences from Tatoeba (https://tatoeba.org), licensed under CC BY 2.0 FR.
+
+### Universal Declaration of Human Rights: public domain (as listed by NLTK)
+
+- **What we use:** the corpus `udhr2` from NLTK data (https://raw.githubusercontent.com/nltk/nltk_data/gh-pages/packages/corpora/udhr2.zip, SHA-256 `0796c314…66c7f3`, matching NLTK's index), saved as `data/udhr2/udhr2.zip`. It is the Unicode Consortium's "UDHR in Unicode" collection; we use the English, Spanish, German, Chinese (simplified) and Japanese texts for the coverage check.
+- **License:** NLTK's data index lists `udhr2` as `license="public domain"`. The Unicode Consortium stopped hosting the project in January 2024 and points to the UN's translation project at OHCHR (https://www.ohchr.org/en/human-rights/universal-declaration/universal-declaration-human-rights/about-universal-declaration-human-rights-translation-project); we could not load that page's terms to confirm them.
+- **Statement** (not required, given for credit):
+  > Universal Declaration of Human Rights, United Nations General Assembly resolution 217 A (1948); texts from the UDHR in Unicode project via NLTK data.
+
+### Test texts in `texts/`
+
+The concept-tagged texts are our own work. Their comments quote only public-domain sources: Genesis 11:1–9 and Matthew 6:9–13 in the King James Version, and the UDHR. The North Wind and the Sun (Aesop) and Schleicher's fable (1868) are retold in our own words.
+
 ### Open question: combining sources
 
 If we publish one combined concept-frequency table, its license depends on which sources went into it. NoRaRe (NC) and wordfreq (SA) don't combine cleanly: share-alike requires the same license, and NC adds a restriction that CC BY-SA doesn't allow. Before publishing a combined table, we should either pick sources whose licenses are compatible or ask the dataset authors. (This is a reading of the license terms, not legal advice.)

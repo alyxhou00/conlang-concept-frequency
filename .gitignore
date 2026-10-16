@@ -9,6 +9,8 @@ __pycache__/
 data/concepticon-data/
 data/norare-data/
 data/omw-1.4.zip
+data/udhr2/
+data/tatoeba/
 
 # Generated tables: derived from NoRaRe (CC BY-NC) and wordfreq (CC BY-SA), see ATTRIBUTION.md
 out/

@@ -1,0 +1,20 @@
+# The Lord's Prayer, Matthew 6:9-13 (King James Version, public domain)
+# Draft for the coverage check (2026-10-16). Tokens starting with ? mark grammar that is not decided yet
+# (?REL relative clause, ?OPT wish "may it be", ?AS "as, like"). BELONG is a proposed new concept.
+# "Our" is WE (EXCLUSIVE): the people praying, not the one addressed.
+# Our Father which art in heaven,
+FATHER WE_(EXCLUSIVE) ?REL HEAVEN IN ,
+# Hallowed be thy name.
+NAME THOU HOLY ?OPT .
+# Thy kingdom come.
+RULE THOU COME ?OPT .
+# Thy will be done in earth, as it is in heaven.
+DESIRE THOU HAPPEN ?OPT EARTH_OR_LAND ATOP , ?AS HEAVEN IN .
+# Give us this day our daily bread.
+GIVE BREAD DAY_(24_HOURS) EVERY_(EACH) WE_(EXCLUSIVE) WE_(EXCLUSIVE) TOWARDS DAY_(24_HOURS) THIS .
+# And forgive us our debts, as we forgive our debtors.
+AND FORGIVE DEBT WE_(EXCLUSIVE) , ?AS WE_(EXCLUSIVE) FORGIVE PERSON ?REL HAVE DEBT WE_(EXCLUSIVE) TOWARDS .
+# And lead us not into temptation, but deliver us from evil:
+AND LEAD_(GUIDE) NOT WE_(EXCLUSIVE) DESIRE EVIL TOWARDS , BUT RESCUE WE_(EXCLUSIVE) EVIL FROM :
+# For thine is the kingdom, and the power, and the glory, for ever. Amen.
+BECAUSE RULE , POWER AND PRAISE BELONG THOU ALWAYS . TRUE .

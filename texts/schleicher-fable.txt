@@ -1,0 +1,13 @@
+# Schleicher's fable "The sheep and the horses" (August Schleicher 1868, our own retelling)
+# Draft for the coverage check (2026-10-16). Tokens starting with ? mark grammar that is not decided yet
+# (?REL relative clause, ?WHEN "when"-clause).
+# A sheep that had no wool saw horses: one pulling a heavy cart, one carrying a big load, one carrying a man fast.
+SHEEP ?REL HAVE NOT WOOL SEE HORSE PAST_(PARTICLE) : HORSE ONE PULL CART HEAVY , HORSE ONE CARRY LOAD BIG , AND HORSE ONE CARRY MAN FAST .
+# The sheep said to the horses: "My heart hurts when I see a man driving horses."
+SHEEP SAY HORSE TOWARDS : HEART I HURT_(SENSE_PAIN) ?WHEN I SEE MAN DRIVE HORSE .
+# The horses said: "Listen, sheep! Our hearts hurt when we see this:
+HORSE SAY : LISTEN , SHEEP ! HEART WE_(EXCLUSIVE) HURT_(SENSE_PAIN) ?WHEN WE_(EXCLUSIVE) SEE THIS :
+# a man, the master, makes warm clothes for himself from the sheep's wool. And the sheep has no wool."
+MAN , MASTER , MAKE CLOTHES WARM WOOL SHEEP FROM HE SELF FOR . AND SHEEP HAVE NOT WOOL .
+# Having heard this, the sheep ran away into the plain.
+SHEEP HEAR THIS , AND FLEE PLAIN TOWARDS .

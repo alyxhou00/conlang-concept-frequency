@@ -1,0 +1,20 @@
+# The North Wind and the Sun (Aesop; the short version used in the IPA Handbook)
+# Draft for the coverage check (2026-10-16). Tokens starting with ? mark grammar that is not decided yet
+# (?REL relative clause, ?COMP "that"-clause, ?WHEN "when"-clause, ?CORREL "the more ... the more",
+# ?THEREFORE "so"). AROUND is a proposed new concept. This text renders once those are settled.
+# The wind and the sun argued about which of them was stronger.
+WIND NORTH AND SUN DISPUTE PAST_(PARTICLE) : WHO STRONG MORE ?
+# Then a traveller came by, wrapped in a warm cloak.
+?WHEN PERSON TRAVEL COME , HE WRAP CLOAK WARM .
+# They agreed that whoever first made the traveller take off his cloak would count as the stronger.
+THEY AGREE ?COMP : WHO ?REL FIRST CAUSE_TO_(LET) PERSON TRAVEL TAKE_OFF CLOAK HE , HE STRONG MORE .
+# The north wind blew with all his strength,
+THEN WIND NORTH BLOW_(OF_WIND) STRENGTH ALL HE WITH ,
+# but the harder he blew, the tighter the traveller wrapped the cloak around himself,
+BUT HE BLOW_(OF_WIND) ?CORREL MORE , PERSON TRAVEL WRAP CLOAK HE SELF AROUND TIGHT ?CORREL MORE ,
+# and in the end the north wind gave up.
+AND LAST_(FINAL) AT WIND NORTH STOP_DOING TRY .
+# Then the sun shone warmly, and the traveller at once took off his cloak.
+THEN SUN SHINE WARM , AND PERSON TRAVEL TAKE_OFF CLOAK HE IMMEDIATELY .
+# So the north wind had to admit that the sun was the stronger of the two.
+?THEREFORE WIND NORTH MUST ADMIT ?COMP : SUN STRONG MORE .

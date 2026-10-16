@@ -34,7 +34,7 @@ curl -L -o data/omw-1.4.zip https://raw.githubusercontent.com/nltk/nltk_data/gh-
 
 | Path | Contents |
 | --- | --- |
-| `data/` | Concepticon and NoRaRe clones, OMW zip (not committed) |
+| `data/` | Concepticon and NoRaRe clones, OMW zip; for the coverage check also `udhr2/` (NLTK) and `tatoeba/` (not committed) |
 | `freq/build_concept_freq.py` | Step 1–3: concept frequencies per language (en, es, de, zh, ja) and combined |
 | `mapping/extra_concepts.tsv` | Our own concepts that Concepticon lacks (DIGNITY, SHOULD, grammar particles …), with a word per language |
 | `mapping/merges.tsv` | Concepts said with another concept's word (the 33 pronoun concepts → 7 pronouns) |
