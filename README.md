@@ -1,8 +1,8 @@
 # conlang-concept-frequency
 
-We want to create a constructed language (conlang) in which the concepts people use most often get the shortest words and related concepts share a root (like Arabic k-t-b in *kataba* "write" and *kitāb* "book"), so we estimate how often each concept is used across many languages, group related concepts into root families, and assign word lengths with Huffman coding.
+We want to create a constructed language (conlang) in which the concepts people use most often get the shortest words: we estimate how often each concept is used across many languages and assign word lengths with Huffman coding. Related concepts share words, because the grammar is analytic (derived and new concepts are compounds of existing words).
 
-The plan and our discussion are in [人造語言：跨語言概念頻率與編碼.md](人造語言：跨語言概念頻率與編碼.md).
+The plan and our discussion with AI are in [人造語言：跨語言概念頻率與編碼.md](notes/人造語言：跨語言概念頻率與編碼.md).
 
 The language itself (phonology, orthography, grammar, vocabulary, texts) is described in [docs/](docs/README.md).
 

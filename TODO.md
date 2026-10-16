@@ -57,13 +57,19 @@ Ordered by what depends on what. Details for most items are in the discussion do
 ## Before 1.0.0 / 凍結 v1 之前
 
 8. [ ] **Number system**: numbers above ten, ordinals. The coverage report lists the number words.
-9. [ ] **Root families** (goal 2): related concepts share a root. This changes many words, so it must happen before 1.0.0.
-10. [ ] **More texts**: The Wonderful Wizard of Oz, the full North Wind and the Sun.
-11. [ ] **Dictionary webpage.** The word list (`lexicon/<version>.tsv`) can be published; only the frequencies can't. A page makes it usable:
+9. [ ] **More texts**: The Wonderful Wizard of Oz, the full North Wind and the Sun.
+10. [ ] **Dictionary webpage.** The word list (`lexicon/<version>.tsv`) can be published; only the frequencies can't. A page makes it usable:
     - Search both ways: concept or English → our word, and our word → meaning.
     - Each concept with its Concepticon definition (CC BY, with attribution).
     - IPA, syllables, and how merged concepts and compounds are said; the names list once it exists.
     - Generated from each release by a script, like `docs/`, as one static HTML page.
     - Where to host it: GitHub Pages needs a public repo or a paid plan for private ones; otherwise share the page some other way.
-12. [ ] **Small open points**: language code; stress or pitch accent; capitalization at sentence start.
-13. [ ] **Release 1.0.0.** From then on, existing words never change.
+11. [ ] **Small open points**: language code; stress or pitch accent; capitalization at sentence start.
+12. [ ] **Release 1.0.0.** From then on, existing words never change.
+
+## Later / 以後
+
+- [ ] **Root families as an optional layer.** Goal 2 is met by compounds. If wanted, make a few clear families sound related, at no extra length:
+  - Families of two-syllable words share their first syllable (WRITE, READ, BOOK, PAPER, LEARN and SCHOOL are all two syllables in 0.1.0).
+  - Families of one-syllable words share their onset and coda: *kat* WRITE, *kit* BOOK.
+  - Words added after 1.0.0 can join a family through the free slots under its first syllable.

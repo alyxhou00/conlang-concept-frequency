@@ -11,7 +11,7 @@
 ## Goals / 目標
 
 1. **Frequent concepts get short words.** How often each concept is used is estimated across five languages (English, Spanish, German, Chinese, Japanese) and turned into word lengths with Huffman coding.
-2. **Derived concepts share a root.** Related concepts should sound related, like Arabic *k-t-b* in *kataba* "write" and *kitāb* "book". Not built yet.
+2. **Related concepts share words.** Done through the analytic grammar: derived and new concepts are compounds of existing words (TREE COCONUT, NET COMPUTER), like Chinese 電話, 電腦. Arabic-style roots (*k-t-b* in *kataba* "write", *kitāb* "book") are only a possible later layer.
 3. **Sentences as short as possible.** No grammatical category has to be marked; particles are used only when needed.
 
 ## Design principles / 設計原則
@@ -32,11 +32,11 @@ Semantic versioning:
 
 A removed word's slot is never reused.
 
-Before 1.0.0: root families, a check of common texts for missing concepts, the number system, and the remaining grammar (tense, relative clauses, comparison).
+Before 1.0.0: a check of common texts for missing concepts, the number system, and the remaining grammar (tense, relative clauses, comparison).
 
 ## Status / 狀態
 
 - Phonology, orthography and core grammar: decided.
 - Vocabulary: generated for 4,108 concepts.
 - Name: SHORT LANGUAGE (decided 2026-10-16).
-- Root families (goal 2), numbers, tense details, language code: not decided.
+- Numbers, remaining grammar, language code: not decided. Root families: an optional later layer.

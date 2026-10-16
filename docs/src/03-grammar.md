@@ -58,4 +58,3 @@ Not decided yet: the NAME particle itself (it will be added in the next lexicon 
 - Relative clauses: a marker or plain juxtaposition.
 - Comparison ("bigger than").
 - Numbers above ten.
-- Root families (deriving related words from a shared root).
