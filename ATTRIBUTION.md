@@ -33,7 +33,7 @@ This repository does not redistribute any of the datasets below: `data/` and the
 
 ### Japanese WordNet: NICT license (permissive, notice required)
 
-- **What we use:** the Japanese lemmas in `omw-1.4/jpn/wn-data-jpn.tab` from the Open Multilingual Wordnet 1.4 zip (`data/omw-1.4.zip`). `freq/build_concept_freq.py` uses them to find a Japanese word for each concept.
+- **What we use:** the Japanese lemmas in `omw-1.4/jpn/wn-data-jpn.tab` from the Open Multilingual Wordnet 1.4 zip (`data/omw-1.4.zip`). `pipeline/build_concept_freq.py` uses them to find a Japanese word for each concept.
 - **License:** use, copying, modification and distribution are allowed for any purpose, as long as the copyright notice, statements and disclaimer appear on all copies, including modified ones (the `omw-1.4/jpn/LICENSE` file).
 - **Required notice** (must accompany anything we distribute that contains Japanese WordNet data, such as `out/concept_freq_by_lang.tsv`):
   > Japanese WordNet Copyright 2009 by the National Institute of Information and Communications Technology (NICT). All rights reserved.

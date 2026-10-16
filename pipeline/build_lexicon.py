@@ -28,15 +28,15 @@ after a version is frozen; one-syllable words are not affected.
 Only "units" get a code (see units.py): pronouns and other merged concepts
 use their target's word, compounds use their parts' words.
 
-Input:  out/concept_freq.tsv  (from freq/build_concept_freq.py),
+Input:  out/concept_freq.tsv  (from pipeline/build_concept_freq.py),
         mapping/merges.tsv, mapping/compounds.tsv
-Output: out/lexicon_meta.json statistics for encode/release.py
+Output: out/lexicon_meta.json statistics for pipeline/release.py
         out/lexicon.tsv       one row per concept: concept_id, gloss, kind (word,
                               merged, compound), p, p_word (frequency of the word
                               itself, for kind=word), syllables, letters, word,
                               word_hyphenated, cvc (with Ø), ipa
 
-Run:  .venv/Scripts/python -X utf8 encode/build_lexicon.py
+Run:  .venv/Scripts/python -X utf8 pipeline/build_lexicon.py
 """
 import argparse
 import json

@@ -22,7 +22,7 @@ Run these from the project folder. Setup is in the [main README](../README.md).
 **1. Count how often each concept is used.**
 
 ```bash
-.venv/Scripts/python -X utf8 freq/build_concept_freq.py
+.venv/Scripts/python -X utf8 pipeline/build_concept_freq.py
 ```
 
 Only needed when the concepts or the data change. Our own concepts, merged pronouns and compounds are listed in `mapping/`; edit those files to change what the language has.
@@ -30,13 +30,13 @@ Only needed when the concepts or the data change. Our own concepts, merged prono
 **2. Make the words.**
 
 ```bash
-.venv/Scripts/python -X utf8 encode/build_lexicon.py
+.venv/Scripts/python -X utf8 pipeline/build_lexicon.py
 ```
 
 This writes a *draft* word list to `out/lexicon.tsv`. Nothing is published yet, so you can try changes and run it again as often as you like. To see a text in the draft:
 
 ```bash
-.venv/Scripts/python -X utf8 encode/render.py texts/udhr-article-1.txt
+.venv/Scripts/python -X utf8 pipeline/render.py texts/udhr-article-1.txt
 ```
 
 **3. Check.**
@@ -50,7 +50,7 @@ All tests must pass. Also read a few words and texts: do they look right?
 **4. Release.** Pick the next version number (see below) and say in one line what changed:
 
 ```bash
-.venv/Scripts/python -X utf8 encode/release.py 0.2.0 --note "added 40 everyday concepts"
+.venv/Scripts/python -X utf8 pipeline/release.py 0.2.0 --note "added 40 everyday concepts"
 ```
 
 This freezes the draft as `lexicon/0.2.0.tsv` and adds an entry to the changelog. It refuses to overwrite a version that already exists.

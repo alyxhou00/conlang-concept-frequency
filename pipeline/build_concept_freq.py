@@ -32,7 +32,7 @@ Outputs (not committed, see ATTRIBUTION.md):
   out/concept_freq.tsv          concept_id, gloss, p, n_langs, langs, outliers, p_<lang>...
                                 (p_<lang> keeps the outlier values for inspection)
 
-Run:  .venv/Scripts/python -X utf8 freq/build_concept_freq.py
+Run:  .venv/Scripts/python -X utf8 pipeline/build_concept_freq.py
 """
 import argparse
 import re

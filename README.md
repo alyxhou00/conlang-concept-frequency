@@ -2,8 +2,6 @@
 
 We want to create a constructed language (conlang) in which the concepts people use most often get the shortest words: we estimate how often each concept is used across many languages and assign word lengths with Huffman coding. Related concepts share words, because the grammar is analytic (derived and new concepts are compounds of existing words).
 
-The plan and our discussion with AI are in [人造語言：跨語言概念頻率與編碼.md](notes/人造語言：跨語言概念頻率與編碼.md).
-
 The language itself (phonology, orthography, grammar, vocabulary, texts) is described in [docs/](docs/README.md).
 
 ## Setup
@@ -32,36 +30,27 @@ curl -L -o data/omw-1.4.zip https://raw.githubusercontent.com/nltk/nltk_data/gh-
 
 ## Layout
 
-| Path | Contents |
+| Folder or file | Contents |
 | --- | --- |
-| `data/` | Concepticon and NoRaRe clones, OMW zip; for the coverage check also `udhr2/` (NLTK) and `tatoeba/` (not committed) |
-| `freq/build_concept_freq.py` | Step 1–3: concept frequencies per language (en, es, de, zh, ja) and combined |
-| `mapping/extra_concepts.tsv` | Our own concepts that Concepticon lacks (DIGNITY, SHOULD, grammar particles …), with a word per language |
-| `mapping/merges.tsv` | Concepts said with another concept's word (the 33 pronoun concepts → 7 pronouns) |
-| `mapping/compounds.tsv` | Concepts said with existing words (COCONUT TREE → TREE COCONUT); made by `mapping/find_compounds.py`, edit by hand |
-| `encode/huffman.py` | n-ary Huffman coding |
-| `encode/units.py` | Which concepts get their own word; frequencies of merged and compound concepts |
-| `encode/build_lexicon.py` | Step 4: give every concept a word made of CVC syllables |
-| `encode/render.py` | Turn a concept-tagged text into our language |
+| [`pipeline/`](pipeline/README.md) | The scripts that build, release and render the lexicon |
+| [`mapping/`](mapping/README.md) | Hand-edited tables: our own concepts, merged pronouns, compounds |
+| [`lexicon/`](lexicon/CHANGELOG.md) | Released versions: `<version>.tsv` (concepts and words), `<version>.json` (statistics), `CHANGELOG.md` |
 | `texts/` | Concept-tagged texts, e.g. UDHR Article 1 |
 | `docs/` | Pages about the language: 00 Introduction … 06 Culture, A Pipeline; generated from `docs/src/` by `docs/build_docs.py` |
-| `lexicon/` | Released versions: `<version>.tsv` (concepts and words), `<version>.json` (statistics), `CHANGELOG.md` |
-| `encode/release.py` | Freeze the current lexicon as a version |
+| [`checks/`](checks/README.md) | A one-off check of the data sources, not part of the pipeline |
 | `tests/` | Tests (`pytest`) |
+| `notes/` | The design discussion (Traditional Chinese) |
+| `data/` | Downloaded data: Concepticon and NoRaRe clones, OMW zip, and for the coverage check `udhr2/` and `tatoeba/` (not committed) |
 | `out/` | Generated tables (not committed, see Licenses) |
-| `checks/check_sources.py` | Sanity checks on Calude-2011-200, NoRaRe and wordfreq |
-| `checks/check_sources_output.txt` | Output of the last run |
 | `ATTRIBUTION.md` | Licenses and attribution statements for the data we use |
 | `REFERENCES.md` | Literature (參考文獻) |
-
-Planned (from the discussion doc): `notebooks/`.
 
 ## Running the pipeline
 
 ```bash
-.venv/Scripts/python -X utf8 freq/build_concept_freq.py
-.venv/Scripts/python -X utf8 encode/build_lexicon.py
-.venv/Scripts/python -X utf8 encode/render.py texts/udhr-article-1.txt
+.venv/Scripts/python -X utf8 pipeline/build_concept_freq.py
+.venv/Scripts/python -X utf8 pipeline/build_lexicon.py
+.venv/Scripts/python -X utf8 pipeline/render.py texts/udhr-article-1.txt
 ```
 
 The first writes `out/concept_freq_by_lang.tsv` and `out/concept_freq.tsv`; the second writes `out/lexicon.tsv`; the third prints the text in our language, with IPA and glosses. `-X utf8` is needed on Windows consoles that are not set to UTF-8.
@@ -69,7 +58,7 @@ The first writes `out/concept_freq_by_lang.tsv` and `out/concept_freq.tsv`; the 
 `mapping/compounds.tsv` is generated once and then edited by hand. To regenerate it from scratch (this overwrites hand edits):
 
 ```bash
-.venv/Scripts/python -X utf8 mapping/find_compounds.py
+.venv/Scripts/python -X utf8 pipeline/find_compounds.py
 ```
 
 ### Releasing a version
@@ -77,7 +66,7 @@ The first writes `out/concept_freq_by_lang.tsv` and `out/concept_freq.tsv`; the 
 The current lexicon is version **0.1.0** (beta). Versions follow semantic versioning: 0.x betas may still change words; from 1.0.0 on, existing words never change and 1.x only adds words, into the 10% of two-syllable code space that `build_lexicon.py` keeps free (`--reserve-2syl`, default 0.10).
 
 ```bash
-.venv/Scripts/python -X utf8 encode/release.py 0.2.0 --note "what changed"
+.venv/Scripts/python -X utf8 pipeline/release.py 0.2.0 --note "what changed"
 .venv/Scripts/python -X utf8 docs/build_docs.py
 ```
 
@@ -101,7 +90,7 @@ The lexicon covers all 4,099 active Concepticon concept sets plus our 9 concepts
 
 The `source` column of `out/concept_freq_by_lang.tsv` shows which case applies.
 
-### `freq/build_concept_freq.py` options
+### `pipeline/build_concept_freq.py` options
 
 **`--min-langs N`** (default 0): keep only concepts that have frequency data in at least N of the 5 languages. With 0, every concept is kept, including those with no data (case 3 above). Concepts below N are left out of the lexicon entirely.
 
@@ -124,7 +113,7 @@ The average is per word, weighted by how often each word is used.
 
 **`--outlier-factor F`** (default 10): when averaging a concept over its languages, ignore a language whose value is more than F times above or below the median of that concept's languages (compared on a log scale). This catches bad word mappings, such as Japanese 水 for WATER BUFFALO or German *Oheim* for UNCLE. If every language of a concept would be dropped, all are kept. `0` turns this off. Dropped languages are listed in the `outliers` column of `out/concept_freq.tsv`.
 
-### `encode/build_lexicon.py` options
+### `pipeline/build_lexicon.py` options
 
 **`--onsets`** (default `Ømnptkshvrl`), **`--vowels`** (default `iöeuëoa`), **`--codas`** (default `nthlØ`): the sound inventory, one letter per sound. `Ø` is the zero consonant: it counts as a consonant slot but is not written in the word.
 
@@ -159,3 +148,6 @@ A zero onset is allowed only in a word's first syllable, so every written word s
 ## Licenses
 
 Our data sources have different licenses, and NoRaRe is **non-commercial only** (CC BY-NC 4.0). See [ATTRIBUTION.md](ATTRIBUTION.md) before redistributing any derived frequency tables; for that reason `out/` is not committed. No license has been chosen yet for this repository's own code.
+
+## Notes
+The plan and our discussion with AI are in [人造語言：跨語言概念頻率與編碼.md](notes/人造語言：跨語言概念頻率與編碼.md).

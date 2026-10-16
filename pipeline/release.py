@@ -9,7 +9,7 @@ Versions follow semantic versioning (see docs/00-introduction.md):
 0.x are betas whose words may still change; from 1.0.0 on, existing words
 never change and 1.x only adds words.
 
-Run:  .venv/Scripts/python -X utf8 encode/release.py 0.1.0 --note "first beta"
+Run:  .venv/Scripts/python -X utf8 pipeline/release.py 0.1.0 --note "first beta"
 """
 import argparse
 import datetime

@@ -18,7 +18,7 @@ particles and adpositions follow their word:
 The output is meant to be edited by hand: delete a row to give the concept its
 own word, or change PARTS. build_lexicon.py reads the file as it is.
 
-Run:  .venv/Scripts/python -X utf8 mapping/find_compounds.py
+Run:  .venv/Scripts/python -X utf8 pipeline/find_compounds.py
 """
 import re
 from pathlib import Path

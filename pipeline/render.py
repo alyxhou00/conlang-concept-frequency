@@ -9,7 +9,7 @@ Text format (see texts/):
 Because the text names concepts, not words, it stays valid when the lexicon is
 rebuilt: render it again and it uses the new words.
 
-Run:  .venv/Scripts/python -X utf8 encode/render.py texts/udhr-article-1.txt
+Run:  .venv/Scripts/python -X utf8 pipeline/render.py texts/udhr-article-1.txt
 """
 import argparse
 import difflib
