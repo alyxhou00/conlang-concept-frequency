@@ -5,6 +5,7 @@ Placeholders in the templates:
   {{w: I SEE DOG}}       the words, in italics: *ö rö tön*
   {{ipa: I SEE DOG}}     the IPA: [ʔø ʁø tøn]
   {{h: DIGNITY}}         the words with syllable breaks, in italics: *et-nöh*
+  {{name: SHORT LANGUAGE}}  a proper name: the words capitalized, in italics: *Ihöt Önre*
   {{stats}}              table of counts and average word length
   {{top: 30}}            table of the 30 most frequent words
   {{text: texts/x.txt}}  a concept-tagged text: words, IPA and glosses
@@ -94,6 +95,8 @@ class Builder:
                 return f"*{self.words(arg)}*"
             if kind == "ipa":
                 return f"[{self.ipa(arg)}]"
+            if kind == "name":
+                return "*" + " ".join(w.capitalize() for w in self.words(arg).split()) + "*"
             if kind == "h":
                 return f"*{self.hyphenated(arg)}*"
             if kind == "stats":

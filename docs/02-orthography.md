@@ -22,6 +22,7 @@ One letter per sound.
 - A word splits into syllables in one way, because every syllable after the first starts with a consonant: *önhe* "dignity" = *ön-he*. Hyphens are used only in tables to show syllables.
 - Compound concepts are written as separate words: *ihë könah* "coconut tree" (TREE COCONUT).
 - Punctuation follows the word: `.` `,` `?` `!`
+- Proper names are capitalized: *Ihöt Önre*.
 
 ## Notes / 注意
 
@@ -30,5 +31,5 @@ One letter per sound.
 
 ## Not decided yet / 尚未決定
 
-- Capitalization.
+- Capitalization other than proper names (sentence starts?).
 - Whether questions also end with `?` (the question particle already marks them).

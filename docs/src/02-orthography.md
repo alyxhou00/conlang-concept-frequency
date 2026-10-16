@@ -21,6 +21,7 @@ One letter per sound.
 - A word splits into syllables in one way, because every syllable after the first starts with a consonant: {{w: DIGNITY}} "dignity" = {{h: DIGNITY}}. Hyphens are used only in tables to show syllables.
 - Compound concepts are written as separate words: {{w: COCONUT_TREE}} "coconut tree" (TREE COCONUT).
 - Punctuation follows the word: `.` `,` `?` `!`
+- Proper names are capitalized: {{name: SHORT LANGUAGE}}.
 
 ## Notes / 注意
 
@@ -29,5 +30,5 @@ One letter per sound.
 
 ## Not decided yet / 尚未決定
 
-- Capitalization.
+- Capitalization other than proper names (sentence starts?).
 - Whether questions also end with `?` (the question particle already marks them).

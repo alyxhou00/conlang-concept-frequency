@@ -40,6 +40,18 @@ Singular vs. plural, and inclusive vs. exclusive "we". No gender, no politeness 
 | 2nd | THOU — {{w: THOU}} | YOU — {{w: YOU}} |
 | 3rd | HE OR SHE OR IT — {{w: HE_OR_SHE_OR_IT}} | THEY — {{w: THEY}} |
 
+## Proper names and loanwords / 專有名詞與外來詞
+
+| Kind | Rule | Example |
+| --- | --- | --- |
+| New concepts, including international ones (computer, internet) | Said with existing words, like Chinese 電話 "electric speech"; once common, a word of their own from the free slots. No borrowing by sound. | INTERNET → NET COMPUTER, "net of computers" |
+| Names made of our own words | **Modifier first**, the reverse of the normal order: the order itself marks a fixed name. Capitalized. | SHORT LANGUAGE — {{name: SHORT LANGUAGE}}, the name of this language; compare LANGUAGE SHORT — {{w: LANGUAGE SHORT}} "a language that is short" |
+| Names from other languages (Maria, Paris) | Adapted to our sounds and placed between two NAME particles, so the listener hears where the name starts and ends. Capitalized. A category word (PERSON, CITY, RIVER …) may follow. | NAME *Nuyok* NAME CITY "New York City" |
+
+Why names need the NAME particles: almost every syllable sequence is already a sequence of our words, so a name like *ma-ri-a* would otherwise be heard as three ordinary words.
+
+Not decided yet: the NAME particle itself (it will be added in the next lexicon version), the rules for adapting foreign sounds, and how foreign names are spelled beyond the capital letter.
+
 ## Not decided yet / 尚未決定
 
 - Tense and aspect beyond PAST (future, perfective …).

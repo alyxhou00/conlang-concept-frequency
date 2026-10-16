@@ -1,9 +1,9 @@
 # 00. Introduction
 
-- Name / 名稱: {{w: LANGUAGE SHORT}} {{ipa: LANGUAGE SHORT}}, literally LANGUAGE SHORT, "short language" / 短的語言
-  - A compound like any other, written as two words. Like every word, it can still change until 1.0.0.
-  - SHORT here is SHORT (length), concept 1645, not SHORT (TIME).
-  - No slot is reserved for it: no word added later can sound the same, because no word can begin with the word for LANGUAGE.
+- Name / 名稱: {{name: SHORT LANGUAGE}} {{ipa: SHORT LANGUAGE}}, literally SHORT LANGUAGE, "the Short Language" / 短語言
+  - A proper name made of two existing words. Proper names put the modifier first, the reverse of the normal order, so the name differs from the ordinary phrase {{w: LANGUAGE SHORT}} "a language that is short" (see [03 Grammar](03-grammar.md#proper-names-and-loanwords--專有名詞與外來詞)).
+  - SHORT here is SHORT (length), concept 1645, not SHORT (TIME). Like every word, the name can still change until 1.0.0.
+  - No slot is reserved for it: no word added later can sound the same, because no word can begin with the word for SHORT.
 - Language code / 語言代碼: not decided yet
 - Type / 類型: constructed language, analytic (isolating) / 人造語言，分析語（孤立語）
 
@@ -37,5 +37,5 @@ Before 1.0.0: root families, a check of common texts for missing concepts, the n
 
 - Phonology, orthography and core grammar: decided.
 - Vocabulary: generated for 4,108 concepts.
-- Name: LANGUAGE SHORT (decided 2026-10-16).
+- Name: SHORT LANGUAGE (decided 2026-10-16).
 - Root families (goal 2), numbers, tense details, language code: not decided.
