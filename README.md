@@ -44,7 +44,9 @@ curl -L -o data/omw-1.4.zip https://raw.githubusercontent.com/nltk/nltk_data/gh-
 | `encode/build_lexicon.py` | Step 4: give every concept a word made of CVC syllables |
 | `encode/render.py` | Turn a concept-tagged text into our language |
 | `texts/` | Concept-tagged texts, e.g. UDHR Article 1 |
-| `docs/` | Pages about the language: 00 Introduction … 06 Culture, A Pipeline |
+| `docs/` | Pages about the language: 00 Introduction … 06 Culture, A Pipeline; generated from `docs/src/` by `docs/build_docs.py` |
+| `lexicon/` | Released versions: `<version>.tsv` (concepts and words), `<version>.json` (statistics), `CHANGELOG.md` |
+| `encode/release.py` | Freeze the current lexicon as a version |
 | `tests/` | Tests (`pytest`) |
 | `out/` | Generated tables (not committed, see Licenses) |
 | `checks/check_sources.py` | Sanity checks on Calude-2011-200, NoRaRe and wordfreq |
@@ -69,6 +71,17 @@ The first writes `out/concept_freq_by_lang.tsv` and `out/concept_freq.tsv`; the 
 ```bash
 .venv/Scripts/python -X utf8 mapping/find_compounds.py
 ```
+
+### Releasing a version
+
+The current lexicon is version **0.1.0** (beta). Versions follow semantic versioning: 0.x betas may still change words; from 1.0.0 on, existing words never change and 1.x only adds words, into the 10% of two-syllable code space that `build_lexicon.py` keeps free (`--reserve-2syl`, default 0.10).
+
+```bash
+.venv/Scripts/python -X utf8 encode/release.py 0.2.0 --note "what changed"
+.venv/Scripts/python -X utf8 docs/build_docs.py
+```
+
+`release.py` writes `lexicon/<version>.tsv` (rank, concept, kind, word, syllables, `cvc`, IPA; no frequencies) and `lexicon/<version>.json`, and adds a `lexicon/CHANGELOG.md` entry. An existing version is never overwritten. `build_docs.py` then fills the pages in `docs/` from the latest version; edit their templates in `docs/src/`. A test fails if `docs/` is out of date.
 
 ### Writing texts
 

@@ -2,7 +2,7 @@
 
 Data and software this project uses, with the attribution statement each license asks for. Full citations are in [REFERENCES.md](REFERENCES.md).
 
-This repository does not redistribute any of the datasets below: `data/` and the generated tables in `out/` are not committed. `checks/check_sources_output.txt` quotes a handful of individual values from them as part of the analysis.
+This repository does not redistribute any of the datasets below: `data/` and the generated tables in `out/` are not committed. The released word lists in `lexicon/` contain Concepticon IDs and glosses (CC BY 4.0, see below) and our own words; they contain no frequency values, only a `rank` that orders our words. Whether word lengths and ranks count as material derived from the NoRaRe and wordfreq data is an open question (see the end of the Data section). `checks/check_sources_output.txt` quotes a handful of individual values from them as part of the analysis.
 
 ## Data (Creative Commons)
 

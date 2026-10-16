@@ -1,0 +1,29 @@
+{
+  "version": "0.1.0",
+  "date": "2026-10-16",
+  "built_from_commit": "dec2c9b",
+  "concepts": 4108,
+  "own_words": 3752,
+  "merged": 25,
+  "compounds": 331,
+  "words_per_syllables": {
+    "1": 376,
+    "2": 2833,
+    "3": 543
+  },
+  "free_slots_per_syllables": {
+    "1": 0,
+    "2": 315,
+    "3": 157
+  },
+  "average_syllables": 1.1592,
+  "average_letters": 2.3223,
+  "inventory": {
+    "onsets": "Ømnptkshvrl",
+    "vowels": "iöeuëoa",
+    "codas": "nthlØ"
+  },
+  "first_syllables": 385,
+  "later_syllables": 350,
+  "reserve_2syl": 0.1
+}

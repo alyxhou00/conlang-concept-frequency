@@ -22,12 +22,16 @@ node of the code tree):
      simple walk k -> (onset k, vowel k, coda k); otherwise it still covers
      every syllable once.
 
+10% of the two-syllable words (--reserve-2syl) are kept free for words added
+after a version is frozen; one-syllable words are not affected.
+
 Only "units" get a code (see units.py): pronouns and other merged concepts
 use their target's word, compounds use their parts' words.
 
 Input:  out/concept_freq.tsv  (from freq/build_concept_freq.py),
         mapping/merges.tsv, mapping/compounds.tsv
-Output: out/lexicon.tsv       one row per concept: concept_id, gloss, kind (word,
+Output: out/lexicon_meta.json statistics for encode/release.py
+        out/lexicon.tsv       one row per concept: concept_id, gloss, kind (word,
                               merged, compound), p, p_word (frequency of the word
                               itself, for kind=word), syllables, letters, word,
                               word_hyphenated, cvc (with Ø), ipa
@@ -35,13 +39,14 @@ Output: out/lexicon.tsv       one row per concept: concept_id, gloss, kind (word
 Run:  .venv/Scripts/python -X utf8 encode/build_lexicon.py
 """
 import argparse
+import json
 import math
 import unicodedata
 from pathlib import Path
 
 import pandas as pd
 
-from huffman import nary_huffman
+from huffman import free_slots, nary_huffman_reserving
 from units import Units, load_compounds, load_merges
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -129,6 +134,8 @@ def main():
     ap.add_argument("--onsets", default=ONSETS, help=f"syllable-initial consonants, one letter each, {ZERO} = none (default {ONSETS})")
     ap.add_argument("--vowels", default=VOWELS, help=f"vowels, one letter each (default {VOWELS})")
     ap.add_argument("--codas", default=CODAS, help=f"syllable-final consonants, {ZERO} = none (default {CODAS})")
+    ap.add_argument("--reserve-2syl", type=float, default=0.10,
+                    help="share of two-syllable words kept free for later additions (default 0.10)")
     ap.add_argument("--input", type=Path, default=OUT / "concept_freq.tsv")
     ap.add_argument("--output", type=Path, default=OUT / "lexicon.tsv")
     args = ap.parse_args()
@@ -140,7 +147,7 @@ def main():
 
     units = Units(p.index, load_merges(), load_compounds())
     up = units.unit_p(p)
-    codes = nary_huffman(up.to_numpy(), len(later), root_n=len(first))
+    codes = nary_huffman_reserving(up.to_numpy(), len(later), root_n=len(first), reserve2=args.reserve_2syl)
     sylls_of = {u: [first[c[0]], *(later[s] for s in c[1:])] for u, c in zip(up.index, codes)}
 
     rows = []
@@ -171,6 +178,22 @@ def main():
     avg_syl = float((own.p_word * own.syllables).sum())
     avg_let = float((own.p_word * own.letters).sum())
     entropy = -sum(x * math.log(x) for x in up if x > 0) / math.log(len(first))
+    meta = {
+        "concepts": len(lex),
+        "own_words": len(own),
+        "merged": int((lex.kind == "merged").sum()),
+        "compounds": int((lex.kind == "compound").sum()),
+        "words_per_syllables": {str(k): int(v) for k, v in own.syllables.value_counts().sort_index().items()},
+        "free_slots_per_syllables": {str(k): v for k, v in free_slots(codes, len(later), len(first)).items()},
+        "average_syllables": round(avg_syl, 4),
+        "average_letters": round(avg_let, 4),
+        "inventory": {"onsets": args.onsets, "vowels": args.vowels, "codas": args.codas},
+        "first_syllables": len(first),
+        "later_syllables": len(later),
+        "reserve_2syl": args.reserve_2syl,
+    }
+    args.output.with_name("lexicon_meta.json").write_text(
+        json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
     own = own.sort_values("p_word", ascending=False)
     print(f"{len(lex)} concepts: {len(own)} with their own word, "
           f"{(lex.kind == 'merged').sum()} merged, {(lex.kind == 'compound').sum()} compounds")
@@ -178,6 +201,7 @@ def main():
     print(f"average word length {avg_syl:.3f} syllables, {avg_let:.2f} letters; "
           f"entropy lower bound {entropy:.3f} syllables")
     print("words per length:", ", ".join(f"{k} syl: {v}" for k, v in own.syllables.value_counts().sort_index().items()))
+    print("free for new words:", ", ".join(f"{k} syl: {v}" for k, v in free_slots(codes, len(later), len(first)).items()))
     print("most frequent:", ", ".join(f"{g}={w}" for g, w in own[["gloss", "word_hyphenated"]].head(12).itertuples(index=False)))
     print(f"wrote {args.output}")
 

@@ -3,7 +3,7 @@ import random
 
 import pytest
 
-from huffman import nary_huffman
+from huffman import code_from_profile, free_slots, nary_huffman, nary_huffman_reserving
 
 
 def is_prefix_free(codes):
@@ -102,6 +102,44 @@ def test_root_n_count_of_one_syllable_words():
     w = [1 / (i + 1) for i in range(1875)]
     lens = [len(c) for c in nary_huffman(w, 350, root_n=385)]
     assert lens.count(1) == 380 and lens.count(2) == 1495
+
+
+def test_reservation_keeps_two_symbol_slots_free_and_ones_unchanged():
+    rnd = random.Random(7)
+    w = sorted((rnd.paretovariate(1.1) for _ in range(3000)), reverse=True)
+    plain = nary_huffman(w, 50, root_n=60)
+    reserved = nary_huffman_reserving(w, 50, root_n=60, reserve2=0.10)
+    assert is_prefix_free(reserved)
+    assert all(c[0] < 60 and all(s < 50 for s in c[1:]) for c in reserved)
+    ones = sum(len(c) == 1 for c in plain)
+    assert sum(len(c) == 1 for c in reserved) == ones
+    two_slots = (60 - ones) * 50
+    free = free_slots(reserved, 50, 60)
+    assert free[1] == 0                      # no first symbol is left entirely free
+    assert free[2] >= 0.10 * two_slots
+    assert avg_len(w, reserved) >= avg_len(w, plain) - 1e-12
+    lens = [len(c) for c in reserved]
+    assert lens == sorted(lens)  # more frequent items are never longer
+
+
+def test_profile_from_huffman_lengths_is_as_short_as_huffman():
+    rnd = random.Random(3)
+    w = [rnd.paretovariate(1.2) for _ in range(800)]
+    plain = nary_huffman(w, 20, root_n=25)
+    counts = [sum(len(c) == d for c in plain) for d in range(1, max(map(len, plain)) + 1)]
+    rebuilt = code_from_profile(w, counts, [0] * len(counts), 20, 25)
+    assert is_prefix_free(rebuilt)
+    assert avg_len(w, rebuilt) == pytest.approx(avg_len(w, plain))
+
+
+def test_no_reservation_is_plain_huffman():
+    w = [5, 4, 3, 2, 1] * 40
+    assert nary_huffman_reserving(w, 7, root_n=9, reserve2=0) == nary_huffman(w, 7, root_n=9)
+
+
+def test_free_slots_count_unused_leaves():
+    codes = [(0,), (1, 0), (1, 1)]  # n=3: (2,) unused at length 1, (1, 2) unused at length 2
+    assert free_slots(codes, 3) == {1: 1, 2: 1}
 
 
 def test_root_n_equal_to_n_is_plain_huffman():

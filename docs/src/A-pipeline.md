@@ -1,0 +1,45 @@
+# A. Pipeline
+
+How the vocabulary is generated and released. Setup and all options are in the [main README](../README.md).
+
+```bash
+.venv/Scripts/python -X utf8 freq/build_concept_freq.py      # concept frequencies
+.venv/Scripts/python -X utf8 encode/build_lexicon.py         # words
+.venv/Scripts/python -X utf8 encode/render.py texts/udhr-article-1.txt   # a text in our language
+.venv/Scripts/python -X utf8 encode/release.py 0.2.0 --note "what changed"   # freeze a version
+.venv/Scripts/python -X utf8 docs/build_docs.py              # rebuild these pages from the latest version
+```
+
+| Step | File | Output |
+| --- | --- | --- |
+| Frequencies | `freq/build_concept_freq.py` | `out/concept_freq.tsv` |
+| Our own concepts | `mapping/extra_concepts.tsv` | (input) |
+| Pronouns → 7 | `mapping/merges.tsv` | (input) |
+| Compounds | `mapping/compounds.tsv` (edit by hand) | (input) |
+| Words | `encode/build_lexicon.py` | `out/lexicon.tsv` |
+| Texts | `encode/render.py` + `texts/*.txt` | printed text, IPA, glosses |
+| Release | `encode/release.py` | `lexicon/<version>.tsv`, `.json`, `CHANGELOG.md` |
+| Docs | `docs/build_docs.py` + `docs/src/*.md` | `docs/*.md` |
+
+## Releasing a version / 發布版本
+
+1. Build the lexicon (`build_concept_freq.py`, `build_lexicon.py`).
+2. `release.py <version>` freezes it: `lexicon/<version>.tsv` (concepts and words, no frequencies) and `lexicon/<version>.json` (statistics). An existing version is never overwritten.
+3. `docs/build_docs.py` fills these pages from the new version.
+4. Commit all three.
+
+The current version is {{version}}; see [lexicon/CHANGELOG.md](../lexicon/CHANGELOG.md).
+
+## Editing these pages / 編輯這些頁面
+
+Edit `docs/src/*.md`, then run `docs/build_docs.py`. Placeholders such as `\{{w: I SEE DOG}}` become the words of the current version. `docs/build_docs.py --check` reports pages that are out of date; the tests run it too.
+
+## Writing a text / 寫文章
+
+Write concept names in our word order, one sentence per line, with `_` for spaces:
+
+```
+PERSON ALL BE_BORN FREE AND EQUAL DIGNITY AND RIGHT_(ENTITLEMENT) IN .
+```
+
+Then render it. Because the text names concepts, it stays valid when the words change.
