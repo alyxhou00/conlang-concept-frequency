@@ -47,7 +47,7 @@ from pathlib import Path
 import pandas as pd
 
 from huffman import free_slots, nary_huffman_reserving
-from phonetics import GLOTTAL_STOP, IPA
+from phonetics import pronounce
 from units import Units, load_compounds, load_merges
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -120,14 +120,8 @@ def render(*syllables):
 
 
 def ipa(*syllables):
-    """Phonemic IPA with syllable dots; a word-initial zero onset is a glottal stop.
-
-    The sound rules of connected speech are in phonetics.py, not here."""
-    out = []
-    for i, (o, v, c) in enumerate(syllables):
-        o = GLOTTAL_STOP if (o == ZERO and i == 0) else "" if o == ZERO else IPA.get(o, o)
-        out.append(o + IPA.get(v, v) + ("" if c == ZERO else IPA.get(c, c)))
-    return ".".join(out)
+    """IPA of the word said on its own, with syllable dots (sound rules in phonetics.py)."""
+    return pronounce([render(*syllables)])[0]
 
 
 def main():
@@ -164,7 +158,7 @@ def main():
             "word": " ".join(render(*w) for w in words),
             "word_hyphenated": " ".join("-".join(render(x) for x in w) for w in words),
             "cvc": " ".join(".".join("".join(x) for x in w) for w in words),
-            "ipa": " ".join(ipa(*w) for w in words),
+            "ipa": " ".join(pronounce([render(*w) for w in words])),  # a compound is said together
         })
     lex = pd.DataFrame(rows)
     lex.insert(6, "letters", lex.word.str.replace(" ", "").str.len())

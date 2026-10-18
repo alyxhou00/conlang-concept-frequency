@@ -72,7 +72,8 @@ Versions look like `MAJOR.MINOR.PATCH`, e.g. `0.2.0`.
 
 | Situation | Next number | Example |
 | --- | --- | --- |
-| Beta (before 1.0.0): any change | raise the middle number | 0.1.0 → 0.2.0 |
+| Beta (before 1.0.0): words change | raise the middle number | 0.1.0 → 0.2.0 |
+| Beta: no word changes (IPA, glosses, notes) | raise the last number | 0.1.0 → 0.1.1 |
 | Words are final | 1.0.0 | |
 | After 1.0.0: new words only | raise the middle number | 1.0.0 → 1.1.0 |
 | After 1.0.0: fix a typo in a gloss or note, no word changes | raise the last number | 1.1.0 → 1.1.1 |

@@ -1,7 +1,7 @@
 """How written words sound: letters to IPA, and the sound rules of connected speech.
 
-The lexicon's `ipa` column is phonemic: each word on its own, no rules. The
-rules below apply when words are said together (docs/src/01-phonology.md):
+The lexicon's `ipa` column is each word said on its own, with these rules; in
+texts they also apply across words (docs/src/01-phonology.md):
 
   1. A word-initial empty onset is a glottal stop [ʔ].
   2. h is [ç] next to a front vowel (i e ö) in the same word, otherwise [x]:

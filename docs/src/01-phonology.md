@@ -70,7 +70,7 @@ A coda t or n takes the place of the next consonant when that is a labial (m p) 
 - It does not happen before [ç].
 - Because p, m, k and ŋ never end a syllable otherwise, the listener always knows that [p] or [k] at the end of a syllable is t, and [m] or [ŋ] is n.
 
-The lexicon's IPA column shows each word on its own, without these rules (0.1.0 still has [ɕ] for s). Texts and the tables here show them.
+The lexicon's IPA column shows each word said on its own, with these rules inside the word (from 0.1.1; 0.1.0 has [ɕ] for s and no [ç] or assimilation). Assimilation across words shows only in texts.
 
 ## Not decided yet / 尚未決定
 

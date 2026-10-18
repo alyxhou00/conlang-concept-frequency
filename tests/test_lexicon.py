@@ -1,6 +1,7 @@
 import pytest
 
 from build_lexicon import CODAS, ONSETS, VOWELS, ZERO, ipa, render, syllable_inventory, vary
+from phonetics import pronounce
 
 
 def test_default_inventory_sizes():
@@ -90,3 +91,14 @@ def test_accepts_decomposed_umlauts():
 def test_rejects_bad_inventories(onsets, vowels, codas):
     with pytest.raises(ValueError):
         syllable_inventory(onsets, vowels, codas)
+
+
+def test_assimilation_across_words_makes_no_new_homophones():
+    # coda t, n become p m k ŋ only before m p k h, and those never end a syllable otherwise
+    first, later = syllable_inventory(ONSETS, VOWELS, CODAS)
+    words = [render(a) for a in first] + [render(a, b) for a in first[:15] for b in later[:15]]
+    said = {}
+    for a in words[:300]:
+        for b in words[:300]:
+            said.setdefault("".join(pronounce([a, b])).replace(".", ""), set()).add((a, b))
+    assert all(len(v) == 1 for v in said.values())
