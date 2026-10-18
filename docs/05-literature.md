@@ -25,3 +25,59 @@ Notes:
 - "brotherhood" is SPIRIT BROTHER (possessor after the noun).
 - The subject of the second clause is dropped after AND.
 - Source: [texts/udhr-article-1.txt](../texts/udhr-article-1.txt).
+
+## The North Wind and the Sun / 北風與太陽
+
+Translated by CLB (Łügutökü Likine).
+
+> The North Wind and the Sun (Aesop; the full text used in the IPA Handbook, retold in our own words)
+> Translation: CLB (Łügutökü Likine), 2026-10-18
+> The north wind and the sun were arguing about which of them was stronger, when a traveller came along, wrapped in a warm cloak.
+> "wrapped in" is said actively (WRAP CLOAK), like the wrapping later on.
+
+**etlö umöt in urih hitet mö, röl iset vi, ken etli, etpëh hënöl önkën, ël se.**  
+[ʔɛt.lø ʔu.møt ʔin ʔu.ʁix xi.tɛt mø ʁøl ʔi.ɕɛt ʋi kɛn ʔɛt.li ʔɛt.pɤx xɤ.nøl ʔøn.kɤn ʔɤl ɕɛ]  
+WIND NORTH AND SUN DISPUTE PAST_(PARTICLE) , WHICH STRONG MORE , PERSON TRAVEL , WRAP CLOAK WARM , COME WHEN .
+
+> They agreed that the one who first got the traveller to take off his cloak would be counted the stronger of the two.
+> "would be counted" is left out: "the one who first ..., is stronger than the other".
+
+**ah imël, ot, ku ken etli etsuhsen hënöl e li, iset vi tën itih.**  
+[ʔɑx ʔi.mɤl ʔɔt ku kɛn ʔɛt.li ʔɛt.ɕux.ɕɛn xɤ.nøl ʔɛ li ʔi.ɕɛt ʋi tɤn ʔi.tix]  
+THEY AGREE , ONE , CAUSE_TO_(LET) PERSON TRAVEL TAKE_OFF CLOAK HE FIRST , STRONG MORE OTHER ABOVE .
+
+> Then the north wind blew with all his might, but the harder he blew, the tighter the traveller pulled his cloak around him.
+> "the harder ..., the tighter ..." is said as "when he blew more, ... tighter more".
+
+**it etlö umöt etkal usit ki ti, lo e etkal vi se, ken etli etpëh hënöl e umun vi.**  
+[ʔit ʔɛt.lø ʔu.møt ʔɛt.kɑl ʔu.ɕit ki ti lɔ ʔɛ ʔɛt.kɑl ʋi ɕɛ kɛn ʔɛt.li ʔɛt.pɤx xɤ.nøl ʔɛ ʔu.mun ʋi]  
+THEN WIND NORTH BLOW_(OF_WIND) STRENGTH ALL WITH , BUT HE BLOW_(OF_WIND) MORE WHEN , PERSON TRAVEL WRAP CLOAK HE TIGHT MORE .
+
+> In the end the north wind gave up trying.
+
+**hon po etlö umöt ukël kit.**  
+[xɔn pɔ ʔɛt.lø ʔu.møt ʔu.kɤl kit]  
+LAST_(FINAL) IN WIND NORTH ABANDON TRY .
+
+> Then the sun shone out warmly, and the traveller took off his cloak at once.
+
+**it urih hëpa önkën, ken etli etsuhsen hënöl e usëh.**  
+[ʔit ʔu.ʁix xɤ.pɑ ʔøn.kɤn kɛn ʔɛt.li ʔɛt.ɕux.ɕɛn xɤ.nøl ʔɛ ʔu.ɕɤx]  
+THEN SUN SHINE_(EMITTED_LIGHT) WARM , PERSON TRAVEL TAKE_OFF CLOAK HE IMMEDIATELY .
+
+> So the north wind had to admit that the sun was the stronger of the two.
+> "so" is RESULT IN, "in the result", like LAST IN "in the end"; "of the two" is clear from context.
+
+**inat po, etlö umöt uveh koh, urih iset vi.**  
+[ʔi.nɑt pɔ ʔɛt.lø ʔu.møt ʔu.ʋɛx kɔx ʔu.ʁix ʔi.ɕɛt ʋi]  
+RESULT IN , WIND NORTH ADMIT MUST , SUN STRONG MORE .
+
+Notes:
+
+- Clauses are joined with commas, with no word for "that", "who" or "when" at the start: see [Clauses](03-grammar.md#clauses--子句).
+- WHEN goes at the end of its clause, like a postposition: HE BLOW MORE WHEN "when he blew harder".
+- "the harder he blew, the tighter …" is MORE in both clauses: … BLOW MORE WHEN , … WRAP CLOAK HE TIGHT MORE.
+- Comparison is A ADJ MORE B ABOVE: STRONG MORE OTHER ABOVE "stronger than the other".
+- No passive: "wrapped in a warm cloak" is WRAP CLOAK WARM, and "would be counted the stronger" is just STRONG MORE.
+- "so" is RESULT IN "in the result", like LAST IN "in the end".
+- Source: [texts/north-wind-and-sun.txt](../texts/north-wind-and-sun.txt).

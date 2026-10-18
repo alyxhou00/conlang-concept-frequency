@@ -1,20 +1,18 @@
-# The North Wind and the Sun (Aesop; the short version used in the IPA Handbook)
-# Draft for the coverage check (2026-10-16). Tokens starting with ? mark grammar that is not decided yet
-# (?REL relative clause, ?COMP "that"-clause, ?WHEN "when"-clause, ?CORREL "the more ... the more",
-# ?THEREFORE "so"). AROUND is a proposed new concept. This text renders once those are settled.
-# The wind and the sun argued about which of them was stronger.
-WIND NORTH AND SUN DISPUTE PAST_(PARTICLE) : WHO STRONG MORE ?
-# Then a traveller came by, wrapped in a warm cloak.
-?WHEN PERSON TRAVEL COME , HE WRAP CLOAK WARM .
-# They agreed that whoever first made the traveller take off his cloak would count as the stronger.
-THEY AGREE ?COMP : WHO ?REL FIRST CAUSE_TO_(LET) PERSON TRAVEL TAKE_OFF CLOAK HE , HE STRONG MORE .
-# The north wind blew with all his strength,
-THEN WIND NORTH BLOW_(OF_WIND) STRENGTH ALL HE WITH ,
-# but the harder he blew, the tighter the traveller wrapped the cloak around himself,
-BUT HE BLOW_(OF_WIND) ?CORREL MORE , PERSON TRAVEL WRAP CLOAK HE SELF AROUND TIGHT ?CORREL MORE ,
-# and in the end the north wind gave up.
-AND LAST_(FINAL) AT WIND NORTH STOP_DOING TRY .
-# Then the sun shone warmly, and the traveller at once took off his cloak.
-THEN SUN SHINE WARM , AND PERSON TRAVEL TAKE_OFF CLOAK HE IMMEDIATELY .
+# The North Wind and the Sun (Aesop; the full text used in the IPA Handbook, retold in our own words)
+# Translation: CLB (Łügutökü Likine), 2026-10-18
+# The north wind and the sun were arguing about which of them was stronger, when a traveller came along, wrapped in a warm cloak.
+# "wrapped in" is said actively (WRAP CLOAK), like the wrapping later on.
+WIND NORTH AND SUN DISPUTE PAST_(PARTICLE) , WHICH STRONG MORE , PERSON TRAVEL , WRAP CLOAK WARM , COME WHEN .
+# They agreed that the one who first got the traveller to take off his cloak would be counted the stronger of the two.
+# "would be counted" is left out: "the one who first ..., is stronger than the other".
+THEY AGREE , ONE , CAUSE_TO_(LET) PERSON TRAVEL TAKE_OFF CLOAK HE FIRST , STRONG MORE OTHER ABOVE .
+# Then the north wind blew with all his might, but the harder he blew, the tighter the traveller pulled his cloak around him.
+# "the harder ..., the tighter ..." is said as "when he blew more, ... tighter more".
+THEN WIND NORTH BLOW_(OF_WIND) STRENGTH ALL WITH , BUT HE BLOW_(OF_WIND) MORE WHEN , PERSON TRAVEL WRAP CLOAK HE TIGHT MORE .
+# In the end the north wind gave up trying.
+LAST_(FINAL) IN WIND NORTH ABANDON TRY .
+# Then the sun shone out warmly, and the traveller took off his cloak at once.
+THEN SUN SHINE_(EMITTED_LIGHT) WARM , PERSON TRAVEL TAKE_OFF CLOAK HE IMMEDIATELY .
 # So the north wind had to admit that the sun was the stronger of the two.
-?THEREFORE WIND NORTH MUST ADMIT ?COMP : SUN STRONG MORE .
+# "so" is RESULT IN, "in the result", like LAST IN "in the end"; "of the two" is clear from context.
+RESULT IN , WIND NORTH ADMIT MUST , SUN STRONG MORE .

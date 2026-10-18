@@ -20,6 +20,9 @@ Examples show concept names (GLOSSES) and the words in lexicon version 0.1.0.
 | Possession | Juxtaposed, possessor after | DOG I — *let ö* "my dog" |
 | Numerals | After the noun, no classifiers | PERSON THREE — *ken höl* |
 | Compounds | Existing words, head first | TREE COCONUT — *ihë könah* |
+| Adverbs | At the end of the clause | HE BLOW HARD — *e etkal rin* |
+| Comparison | A ADJ MORE B ABOVE; B can be left out | SUN STRONG MORE HE ABOVE — *urih iset vi e itih* "the sun is stronger than he" |
+| Clauses | Joined with commas, no conjunction needed | see [Clauses](#clauses--子句) |
 
 ## Particles / 小詞
 
@@ -30,6 +33,26 @@ Examples show concept names (GLOSSES) and the words in lexicon version 0.1.0.
 | PLURAL | *mon* | after the noun, only when needed: PERSON PL |
 | QUESTION | *ih* | at the start of a yes/no question |
 | SHOULD | *pël* | after the verb: DO SHOULD |
+
+## Clauses / 子句
+
+Clauses are joined with a comma (a pause in speech). There is no word for "that" or "who"; the comma does the work, and the order of the parts says how they relate.
+
+| Kind | Rule | Example |
+| --- | --- | --- |
+| "that"-clause | After the verb, set off by a comma | THEY AGREE , SUN STRONG MORE — *ah imël, urih iset vi* "they agree that the sun is stronger" |
+| Question as object | The question word stays in place, after a comma | DISPUTE , WHICH STRONG MORE — *hitet, röl iset vi* "argue about which is stronger" |
+| Relative clause | After the noun, between commas | PERSON TRAVEL , WRAP CLOAK WARM , COME — *ken etli, etpëh hënöl önkën, ël* "a traveller, wrapped in a warm cloak, came" |
+| "when"-clause | WHEN at the end of the clause, like a postposition | HE BLOW MORE WHEN , … — *e etkal vi se,* "when he blew harder, …" |
+| "the more …, the more …" | MORE in both clauses, the first one ending in WHEN | HE BLOW MORE WHEN , PERSON TRAVEL WRAP CLOAK TIGHT MORE — *e etkal vi se, ken etli etpëh hënöl umun vi* |
+| "so", "therefore" | RESULT IN at the start, "in the result", like LAST IN "in the end" | RESULT IN , … — *inat po,* |
+| "but", "and" | BUT at the start of the second clause; AND can be left out | …, BUT HE BLOW MORE WHEN , … |
+
+A passive is not needed: "wrapped in a cloak" is WRAP CLOAK, and "should be considered stronger" is just STRONG MORE.
+
+Modals (SHOULD, MUST, CAN) go after the verb, like the particles: ADMIT MUST — *uveh koh* "must admit".
+
+Decided while translating *The North Wind and the Sun* ([texts/north-wind-and-sun.txt](../texts/north-wind-and-sun.txt)). Open point: in writing the commas are clear, but in speech one pause marks every kind of clause boundary. Check this on longer texts before 1.0.0.
 
 ## Pronouns / 代名詞
 
@@ -56,6 +79,6 @@ Not decided yet: the NAME particle itself (it will be added in the next lexicon 
 ## Not decided yet / 尚未決定
 
 - Tense and aspect beyond PAST (future, perfective …).
-- Relative clauses: a marker or plain juxtaposition.
-- Comparison ("bigger than").
+- Where BY (PASSIVE MARKER) goes, and whether a passive is needed at all.
+- Whether commas alone are clear enough in speech (see [Clauses](#clauses--子句)).
 - Numbers above ten.
