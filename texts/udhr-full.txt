@@ -1,0 +1,279 @@
+# Universal Declaration of Human Rights, preamble and articles 1-30 (public domain; English text from NLTK udhr2, see ATTRIBUTION.md)
+# Draft, 2026-10-19, using the clause grammar decided while translating The North Wind and the Sun (docs/03-grammar.md, Clauses).
+# Tokens starting with ? mark grammar that is not decided yet:
+# ?SHALL "shall" (SHOULD or MUST?), placed after the verb like the other modals; ?MAY "may", as in "may not"; ?PURP "in order to", "so that";
+# ?WHETHER "whether ... or"; ?ALSO "also, including"; ?AT_LEAST "at least"; ?NUM_n the number n as an article number;
+# ?NAME_ a name (to be written with FOREIGN_NAME_(PARTICLE) or as a name made of our own words, see item 6 in TODO.md).
+# Proposed new concepts (coverage check, 2026-10-16), written plainly: ACCORDING_TO, ANY, ARREST, ARTICLE_(TEXT), BASIC, BELONG, COMMON_(SHARED), COMMUNITY,
+# CONDITION, COOPERATION, CULTURE, DEMOCRACY, DISCRIMINATION, ECONOMY, ENCOURAGE, FREE_(OF_CHARGE), GENERAL, INDEPENDENT, LITERATURE, MATERIAL, MEDIA, MORAL,
+# ORGANIZATION, POLITICS, PRACTICE, PRINCIPLE, PRIVATE, PROGRESS, PROMOTE, PUBLIC, RACE_(ETHNIC_GROUP), REPRESENT, RESOURCE, SERVICE, SPECIAL, STAGE_(PHASE),
+# TECHNOLOGY, VACATION, VALUE, VOTE.
+# Not in Concepticon and not proposed yet: GOAL, LIMIT, TOLERATE.
+# Universal Declaration of Human Rights
+ANNOUNCE WORLD RIGHT_(ENTITLEMENT) PERSON .
+# Preamble
+# Whereas recognition of the inherent dignity and of the equal and inalienable rights of all members of the human family is the foundation of freedom, justice and peace in the world,
+# "recognition" is ADMIT used as a noun; "inherent" and "inalienable" are relative clauses: "that people have when they are born", "that nobody can take".
+BECAUSE ADMIT DIGNITY , PERSON HAVE BE_BORN WHEN , AND RIGHT_(ENTITLEMENT) EQUAL MEMBER FAMILY PERSON ALL , NOBODY TAKE CAN , BE BASE FREEDOM AND JUSTICE AND PEACE WORLD IN ,
+# Whereas disregard and contempt for human rights have resulted in barbarous acts which have outraged the conscience of mankind,
+BECAUSE IGNORE AND CONTEMPT RIGHT_(ENTITLEMENT) PERSON RESULT_IN DO CRUEL , MAKE_ANGRY_(ANNOY) CONSCIENCE PERSON ALL ,
+# and the advent of a world in which human beings shall enjoy freedom of speech and belief and freedom from fear and want has been proclaimed as the highest aspiration of the common people,
+# "has been proclaimed" is said actively: the people announce it. "highest" is HIGH MORE ALL ABOVE, "higher than all".
+AND PEOPLE ANNOUNCE , HOPE HIGH MORE ALL ABOVE BE WORLD , PERSON HAVE ?SHALL FREEDOM SPEAK AND BELIEVE AND FREEDOM FEAR_(FRIGHT) AND POVERTY FROM ,
+# Whereas it is essential, if man is not to be compelled to have recourse, as a last resort, to rebellion against tyranny and oppression, that human rights should be protected by the rule of law,
+# "is not to be compelled to" is MUST NOT, "need not": NOT follows the word it negates, here MUST. "tyranny" is RULE CRUEL.
+BECAUSE PERSON REBEL MUST NOT RULE CRUEL AND OPPRESS AGAINST LAST_(FINAL) IN IF , RULE LAW PROTECT MUST RIGHT_(ENTITLEMENT) PERSON ,
+# Whereas it is essential to promote the development of friendly relations between nations,
+BECAUSE PROMOTE MUST , FRIENDSHIP COUNTRY BETWEEN GROW ,
+# Whereas the peoples of the United Nations have in the Charter reaffirmed their faith in fundamental human rights, in the dignity and worth of the human person and in the equal rights of men and women
+BECAUSE PEOPLE ?NAME_UNITED_NATIONS SAY ?NAME_CHARTER IN AGAIN , THEY BELIEVE RIGHT_(ENTITLEMENT) PERSON BASIC AND DIGNITY AND VALUE PERSON AND RIGHT_(ENTITLEMENT) EQUAL MAN AND WOMAN ,
+# and have determined to promote social progress and better standards of life in larger freedom,
+AND DECIDE , PROMOTE PROGRESS SOCIETY AND LIFE GOOD MORE FREEDOM BIG MORE IN ,
+# Whereas Member States have pledged themselves to achieve, in co-operation with the United Nations, the promotion of universal respect for and observance of human rights and fundamental freedoms,
+BECAUSE STATE_(POLITICS) MEMBER PROMISE , THEY PROMOTE ?NAME_UNITED_NATIONS WITH , WORLD WHOLE RESPECT_(SOMEBODY) AND OBEY RIGHT_(ENTITLEMENT) PERSON AND FREEDOM BASIC ,
+# Whereas a common understanding of these rights and freedoms is of the greatest importance for the full realization of this pledge,
+BECAUSE UNDERSTAND COMMON_(SHARED) RIGHT_(ENTITLEMENT) AND FREEDOM THIS IMPORTANT MORE ALL ABOVE , ?PURP PROMISE THIS HAPPEN WHOLE ,
+# Now, therefore, The General Assembly proclaims this Universal Declaration of Human Rights as a common standard of achievement for all peoples and all nations,
+# "Declaration" is ANNOUNCE used as a noun, so "proclaims this Declaration" is ANNOUNCE , ANNOUNCE THIS ...
+RESULT IN , ?NAME_GENERAL_ASSEMBLY ANNOUNCE , ANNOUNCE THIS BE GOAL COMMON_(SHARED) PEOPLE ALL AND COUNTRY ALL ,
+# to the end that every individual and every organ of society, keeping this Declaration constantly in mind, shall strive by teaching and education to promote respect for these rights and freedoms
+# "strive by teaching ... to promote" is "try to use teaching, in order to promote"; teaching and education are both TEACH.
+?PURP PERSON EVERY_(EACH) AND PART SOCIETY EVERY_(EACH) , REMEMBER ANNOUNCE THIS ALWAYS , TRY ?SHALL , USE_(VERB) TEACH , ?PURP PROMOTE RESPECT_(NOUN) RIGHT_(ENTITLEMENT) AND FREEDOM THIS ,
+# and by progressive measures, national and international, to secure their universal and effective recognition and observance,
+AND USE_(VERB) ?SHALL DO GRADUALLY COUNTRY AND COUNTRY BETWEEN , ?PURP PERSON EVERYWHERE ADMIT AND OBEY THEY TRUE ,
+# both among the peoples of Member States themselves and among the peoples of territories under their jurisdiction.
+PEOPLE STATE_(POLITICS) MEMBER SELF BETWEEN , AND PEOPLE LAND , THEY RULE , BETWEEN .
+# Article 1
+ARTICLE_(TEXT) ?NUM_1 .
+# All human beings are born free and equal in dignity and rights.
+PERSON ALL BE_BORN FREE AND EQUAL DIGNITY AND RIGHT_(ENTITLEMENT) IN .
+# They are endowed with reason and conscience and should act towards one another in a spirit of brotherhood.
+THEY HAVE REASON AND CONSCIENCE , AND DO SHOULD EACH_OTHER TOWARDS SPIRIT_(ATTITUDE) BROTHER IN .
+# Article 2
+ARTICLE_(TEXT) ?NUM_2 .
+# Everyone is entitled to all the rights and freedoms set forth in this Declaration, without distinction of any kind, such as race, colour, sex, language, religion, political or other opinion, national or social origin, property, birth or other status.
+# "set forth in this Declaration" is RIGHT AND FREEDOM ANNOUNCE THIS, "the rights and freedoms of this Declaration"; the colon lists the examples. "origin" is ROOT.
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) AND FREEDOM ALL ANNOUNCE THIS , DISCRIMINATION ANY WITHOUT : RACE_(ETHNIC_GROUP) OR COLOR OR SEX_(GENDER) OR LANGUAGE OR RELIGION OR OPINION POLITICS OR OTHER OR ROOT COUNTRY OR SOCIETY OR WEALTH OR BIRTH_(ACCOUCHEMENT) OR THING OTHER .
+# Furthermore, no distinction shall be made on the basis of the political, jurisdictional or international status of the country or territory to which a person belongs,
+AND THERE_IS_OR_THERE_ARE NOT ?SHALL DISCRIMINATION ANY , STATE_(POLITICS) OR LAND , PERSON BELONG , BECAUSE_OF , OR POLITICS OR LAW OR PLACE_(POSITION) COUNTRY BETWEEN HE BECAUSE_OF ,
+# whether it be independent, trust, non-self-governing or under any other limitation of sovereignty.
+# "trust" and "non-self-governing" are both "under the rule of another country"; "sovereignty" is RULE SELF.
+?WHETHER HE INDEPENDENT , OR RULE COUNTRY OTHER BELOW_OR_UNDER , OR LIMIT RULE SELF ANY BELOW_OR_UNDER .
+# Article 3
+ARTICLE_(TEXT) ?NUM_3 .
+# Everyone has the right to life, liberty and the security of person.
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) LIFE AND FREEDOM AND SAFETY BODY .
+# Article 4
+ARTICLE_(TEXT) ?NUM_4 .
+# No one shall be held in slavery or servitude; slavery and the slave trade shall be prohibited in all their forms.
+NOBODY BE ?SHALL SLAVE OR SERVANT ; FORBID ?SHALL HAVE SLAVE AND TRADE SLAVE KIND_(THING) ALL IN .
+# Article 5
+ARTICLE_(TEXT) ?NUM_5 .
+# No one shall be subjected to torture or to cruel, inhuman or degrading treatment or punishment.
+# "be subjected to" is SUFFER, so no passive is needed; "treatment" is DO, "inhuman or degrading" is DIGNITY WITHOUT.
+NOBODY SUFFER ?SHALL TORTURE , OR DO OR PUNISHMENT CRUEL OR DIGNITY WITHOUT .
+# Article 6
+ARTICLE_(TEXT) ?NUM_6 .
+# Everyone has the right to recognition everywhere as a person before the law.
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) , LAW EVERYWHERE ADMIT , HE BE PERSON .
+# Article 7
+ARTICLE_(TEXT) ?NUM_7 .
+# All are equal before the law and are entitled without any discrimination to equal protection of the law.
+PERSON ALL EQUAL LAW IN_FRONT_OF , AND HAVE RIGHT_(ENTITLEMENT) , LAW PROTECT THEY EQUAL , DISCRIMINATION ANY WITHOUT .
+# All are entitled to equal protection against any discrimination in violation of this Declaration and against any incitement to such discrimination.
+# "in violation of this Declaration" is a relative clause, "that this Declaration forbids", between the noun and its postposition.
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) , LAW PROTECT THEY EQUAL , DISCRIMINATION ANY , ANNOUNCE THIS FORBID , AGAINST , AND ENCOURAGE DISCRIMINATION OF_THIS_KIND_(SUCH) AGAINST .
+# Article 8
+ARTICLE_(TEXT) ?NUM_8 .
+# Everyone has the right to an effective remedy by the competent national tribunals for acts violating the fundamental rights granted him by the constitution or by law.
+# "constitution" is LAW BASIC, "basic law"; "competent" is left out.
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) , COURT COUNTRY HELP HE TRUE , PERSON DAMAGE RIGHT_(ENTITLEMENT) BASIC , LAW BASIC OR LAW GIVE HE , WHEN .
+# Article 9
+ARTICLE_(TEXT) ?NUM_9 .
+# No one shall be subjected to arbitrary arrest, detention or exile.
+# "arbitrary" is CAUSE WITHOUT, "without a cause"; "exile" is SEND COUNTRY OUTSIDE.
+NOBODY SUFFER ?SHALL ARREST OR PRISON OR SEND COUNTRY OUTSIDE CAUSE WITHOUT .
+# Article 10
+ARTICLE_(TEXT) ?NUM_10 .
+# Everyone is entitled in full equality to a fair and public hearing by an independent and impartial tribunal, in the determination of his rights and obligations and of any criminal charge against him.
+# "fair" and "just" are JUSTICE: Concepticon's JUST is "only a very short time before". "impartial" is HONEST.
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) EQUAL WHOLE , COURT INDEPENDENT AND HONEST HEAR HE PUBLIC AND JUSTICE WITH , COURT DECIDE RIGHT_(ENTITLEMENT) AND OBLIGATION_(DUTY) HE OR ACCUSE CRIME ANY HE WHEN .
+# Article 11
+ARTICLE_(TEXT) ?NUM_11 .
+# Everyone charged with a penal offence has the right to be presumed innocent until proved guilty according to law in a public trial
+# "charged with" is SOMEONE ACCUSE HE, "whom someone accuses"; UNTIL is placed like WHEN, at the end of its clause.
+PERSON ALL , SOMEONE ACCUSE HE CRIME , HAVE RIGHT_(ENTITLEMENT) , PERSON THINK HE INNOCENT , COURT PUBLIC SHOW HE GUILTY LAW ACCORDING_TO UNTIL ,
+# at which he has had all the guarantees necessary for his defence.
+AND COURT THIS IN , HE HAVE THING ALL , HE NEED_(SOMETHING) DEFEND HE SELF .
+# No one shall be held guilty of any penal offence on account of any act or omission which did not constitute a penal offence, under national or international law, at the time when it was committed.
+NOBODY GUILTY ?SHALL CRIME ANY , BECAUSE HE DO OR DO NOT THING , THIS BE NOT CRIME LAW COUNTRY OR LAW COUNTRY BETWEEN ACCORDING_TO , HE DO WHEN .
+# Nor shall a heavier penalty be imposed than the one that was applicable at the time the penal offence was committed.
+AND PUNISHMENT HEAVY MORE NOT ?SHALL PUNISHMENT LAW ABOVE , HE DO CRIME WHEN .
+# Article 12
+ARTICLE_(TEXT) ?NUM_12 .
+# No one shall be subjected to arbitrary interference with his privacy, family, home or correspondence, nor to attacks upon his honour and reputation.
+# "reputation" is NAME.
+NOBODY SUFFER ?SHALL DISTURB LIFE PRIVATE HE OR FAMILY HE OR HOME HE OR LETTER HE CAUSE WITHOUT , OR ATTACK DIGNITY AND NAME HE .
+# Everyone has the right to the protection of the law against such interference or attacks.
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) , LAW PROTECT HE DISTURB OR ATTACK OF_THIS_KIND_(SUCH) AGAINST .
+# Article 13
+ARTICLE_(TEXT) ?NUM_13 .
+# Everyone has the right to freedom of movement and residence within the borders of each State.
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) , MOVE AND DWELL_(LIVE,_RESIDE) BORDER STATE_(POLITICS) EVERY_(EACH) INSIDE FREE .
+# Everyone has the right to leave any country, including his own, and to return to his country.
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) , LEAVE COUNTRY ANY , COUNTRY HE ?ALSO , AND COME_BACK COUNTRY HE TOWARDS .
+# Article 14
+ARTICLE_(TEXT) ?NUM_14 .
+# Everyone has the right to seek and to enjoy in other countries asylum from persecution.
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) , LOOK_FOR AND HAVE PROTECT OPPRESS AGAINST COUNTRY OTHER IN .
+# This right may not be invoked in the case of prosecutions genuinely arising from non-political crimes or from acts contrary to the purposes and principles of the United Nations.
+# "may not" is ?MAY NOT ("not allowed"), unlike "shall not", which is NOT ?SHALL ("shall not do").
+PERSON USE_(VERB) ?MAY NOT RIGHT_(ENTITLEMENT) THIS , COURT ACCUSE HE CRIME POLITICS NOT OR DO GOAL AND PRINCIPLE ?NAME_UNITED_NATIONS AGAINST BECAUSE_OF TRUE WHEN .
+# Article 15
+ARTICLE_(TEXT) ?NUM_15 .
+# Everyone has the right to a nationality.
+# "nationality" is CITIZEN COUNTRY, "citizen of a country".
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) , BE CITIZEN COUNTRY .
+# No one shall be arbitrarily deprived of his nationality nor denied the right to change his nationality.
+TAKE NOT ?SHALL CITIZEN COUNTRY PERSON ANY CAUSE WITHOUT , AND FORBID NOT ?SHALL HE , CHANGE CITIZEN COUNTRY HE .
+# Article 16
+ARTICLE_(TEXT) ?NUM_16 .
+# Men and women of full age, without any limitation due to race, nationality or religion, have the right to marry and to found a family.
+MAN AND WOMAN ADULT , LIMIT ANY RACE_(ETHNIC_GROUP) OR CITIZEN COUNTRY OR RELIGION BECAUSE_OF WITHOUT , HAVE RIGHT_(ENTITLEMENT) , MARRY AND BEGIN FAMILY .
+# They are entitled to equal rights as to marriage, during marriage and at its dissolution.
+THEY HAVE RIGHT_(ENTITLEMENT) EQUAL MARRY WHEN , MARRIAGE IN AND DIVORCE_(SEPARATE) WHEN .
+# Marriage shall be entered into only with the free and full consent of the intending spouses.
+# ONLY follows the word it limits: WHEN ONLY, "only when".
+PERSON MARRY ?SHALL , THEY AGREE FREE AND WHOLE WHEN ONLY .
+# The family is the natural and fundamental group unit of society and is entitled to protection by society and the State.
+FAMILY BE GROUP NATURE AND BASIC SOCIETY , AND HAVE RIGHT_(ENTITLEMENT) , SOCIETY AND STATE_(POLITICS) PROTECT HE .
+# Article 17
+ARTICLE_(TEXT) ?NUM_17 .
+# Everyone has the right to own property alone as well as in association with others.
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) , OWN POSSESSIONS ALONE AND OTHER WITH .
+# No one shall be arbitrarily deprived of his property.
+TAKE NOT ?SHALL POSSESSIONS PERSON ANY CAUSE WITHOUT .
+# Article 18
+ARTICLE_(TEXT) ?NUM_18 .
+# Everyone has the right to freedom of thought, conscience and religion;
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) FREEDOM THINK AND CONSCIENCE AND RELIGION ;
+# this right includes freedom to change his religion or belief,
+RIGHT_(ENTITLEMENT) THIS CONTAIN FREEDOM , CHANGE RELIGION OR BELIEF_(RELIGIOUS) HE ,
+# and freedom, either alone or in community with others and in public or private, to manifest his religion or belief in teaching, practice, worship and observance.
+AND FREEDOM , SHOW RELIGION OR BELIEF_(RELIGIOUS) HE TEACH AND PRACTICE AND WORSHIP AND OBEY WITH , ALONE OR OTHER WITH , AND PUBLIC OR PRIVATE .
+# Article 19
+ARTICLE_(TEXT) ?NUM_19 .
+# Everyone has the right to freedom of opinion and expression;
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) FREEDOM OPINION AND SAY ;
+# this right includes freedom to hold opinions without interference and to seek, receive and impart information and ideas through any media and regardless of frontiers.
+RIGHT_(ENTITLEMENT) THIS CONTAIN FREEDOM , HAVE OPINION DISTURB WITHOUT , AND LOOK_FOR AND GET AND GIVE INFORMATION AND IDEA MEDIA ANY AND BORDER ANY THROUGH .
+# Article 20
+ARTICLE_(TEXT) ?NUM_20 .
+# Everyone has the right to freedom of peaceful assembly and association.
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) FREEDOM , GATHER PEACE WITH AND MAKE GROUP .
+# No one may be compelled to belong to an association.
+# "may not be compelled to" is MUST NOT, "need not", as in the preamble.
+PERSON BELONG MUST NOT GROUP ANY .
+# Article 21
+ARTICLE_(TEXT) ?NUM_21 .
+# Everyone has the right to take part in the government of his country, directly or through freely chosen representatives.
+# "directly" is SELF; a representative is PERSON REPRESENT.
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) , JOIN GOVERNMENT COUNTRY HE , SELF OR PERSON REPRESENT , HE CHOOSE FREE , THROUGH .
+# Everyone has the right of equal access to public service in his country.
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) EQUAL , WORK_(LABOUR) SERVICE PUBLIC COUNTRY HE IN .
+# The will of the people shall be the basis of the authority of government;
+DESIRE PEOPLE BE ?SHALL BASE POWER GOVERNMENT ;
+# this will shall be expressed in periodic and genuine elections which shall be by universal and equal suffrage
+# "periodic" is OFTEN.
+PEOPLE SHOW ?SHALL DESIRE THIS VOTE IN , VOTE HAPPEN OFTEN AND TRUE , PERSON ALL VOTE EQUAL ,
+# and shall be held by secret vote or by equivalent free voting procedures.
+# "equivalent free" is FREE EQUAL, "equally free"; how to say "as ... as" is not decided.
+AND PERSON VOTE ?SHALL SECRET , OR METHOD VOTE OTHER , FREE EQUAL .
+# Article 22
+ARTICLE_(TEXT) ?NUM_22 .
+# Everyone, as a member of society, has the right to social security
+# "as a member of society" is set off by commas, like MAN , MASTER , in Schleicher's fable.
+PERSON ALL , MEMBER SOCIETY , HAVE RIGHT_(ENTITLEMENT) SAFETY SOCIETY .
+# and is entitled to realization, through national effort and international co-operation and in accordance with the organization and resources of each State, of the economic, social and cultural rights indispensable for his dignity and the free development of his personality.
+# "personality" is SELF; "effort" is TRY.
+HE NEED_(SOMETHING) RIGHT_(ENTITLEMENT) ECONOMY AND SOCIETY AND CULTURE , ?PURP HE HAVE DIGNITY AND SELF HE GROW FREE ;
+AND HE HAVE RIGHT_(ENTITLEMENT) , RIGHT_(ENTITLEMENT) THIS BECOME TRUE , TRY COUNTRY AND COOPERATION COUNTRY BETWEEN THROUGH , ORGANIZATION AND RESOURCE STATE_(POLITICS) EVERY_(EACH) ACCORDING_TO .
+# Article 23
+ARTICLE_(TEXT) ?NUM_23 .
+# Everyone has the right to work, to free choice of employment, to just and favourable conditions of work and to protection against unemployment.
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) , WORK_(LABOUR) , CHOOSE WORK_(LABOUR) FREE , WORK_(LABOUR) CONDITION JUSTICE AND GOOD IN , AND HAVE PROTECT , HAVE NOT WORK_(LABOUR) WHEN .
+# Everyone, without any discrimination, has the right to equal pay for equal work.
+PERSON ALL , DISCRIMINATION ANY WITHOUT , HAVE RIGHT_(ENTITLEMENT) PAY EQUAL WORK_(LABOUR) EQUAL FOR .
+# Everyone who works has the right to just and favourable remuneration ensuring for himself and his family an existence worthy of human dignity,
+PERSON ALL , WORK_(LABOUR) , HAVE RIGHT_(ENTITLEMENT) PAY JUSTICE AND GOOD , ?PURP HE AND FAMILY HE BE_ALIVE DIGNITY PERSON WITH ,
+# and supplemented, if necessary, by other means of social protection.
+# IF is placed like WHEN, at the end of its clause.
+AND NEED_(SOMETHING) IF , METHOD OTHER PROTECT SOCIETY ADD .
+# Everyone has the right to form and to join trade unions for the protection of his interests.
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) , MAKE AND JOIN GROUP PERSON WORK_(LABOUR) , ?PURP PROTECT BENEFIT HE .
+# Article 24
+ARTICLE_(TEXT) ?NUM_24 .
+# Everyone has the right to rest and leisure, including reasonable limitation of working hours and periodic holidays with pay.
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) REST AND TIME FREE ; RIGHT_(ENTITLEMENT) THIS CONTAIN LIMIT WISE HOUR WORK_(LABOUR) AND VACATION OFTEN PAY WITH .
+# Article 25
+ARTICLE_(TEXT) ?NUM_25 .
+# Everyone has the right to a standard of living adequate for the health and well-being of himself and of his family,
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) LIFE GOOD ENOUGH , ?PURP HE AND FAMILY HE HEALTHY AND HAPPY ,
+# including food, clothing, housing and medical care and necessary social services,
+AND THIS CONTAIN FOOD AND CLOTHES AND HOUSE AND CURE AND SERVICE SOCIETY , HE NEED_(SOMETHING) ;
+# and the right to security in the event of unemployment, sickness, disability, widowhood, old age or other lack of livelihood in circumstances beyond his control.
+# "beyond his control" is "that he cannot change".
+AND HE HAVE RIGHT_(ENTITLEMENT) SAFETY , HE HAVE NOT WORK_(LABOUR) , OR SICK , OR BE DISABLED_PERSON , OR BE WIDOW , OR OLD , OR HAVE NOT METHOD LIFE CAUSE OTHER BECAUSE_OF , HE CHANGE CAN NOT , WHEN .
+# Motherhood and childhood are entitled to special care and assistance.
+MOTHER AND CHILD HAVE RIGHT_(ENTITLEMENT) CARE_FOR AND HELP SPECIAL .
+# All children, whether born in or out of wedlock, shall enjoy the same social protection.
+CHILD ALL , BE_BORN MARRIAGE IN OR MARRIAGE OUTSIDE , HAVE ?SHALL PROTECT SOCIETY SAME .
+# Article 26
+ARTICLE_(TEXT) ?NUM_26 .
+# Everyone has the right to education. Education shall be free, at least in the elementary and fundamental stages.
+# Education is TEACH (a verb used as a noun).
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) TEACH . TEACH FREE_(OF_CHARGE) ?SHALL , STAGE_(PHASE) BEGIN AND BASIC IN ?AT_LEAST .
+# Elementary education shall be compulsory.
+# "shall be compulsory" is MUST, whatever ?SHALL turns out to be.
+CHILD ALL LEARN MUST STAGE_(PHASE) BEGIN IN .
+# Technical and professional education shall be made generally available and higher education shall be equally accessible to all on the basis of merit.
+# CAN ?SHALL: two modals after one verb, in this order. "merit" is ABILITY.
+PERSON ALL LEARN CAN ?SHALL TECHNOLOGY AND WORK_(LABOUR) GENERAL , AND LEARN CAN ?SHALL STAGE_(PHASE) HIGH EQUAL , ABILITY HE ACCORDING_TO .
+# Education shall be directed to the full development of the human personality and to the strengthening of respect for human rights and fundamental freedoms.
+PERSON TEACH ?SHALL , ?PURP SELF PERSON GROW WHOLE , AND RESPECT_(NOUN) RIGHT_(ENTITLEMENT) PERSON AND FREEDOM BASIC STRONG MORE .
+# It shall promote understanding, tolerance and friendship among all nations, racial or religious groups, and shall further the activities of the United Nations for the maintenance of peace.
+HE PROMOTE ?SHALL UNDERSTAND AND TOLERATE AND FRIENDSHIP COUNTRY ALL AND GROUP RACE_(ETHNIC_GROUP) OR RELIGION BETWEEN , AND HELP ?SHALL ?NAME_UNITED_NATIONS , ?PURP KEEP PEACE .
+# Parents have a prior right to choose the kind of education that shall be given to their children.
+PARENTS HAVE RIGHT_(ENTITLEMENT) FIRST , CHOOSE KIND_(THING) TEACH , CHILD THEY GET .
+# Article 27
+ARTICLE_(TEXT) ?NUM_27 .
+# Everyone has the right freely to participate in the cultural life of the community, to enjoy the arts and to share in scientific advancement and its benefits.
+# "enjoy" is LIKE: Concepticon has no ENJOY.
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) , JOIN LIFE CULTURE COMMUNITY FREE , LIKE ART , AND SHARE PROGRESS SCIENCE AND BENEFIT HE .
+# Everyone has the right to the protection of the moral and material interests resulting from any scientific, literary or artistic production of which he is the author.
+# A relative clause inside a postposition phrase: THING ANY , ... , FROM.
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) PROTECT BENEFIT MORAL AND MATERIAL , COME THING ANY , HE MAKE SCIENCE OR LITERATURE OR ART IN , FROM .
+# Article 28
+ARTICLE_(TEXT) ?NUM_28 .
+# Everyone is entitled to a social and international order in which the rights and freedoms set forth in this Declaration can be fully realized.
+# "a social and international order" is SOCIETY AND WORLD: Concepticon's ORDER is the verb.
+PERSON ALL HAVE RIGHT_(ENTITLEMENT) SOCIETY AND WORLD , RIGHT_(ENTITLEMENT) AND FREEDOM ANNOUNCE THIS BECOME CAN TRUE WHOLE .
+# Article 29
+ARTICLE_(TEXT) ?NUM_29 .
+# Everyone has duties to the community in which alone the free and full development of his personality is possible.
+PERSON ALL HAVE OBLIGATION_(DUTY) COMMUNITY TOWARDS , COMMUNITY IN ONLY , SELF HE GROW CAN FREE AND WHOLE .
+# In the exercise of his rights and freedoms, everyone shall be subject only to such limitations as are determined by law
+PERSON ALL USE_(VERB) RIGHT_(ENTITLEMENT) AND FREEDOM HE WHEN , LAW ONLY LIMIT ?SHALL HE ,
+# solely for the purpose of securing due recognition and respect for the rights and freedoms of others
+?PURP ONLY , PERSON ADMIT AND RESPECT_(SOMEBODY) RIGHT_(ENTITLEMENT) AND FREEDOM OTHER GOOD ,
+# and of meeting the just requirements of morality, public order and the general welfare in a democratic society.
+# "public order" is PEACE PUBLIC.
+AND ?PURP SOCIETY DEMOCRACY GET NEED_(NOUN) JUSTICE MORAL AND PEACE PUBLIC AND GOOD GENERAL .
+# These rights and freedoms may in no case be exercised contrary to the purposes and principles of the United Nations.
+# "in no case" is NOT ... TIME ANY IN, "not at any time".
+PERSON USE_(VERB) ?MAY NOT RIGHT_(ENTITLEMENT) AND FREEDOM THIS GOAL AND PRINCIPLE ?NAME_UNITED_NATIONS AGAINST TIME ANY IN .
+# Article 30
+ARTICLE_(TEXT) ?NUM_30 .
+# Nothing in this Declaration may be interpreted as implying for any State, group or person any right to engage in any activity or to perform any act aimed at the destruction of any of the rights and freedoms set forth herein.
+# Four clauses inside each other, set off only by commas.
+NOBODY UNDERSTAND ?MAY , ANNOUNCE THIS SAY , STATE_(POLITICS) OR GROUP OR PERSON ANY HAVE RIGHT_(ENTITLEMENT) , DO THING ANY , ?PURP DESTROY RIGHT_(ENTITLEMENT) OR FREEDOM ANY ANNOUNCE THIS .
