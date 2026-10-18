@@ -46,6 +46,8 @@ An empty onset at the start of a word is pronounced as a glottal stop [ʔ]:
 
 ## h next to a front vowel / h 的顎化
 
+> {h}如前後方是前元音(i, e, ö)則發音變為/ç/
+
 h is [ç] when the vowel right before or right after it in the same word is front (i, e, ö); otherwise it is [x]:
 
 | Word | Sounds | Why |
@@ -57,6 +59,8 @@ h is [ç] when the vowel right before or right after it in the same word is fron
 | *etpëh* "{{en: etpëh}}" | {{say: etpëh = ʔɛp.pɤx}} | next to ë, a back vowel |
 
 ## Coda assimilation / 音節尾同化
+
+> coda {t, n}會受到後方輔音同化成同部位
 
 A coda t or n takes the place of the next consonant when that is a labial (m p) or a velar (k, or h said [x]): t becomes [p] or [k], n becomes [m] or [ŋ]. Only t and n change.
 
@@ -73,9 +77,7 @@ A coda t or n takes the place of the next consonant when that is a labial (m p) 
 - It does not happen before [ç]: *ethi* "{{en: ethi}}" {{say: ethi = ʔɛt.çi}}.
 - Because p, m, k and ŋ never end a syllable otherwise, the listener always knows that [p] or [k] at the end of a syllable is t, and [m] or [ŋ] is n.
 
-The lexicon's IPA column shows each word said on its own, with these rules inside the word. Assimilation across words shows only in texts.
-
-Every pronunciation on this page is checked against the sound rules when the docs are built, and the tests check that the examples use every rule.
+In a text, assimilation also happens across words.
 
 ## Not decided yet / 尚未決定
 
