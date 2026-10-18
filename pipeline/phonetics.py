@@ -1,16 +1,15 @@
 """How written words sound: letters to IPA, and the sound rules of connected speech.
 
-The lexicon's `ipa` column is each word said on its own, with these rules; in
-texts they also apply across words (docs/src/01-phonology.md):
+The rules are described, with examples, in docs/src/01-phonology.md. Every
+example there is written as {{say: words = IPA}}, and the docs build checks it
+against this code; a test checks that the examples together use every rule in
+RULES. So a change here that the page does not show, or an example the code
+does not produce, fails the build or the tests.
 
-  1. A word-initial empty onset is a glottal stop [ʔ].
-  2. h is [ç] next to a front vowel (i e ö) in the same word, otherwise [x]:
-     hitet [çi.tɛt], utöh [ʔu.tøç], ihu [ʔi.çu].
-  3. A coda t or n takes the place of the next consonant when that is a
-     labial (m p) or velar (k [x]): t -> p k, n -> m ŋ. This also works across
-     words, but not across a pause (punctuation), and not before [ʔ] or [ç]:
-     hitet mö [çi.tɛp mø], önkën po [ʔøŋ.kɤm pɔ].
+The lexicon's `ipa` column is each word said on its own (pronounce([word])); a
+test checks that the latest release still matches these rules.
 """
+import re
 import unicodedata
 
 # /m n p t k s x ʋ ʁ l/ written m n p t k s h v r l; /i ø ɛ u ɤ ɔ ɑ/ written i ö e u ë o a
@@ -18,9 +17,15 @@ IPA = {"h": "x", "v": "ʋ", "r": "ʁ", "ö": "ø", "e": "ɛ", "ë": "ɤ", "o": "
 VOWELS = set("iöeuëoa")
 FRONT = set("ieö")
 GLOTTAL_STOP = "ʔ"
-# place of the next consonant -> what a coda t or n becomes
+PUNCTUATION = ".,?!;:"
+# next consonant -> what a coda t or n becomes before it
 ASSIMILATE = {"m": {"t": "p", "n": "m"}, "p": {"t": "p", "n": "m"},
               "k": {"t": "k", "n": "ŋ"}, "x": {"t": "k", "n": "ŋ"}}
+
+# names of the rules, as pronounce() reports them in `used`
+RULES = (["glottal stop", "onset h [ç] by its own vowel", "onset h [ç] by the vowel before", "coda h [ç]", "h [x]"]
+         + [f"{c} -> {new} before {nxt}" for nxt, change in ASSIMILATE.items() for c, new in change.items()]
+         + ["t/n kept before [ʔ]", "t/n kept before [ç]", "t/n kept before another consonant", "t/n kept before a pause"])
 
 
 def syllables(word):
@@ -41,30 +46,64 @@ def syllables(word):
     return out
 
 
-def _h(own_vowel, other_vowel=""):
-    return "ç" if own_vowel in FRONT or other_vowel in FRONT else "x"
+def pronounce(words, used=None):
+    """IPA of words said together without a pause, one string per word, syllables split by dots.
 
-
-def pronounce(words):
-    """IPA of words said together without a pause, one string per word, syllables split by dots."""
-    sylls = [syllables(w) for w in words]
-    # onsets and codas as sounds (rules 1 and 2)
+    If `used` is a set, the names of the rules that applied (see RULES) are added to it.
+    """
+    used = set() if used is None else used
     sounds = []
-    for word in sylls:
+    for word in [syllables(w) for w in words]:
         out = []
         for i, (o, v, c) in enumerate(word):
             if o == "":
-                o = GLOTTAL_STOP if i == 0 else ""
+                if i == 0:
+                    o = GLOTTAL_STOP
+                    used.add("glottal stop")
             elif o == "h":
                 before = word[i - 1][1] if i > 0 and word[i - 1][2] == "" else ""
-                o = _h(v, before)
+                if v in FRONT:
+                    o = "ç"
+                    used.add("onset h [ç] by its own vowel")
+                elif before in FRONT:
+                    o = "ç"
+                    used.add("onset h [ç] by the vowel before")
+                else:
+                    o = "x"
+                    used.add("h [x]")
             else:
                 o = IPA.get(o, o)
-            c = _h(v) if c == "h" else IPA.get(c, c)
+            if c == "h":
+                c = "ç" if v in FRONT else "x"
+                used.add("coda h [ç]" if c == "ç" else "h [x]")
+            else:
+                c = IPA.get(c, c)
             out.append([o, IPA.get(v, v), c])
         sounds.append(out)
-    # rule 3: look at the next syllable's onset, in this word or the next
+    # assimilation: look at the next syllable's onset, in this word or the next
     flat = [s for word in sounds for s in word]
     for s, nxt in zip(flat, flat[1:]):
-        s[2] = ASSIMILATE.get(nxt[0], {}).get(s[2], s[2])
+        if s[2] not in ("t", "n"):
+            continue
+        if nxt[0] in ASSIMILATE:
+            new = ASSIMILATE[nxt[0]][s[2]]
+            used.add(f"{s[2]} -> {new} before {nxt[0]}")
+            s[2] = new
+        elif nxt[0] in (GLOTTAL_STOP, "ç"):
+            used.add(f"t/n kept before [{nxt[0]}]")
+        else:
+            used.add("t/n kept before another consonant")
     return [".".join("".join(s) for s in word) for word in sounds]
+
+
+def speak(text, used=None):
+    """IPA of written text, words split by spaces; punctuation is a pause, which stops assimilation."""
+    used = set() if used is None else used
+    stretches = [s.split() for s in re.split(f"[{re.escape(PUNCTUATION)}]", text)]
+    stretches = [s for s in stretches if s]
+    out = []
+    for i, words in enumerate(stretches):
+        out += pronounce(words, used)
+        if i + 1 < len(stretches) and syllables(words[-1])[-1][2] in ("t", "n"):
+            used.add("t/n kept before a pause")
+    return " ".join(out)

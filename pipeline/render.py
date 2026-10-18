@@ -19,7 +19,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from phonetics import pronounce
+from phonetics import speak
 
 ROOT = Path(__file__).resolve().parent.parent
 PUNCTUATION = set(".,?!;:")
@@ -51,22 +51,18 @@ class Lexicon:
 
 def render_line(line, lexicon):
     """(text in our language, IPA, glosses) for one tagged line."""
-    words, ipas, glosses = [], [], []
-    stretch = []  # words since the last pause
+    words, glosses = [], []
     for token in line.split():
         if token in PUNCTUATION:
             if words:
                 words[-1] += token
             glosses.append(token)
-            ipas += pronounce(stretch)
-            stretch = []
             continue
         row = lexicon.lookup(token)
         words.append(row.word)
-        stretch += row.word.split()
         glosses.append(row.gloss.replace(" ", "_"))
-    ipas += pronounce(stretch)
-    return " ".join(words), " ".join(ipas), " ".join(glosses)
+    text = " ".join(words)
+    return text, speak(text), " ".join(glosses)
 
 
 def render_text(text, lexicon):

@@ -10,7 +10,7 @@
 | Approximant | ʋ | l | | | |
 
 - 10 consonants: /m n p t k s x ʋ ʁ l/.
-- /s/ stays [s] before every vowel, also before i: *si* is [si], not [ɕi], so it stays apart from *hi* [çi].
+- /s/ stays [s] before every vowel, also before i: *si* is {{say: si = si}}, not [ɕi], so it stays apart from *hi* {{say: hi = çi}}.
 - [ʔ], [ç], [ŋ] are not phonemes; they come from the sound rules below.
 
 ## Vowels / 母音
@@ -41,8 +41,8 @@ Every syllable is **C V C**, where either consonant may be empty (written Ø in 
 
 An empty onset at the start of a word is pronounced as a glottal stop [ʔ]:
 
-- {{w: I}} "I" = {{ipa: I}}, {{w: AND}} "and" = {{ipa: AND}}.
-- This keeps words apart in connected speech: *et e* = [ʔɛt ʔɛ] vs. *e te* = [ʔɛ tɛ].
+- *ö* "{{en: ö}}" = {{say: ö = ʔø}}, *in* "{{en: in}}" = {{say: in = ʔin}}.
+- This keeps words apart in connected speech: *et e* = {{say: et e = ʔɛt ʔɛ}} vs. *e te* = {{say: e te = ʔɛ tɛ}}.
 
 ## h next to a front vowel / h 的顎化
 
@@ -50,27 +50,32 @@ h is [ç] when the vowel right before or right after it in the same word is fron
 
 | Word | Sounds | Why |
 | --- | --- | --- |
-| {{w: DISPUTE}} "dispute" | {{ipa: DISPUTE}} | before i |
-| {{w: CAN}} "can" | {{ipa: CAN}} | after ö |
-| {{w: LAST_(FINAL)}} "last" | {{ipa: LAST_(FINAL)}} | next to o |
-| {{w: WRAP}} "wrap" | {{ipa: WRAP}} | next to ë, a back vowel |
+| *hitet* "{{en: hitet}}" | {{say: hitet = çi.tɛt}} | before i |
+| *ihu* "{{en: ihu}}" | {{say: ihu = ʔi.çu}} | after i, in the syllable before |
+| *utöh* "{{en: utöh}}" | {{say: utöh = ʔu.tøç}} | after ö |
+| *hon* "{{en: hon}}" | {{say: hon = xɔn}} | next to o |
+| *etpëh* "{{en: etpëh}}" | {{say: etpëh = ʔɛp.pɤx}} | next to ë, a back vowel |
 
 ## Coda assimilation / 音節尾同化
 
-A coda t or n takes the place of the next consonant when that is a labial (m p) or a velar (k, or h said [x]). Only t and n change:
+A coda t or n takes the place of the next consonant when that is a labial (m p) or a velar (k, or h said [x]): t becomes [p] or [k], n becomes [m] or [ŋ]. Only t and n change.
 
-| Next consonant | t becomes | n becomes | Example |
-| --- | --- | --- | --- |
-| m p | [p] | [m] | {{w: DISPUTE PAST_(PARTICLE)}} {{ipa: DISPUTE PAST_(PARTICLE)}}; {{w: WARM IN}} {{ipa: WARM IN}} |
-| k, [x] | [k] | [ŋ] | {{w: BLOW_(OF_WIND)}} {{ipa: BLOW_(OF_WIND)}}; {{w: WARM}} {{ipa: WARM}} |
-| anything else | t | n | {{w: PERSON TRAVEL}} {{ipa: PERSON TRAVEL}} |
+| Next consonant | Coda t | Coda n |
+| --- | --- | --- |
+| m | *etme* "{{en: etme}}" {{say: etme = ʔɛp.mɛ}} | *önmi* "{{en: önmi}}" {{say: önmi = ʔøm.mi}} |
+| p | *etpëh* "{{en: etpëh}}" {{say: etpëh = ʔɛp.pɤx}} | *önkën po* "{{en: önkën po}}" {{say: önkën po = ʔøŋ.kɤm pɔ}} |
+| k | *etkal* "{{en: etkal}}" {{say: etkal = ʔɛk.kɑl}} | *önkën* "{{en: önkën}}" {{say: önkën = ʔøŋ.kɤn}} |
+| h said [x] | *etha* "{{en: etha}}" {{say: etha = ʔɛk.xɑ}} | *etsuhsen hënöl* "{{en: etsuhsen hënöl}}" {{say: etsuhsen hënöl = ʔɛt.sux.sɛŋ xɤ.nøl}} |
+| anything else | *etli* "{{en: etli}}" {{say: etli = ʔɛt.li}} | *önso* "{{en: önso}}" {{say: önso = ʔøn.sɔ}} |
 
-- It works inside a word and across words, but not across a pause (a comma or other punctuation).
-- It never happens before [ʔ], so *et e* stays [ʔɛt ʔɛ] and the glottal stop rule still keeps words apart.
-- It does not happen before [ç].
+- It works inside a word and across words, as in *hitet mö* "{{en: hitet mö}}" {{say: hitet mö = çi.tɛp mø}}, but not across a pause (a comma or other punctuation): *önkën, po* {{say: önkën, po = ʔøŋ.kɤn pɔ}}.
+- It never happens before [ʔ], so *et e* stays {{say: et e = ʔɛt ʔɛ}} and the glottal stop rule still keeps words apart.
+- It does not happen before [ç]: *ethi* "{{en: ethi}}" {{say: ethi = ʔɛt.çi}}.
 - Because p, m, k and ŋ never end a syllable otherwise, the listener always knows that [p] or [k] at the end of a syllable is t, and [m] or [ŋ] is n.
 
-The lexicon's IPA column shows each word said on its own, with these rules inside the word (from 0.1.1; 0.1.0 has [ɕ] for s and no [ç] or assimilation). Assimilation across words shows only in texts.
+The lexicon's IPA column shows each word said on its own, with these rules inside the word. Assimilation across words shows only in texts.
+
+Every pronunciation on this page is checked against the sound rules when the docs are built, and the tests check that the examples use every rule.
 
 ## Not decided yet / 尚未決定
 

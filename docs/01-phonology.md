@@ -52,26 +52,31 @@ h is [ç] when the vowel right before or right after it in the same word is fron
 | Word | Sounds | Why |
 | --- | --- | --- |
 | *hitet* "dispute" | [çi.tɛt] | before i |
+| *ihu* "below or under" | [ʔi.çu] | after i, in the syllable before |
 | *utöh* "can" | [ʔu.tøç] | after ö |
-| *hon* "last" | [xɔn] | next to o |
+| *hon* "last (final)" | [xɔn] | next to o |
 | *etpëh* "wrap" | [ʔɛp.pɤx] | next to ë, a back vowel |
 
 ## Coda assimilation / 音節尾同化
 
-A coda t or n takes the place of the next consonant when that is a labial (m p) or a velar (k, or h said [x]). Only t and n change:
+A coda t or n takes the place of the next consonant when that is a labial (m p) or a velar (k, or h said [x]): t becomes [p] or [k], n becomes [m] or [ŋ]. Only t and n change.
 
-| Next consonant | t becomes | n becomes | Example |
-| --- | --- | --- | --- |
-| m p | [p] | [m] | *hitet mö* [çi.tɛp mø]; *önkën po* [ʔøŋ.kɤm pɔ] |
-| k, [x] | [k] | [ŋ] | *etkal* [ʔɛk.kɑl]; *önkën* [ʔøŋ.kɤn] |
-| anything else | t | n | *ken etli* [kɛn ʔɛt.li] |
+| Next consonant | Coda t | Coda n |
+| --- | --- | --- |
+| m | *etme* "hurt or pain" [ʔɛp.mɛ] | *önmi* "swim" [ʔøm.mi] |
+| p | *etpëh* "wrap" [ʔɛp.pɤx] | *önkën po* "warm + in" [ʔøŋ.kɤm pɔ] |
+| k | *etkal* "blow (of wind)" [ʔɛk.kɑl] | *önkën* "warm" [ʔøŋ.kɤn] |
+| h said [x] | *etha* "sugar" [ʔɛk.xɑ] | *etsuhsen hënöl* "take off + cloak" [ʔɛt.sux.sɛŋ xɤ.nøl] |
+| anything else | *etli* "travel" [ʔɛt.li] | *önso* "worker" [ʔøn.sɔ] |
 
-- It works inside a word and across words, but not across a pause (a comma or other punctuation).
+- It works inside a word and across words, as in *hitet mö* "dispute + past (particle)" [çi.tɛp mø], but not across a pause (a comma or other punctuation): *önkën, po* [ʔøŋ.kɤn pɔ].
 - It never happens before [ʔ], so *et e* stays [ʔɛt ʔɛ] and the glottal stop rule still keeps words apart.
-- It does not happen before [ç].
+- It does not happen before [ç]: *ethi* "bedroom" [ʔɛt.çi].
 - Because p, m, k and ŋ never end a syllable otherwise, the listener always knows that [p] or [k] at the end of a syllable is t, and [m] or [ŋ] is n.
 
-The lexicon's IPA column shows each word said on its own, with these rules inside the word (from 0.1.1; 0.1.0 has [ɕ] for s and no [ç] or assimilation). Assimilation across words shows only in texts.
+The lexicon's IPA column shows each word said on its own, with these rules inside the word. Assimilation across words shows only in texts.
+
+Every pronunciation on this page is checked against the sound rules when the docs are built, and the tests check that the examples use every rule.
 
 ## Not decided yet / 尚未決定
 

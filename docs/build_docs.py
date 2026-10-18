@@ -9,9 +9,18 @@ Placeholders in the templates:
   {{stats}}              table of counts and average word length
   {{top: 30}}            table of the 30 most frequent words
   {{text: texts/x.txt}}  a concept-tagged text: words, IPA and glosses
+  {{en: hitet}}          what words of ours mean, lowercased: dispute
+  {{say: hitet mö = çi.tɛp mø}}  how words of ours sound, with the sound rules: [çi.tɛp mø];
+                         the build fails if the rules give anything else than the IPA after =
   \{{w: ...}}            stays as the literal text {{w: ...}}
 
 Concepts are written as in texts/ (gloss with _ for spaces, or #ID).
+
+w, ipa and h start from a concept, so the words follow each new version: use
+them where the meaning matters (grammar). en and say start from a fixed word:
+use them where the sound or spelling matters (phonology, orthography), so the
+example keeps showing what the text says about it. en fails when the word is
+no longer a word in the version, and the docs must then get a new example.
 Because the docs come from a released version, they only change when a new
 version is released.
 
@@ -28,7 +37,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "pipeline"))
-from phonetics import pronounce  # noqa: E402
+from phonetics import pronounce, speak  # noqa: E402
 from render import Lexicon, render_line, render_text  # noqa: E402
 
 SRC, OUT, LEXICON_DIR = ROOT / "docs/src", ROOT / "docs", ROOT / "lexicon"
@@ -55,6 +64,29 @@ class Builder:
 
     def ipa(self, tokens):
         return render_line(tokens, self.lexicon)[1]
+
+    def meaning(self, words):
+        own = self.table[self.table.kind.isin(["word", "compound"])]
+        gloss_of = dict(zip(own.word, own.gloss))
+        def english(gloss):
+            return " ".join(x if x == "I" else x.lower() for x in gloss.split())
+        if words in gloss_of:  # a compound, said with several words
+            return english(gloss_of[words])
+        missing = [w for w in words.split() if w not in gloss_of]
+        if missing:
+            raise ValueError(f"{', '.join(missing)}: not a word in lexicon {self.version}; pick another example")
+        return " + ".join(english(gloss_of[w]) for w in words.split())
+
+    @staticmethod
+    def say(arg, name="", used=None):
+        """IPA of `words = expected IPA`, checked against the sound rules."""
+        words, eq, expected = arg.partition("=")
+        if not eq:
+            raise ValueError(f"{name}: write {{{{say: {words.strip()} = IPA}}}}, so the example is checked")
+        got = speak(words, used)
+        if got != expected.strip():
+            raise ValueError(f"{name}: the sound rules say {words.strip()!r} is [{got}], but the page says [{expected.strip()}]")
+        return got
 
     def hyphenated(self, tokens):
         return " ".join(self.lexicon.lookup(t).word_hyphenated for t in tokens.split())
@@ -98,6 +130,10 @@ class Builder:
                 return f"[{self.ipa(arg)}]"
             if kind == "name":
                 return "*" + " ".join(w.capitalize() for w in self.words(arg).split()) + "*"
+            if kind == "en":
+                return self.meaning(arg)
+            if kind == "say":
+                return f"[{self.say(arg, name)}]"
             if kind == "h":
                 return f"*{self.hyphenated(arg)}*"
             if kind == "stats":
