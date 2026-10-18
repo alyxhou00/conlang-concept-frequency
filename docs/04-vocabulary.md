@@ -35,7 +35,7 @@ Some concepts don't get a word of their own:
 | 2 | HE OR SHE OR IT | e | [ʔɛ] |
 | 3 | NOT | ë | [ʔɤ] |
 | 4 | WHAT | o | [ʔɔ] |
-| 5 | THOU | a | [ʔɑ] |
+| 5 | YOU (SINGULAR) | a | [ʔɑ] |
 | 6 | AND | in | [ʔin] |
 | 7 | PAST (PARTICLE) | mö | [mø] |
 | 8 | THAT | nu | [nu] |
@@ -45,7 +45,7 @@ Some concepts don't get a word of their own:
 | 12 | WITH | ti | [ti] |
 | 13 | ATOP OR UP | ke | [kɛ] |
 | 14 | NO | ut | [ʔut] |
-| 15 | YOU | së | [sɤ] |
+| 15 | YOU (PLURAL) | së | [sɤ] |
 | 16 | THIS | oh | [ʔɔx] |
 | 17 | YES | ha | [xɑ] |
 | 18 | HOW | il | [ʔil] |

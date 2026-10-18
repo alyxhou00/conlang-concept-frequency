@@ -76,7 +76,7 @@ Writes `lexicon/<version>.tsv` (rank, concept, kind, word, syllables, `cvc`, IPA
 
 ## render.py: texts
 
-A text in `texts/` names concepts, not words, so it stays valid when the words change. One sentence per line; lines starting with `# ` are comments. A token is a concept gloss with `_` for spaces (`BE_BORN`, `SPIRIT_(ATTITUDE)`) or `#` + a concept ID (`#1209`); the punctuation `. , ? ! ; :` is kept. Word order follows the [grammar](../docs/03-grammar.md): SVO, with modifiers, particles and postpositions after their word.
+A text in `texts/` names concepts, not words, so it stays valid when the words change. One sentence per line; lines starting with `# ` are comments. A token is a concept gloss with `_` for spaces (`BE_BORN`, `SPIRIT_(ATTITUDE)`) or `#` + a concept ID (`#1209`); the punctuation `. , ? ! ; :` is kept. `YOU_(SINGULAR)` and `YOU_(PLURAL)` are clearer names for THOU and YOU, and the gloss line shows them; a plain `YOU` ("you, several people") prints a warning, because English speakers also use it for one person. Word order follows the [grammar](../docs/03-grammar.md): SVO, with modifiers, particles and postpositions after their word.
 
 ```
 PERSON ALL BE_BORN FREE AND EQUAL DIGNITY AND RIGHT_(ENTITLEMENT) IN .

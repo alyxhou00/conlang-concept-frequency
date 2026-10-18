@@ -1,7 +1,7 @@
 # The Tower of Babel, Genesis 11:1-9 (King James Version, public domain)
 # Draft for the coverage check (2026-10-16). Tokens starting with ? mark grammar that is not decided yet
 # (?REL relative clause, ?WHEN "when"-clause, ?HORT "let us", ?PURP "in order to", ?LEST "so that not",
-# ?FUT future, ?THEREFORE "so", ?NAME_ a foreign name, to be written NAME Sinar NAME once the NAME particle exists).
+# ?FUT future, ?THEREFORE "so", ?NAME_ a foreign name, to be written FOREIGN_NAME_(PARTICLE) Sinar FOREIGN_NAME_(PARTICLE) once that particle exists).
 # 1 And the whole earth was of one language, and of one speech.
 WORLD WHOLE HAVE LANGUAGE ONE AND SPEECH ONE PAST_(PARTICLE) .
 # 2 And it came to pass, as they journeyed from the east, that they found a plain in the land of Shinar; and they dwelt there.

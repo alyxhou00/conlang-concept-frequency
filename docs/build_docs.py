@@ -14,7 +14,9 @@ Placeholders in the templates:
                          the build fails if the rules give anything else than the IPA after =
   \{{w: ...}}            stays as the literal text {{w: ...}}
 
-Concepts are written as in texts/ (gloss with _ for spaces, or #ID).
+Concepts are written as in texts/ (gloss with _ for spaces, or #ID). THOU and
+YOU are shown as YOU (SINGULAR) and YOU (PLURAL), and the build fails where a
+page writes YOU, which English speakers misread (see CLEAR_LABELS in render.py).
 
 w, ipa and h start from a concept, so the words follow each new version: use
 them where the meaning matters (grammar). en and say start from a fixed word:
@@ -31,6 +33,7 @@ import argparse
 import json
 import re
 import sys
+import warnings
 from pathlib import Path
 
 import pandas as pd
@@ -38,7 +41,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "pipeline"))
 from phonetics import pronounce, speak  # noqa: E402
-from render import Lexicon, render_line, render_text  # noqa: E402
+from render import Lexicon, MisreadWarning, label, render_line, render_text  # noqa: E402
 
 SRC, OUT, LEXICON_DIR = ROOT / "docs/src", ROOT / "docs", ROOT / "lexicon"
 PLACEHOLDER = re.compile(r"(?<!\\)\{\{\s*(\w+)\s*(?::\s*(.*?))?\s*\}\}")  # \{{ ... }} stays literal
@@ -67,7 +70,7 @@ class Builder:
 
     def meaning(self, words):
         own = self.table[self.table.kind.isin(["word", "compound"])]
-        gloss_of = dict(zip(own.word, own.gloss))
+        gloss_of = {w: label(cid, g) for w, cid, g in zip(own.word, own.concept_id, own.gloss)}
         def english(gloss):
             return " ".join(x if x == "I" else x.lower() for x in gloss.split())
         if words in gloss_of:  # a compound, said with several words
@@ -109,7 +112,7 @@ class Builder:
     def top(self, n):
         rows = self.table[self.table.kind == "word"].sort_values("rank").head(int(n))
         lines = ["| # | Concept | Word | IPA |", "| --- | --- | --- | --- |"]
-        lines += [f"| {int(r.rank)} | {r.gloss} | {r.word} | [{pronounce([r.word])[0]}] |" for r in rows.itertuples()]
+        lines += [f"| {int(r.rank)} | {label(r.concept_id, r.gloss)} | {r.word} | [{pronounce([r.word])[0]}] |" for r in rows.itertuples()]
         return "\n".join(lines)
 
     def text(self, path):
@@ -152,7 +155,9 @@ def build(version=None):
     """{output path: content} for every template."""
     version = version or versions()[-1]
     b = Builder(version)
-    return {OUT / src.name: b.fill(src.read_text(encoding="utf-8"), src.name) for src in sorted(SRC.glob("*.md"))}
+    with warnings.catch_warnings():
+        warnings.simplefilter("error", MisreadWarning)
+        return {OUT / src.name: b.fill(src.read_text(encoding="utf-8"), src.name) for src in sorted(SRC.glob("*.md"))}
 
 
 def main():

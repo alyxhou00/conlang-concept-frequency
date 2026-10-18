@@ -13,8 +13,8 @@ Examples show concept names (GLOSSES) and the words in lexicon version {{version
 | Particles | After the word they modify | GO NOT — {{w: GO NOT}} |
 | Adpositions | Postpositions | DIGNITY IN — {{w: DIGNITY IN}} |
 | Obligatory marking | None (number, tense, voice, case all optional) | PERSON = one person or many |
-| Yes/no questions | Question particle at the start | Q THOU GO — {{w: QUESTION_(PARTICLE) THOU GO}} |
-| Question words | Stay in place | THOU SEE WHO — {{w: THOU SEE WHO}} |
+| Yes/no questions | Question particle at the start | Q YOU (SINGULAR) GO — {{w: QUESTION_(PARTICLE) YOU_(SINGULAR) GO}} |
+| Question words | Stay in place | YOU (SINGULAR) SEE WHO — {{w: YOU_(SINGULAR) SEE WHO}} |
 | Copula | Adjectives are predicates directly; BE only before a noun | PERSON FREE — {{w: PERSON FREE}}; HE BE TEACHER — {{w: HE BE TEACHER}} |
 | Possession | Juxtaposed, possessor after | DOG I — {{w: DOG I}} "my dog" |
 | Numerals | After the noun, no classifiers | PERSON THREE — {{w: PERSON THREE}} |
@@ -60,8 +60,10 @@ Singular vs. plural, and inclusive vs. exclusive "we". No gender, no politeness 
 | | Singular | Plural |
 | --- | --- | --- |
 | 1st | I — {{w: I}} | WE (EXCLUSIVE) — {{w: WE_(EXCLUSIVE)}}; WE (INCLUSIVE) — {{w: WE_(INCLUSIVE)}} |
-| 2nd | THOU — {{w: THOU}} | YOU — {{w: YOU}} |
+| 2nd | YOU (SINGULAR), "you, one person" — {{w: YOU_(SINGULAR)}} | YOU (PLURAL), "you, several people" — {{w: YOU_(PLURAL)}} |
 | 3rd | HE OR SHE OR IT — {{w: HE_OR_SHE_OR_IT}} | THEY — {{w: THEY}} |
+
+In Concepticon the two "you" are THOU (1215) and YOU (1213). Texts may write either name: THOU or YOU_(SINGULAR), and YOU_(PLURAL) or YOU. Glosses always show YOU (SINGULAR) and YOU (PLURAL), because English readers take a plain YOU for one person as well. For the same reason `pipeline/render.py` warns when a text writes plain YOU, and the docs build refuses it.
 
 ## Proper names and loanwords / 專有名詞與外來詞
 
@@ -69,11 +71,13 @@ Singular vs. plural, and inclusive vs. exclusive "we". No gender, no politeness 
 | --- | --- | --- |
 | New concepts, including international ones (computer, internet) | Said with existing words, like Chinese 電話 "electric speech"; once common, a word of their own from the free slots. No borrowing by sound. | INTERNET → NET COMPUTER, "net of computers" |
 | Names made of our own words | **Modifier first**, the reverse of the normal order: the order itself marks a fixed name. Capitalized. | SHORT LANGUAGE — {{name: SHORT LANGUAGE}}, the name of this language; compare LANGUAGE SHORT — {{w: LANGUAGE SHORT}} "a language that is short" |
-| Names from other languages (Maria, Paris) | Adapted to our sounds and placed between two NAME particles, so the listener hears where the name starts and ends. Capitalized. A category word (PERSON, CITY, RIVER …) may follow. | NAME *Nuyok* NAME CITY "New York City" |
+| Names from other languages (Maria, Paris) | Adapted to our sounds and placed between two FOREIGN NAME particles, so the listener hears where the name starts and ends. Capitalized. A category word (PERSON, CITY, RIVER …) may follow. | FOREIGN NAME *Nuyok* FOREIGN NAME CITY "New York City" |
 
-Why names need the NAME particles: almost every syllable sequence is already a sequence of our words, so a name like *ma-ri-a* would otherwise be heard as three ordinary words.
+Why names need the FOREIGN NAME particles: almost every syllable sequence is already a sequence of our words, so a name like *ma-ri-a* would otherwise be heard as three ordinary words.
 
-Not decided yet: the NAME particle itself (it will be added in the next lexicon version), the rules for adapting foreign sounds, and how foreign names are spelled beyond the capital letter.
+The particle's concept is called FOREIGN NAME (PARTICLE), written FOREIGN_NAME_(PARTICLE) in texts, so it can't be confused with the noun NAME, as in "hallowed be thy name" (NAME YOU (SINGULAR) HOLY).
+
+Not decided yet: the FOREIGN NAME particle itself (it will be added in the next lexicon version), the rules for adapting foreign sounds, and how foreign names are spelled beyond the capital letter.
 
 ## Not decided yet / 尚未決定
 

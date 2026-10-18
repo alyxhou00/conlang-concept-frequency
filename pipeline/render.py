@@ -4,6 +4,8 @@ Text format (see texts/):
   - one sentence per line; lines starting with "# " are comments
   - a token is a concept gloss with "_" for spaces (BE_BORN, SPIRIT_(ATTITUDE)),
     case does not matter, or "#" + a concept ID (#1209)
+  - YOU_(SINGULAR) and YOU_(PLURAL) are clearer names for THOU and YOU (see
+    CLEAR_LABELS); the gloss line shows them too
   - . , ? ! ; : are kept as punctuation, and are pauses for the sound rules
 
 The IPA line is how the sentence sounds, with the sound rules of phonetics.py.
@@ -15,6 +17,7 @@ Run:  .venv/Scripts/python -X utf8 pipeline/render.py texts/udhr-article-1.txt
 """
 import argparse
 import difflib
+import warnings
 from pathlib import Path
 
 import pandas as pd
@@ -23,6 +26,22 @@ from phonetics import speak
 
 ROOT = Path(__file__).resolve().parent.parent
 PUNCTUATION = set(".,?!;:")
+
+# Concepticon's THOU is "you, one person" and YOU is "you, several people", but
+# English speakers read YOU as one person too. Texts may write these clearer
+# labels instead, and the gloss line and the docs show them.
+CLEAR_LABELS = {1215: "YOU (SINGULAR)", 1213: "YOU (PLURAL)"}  # THOU, YOU
+# Glosses that read like "you, one person" but are "you, several people".
+MISREAD = {"YOU", "YOU (OBLIQUE CASE OF YOU)", "YOU (HONORIFIC)"}
+
+
+class MisreadWarning(UserWarning):
+    """A text uses a gloss that English speakers easily misread."""
+
+
+def label(concept_id, gloss):
+    """The gloss to show for a concept: the clear label if it has one."""
+    return CLEAR_LABELS.get(concept_id, gloss)
 
 
 class Lexicon:
@@ -33,6 +52,11 @@ class Lexicon:
             raise ValueError(f"glosses used twice: {', '.join(dupes)}")
         self.by_id = lex.set_index("concept_id")
         self.id_of = {g.upper(): cid for g, cid in zip(lex.gloss, lex.concept_id)}
+        for cid, clear in CLEAR_LABELS.items():
+            if clear in self.id_of:
+                raise ValueError(f"{clear} is a gloss in the lexicon and a clear label in render.py")
+            if cid in self.by_id.index:
+                self.id_of[clear] = cid
 
     def lookup(self, token):
         """Lexicon row for a token (gloss with _ for spaces, or #ID)."""
@@ -59,8 +83,11 @@ def render_line(line, lexicon):
             glosses.append(token)
             continue
         row = lexicon.lookup(token)
+        if token.replace("_", " ").upper() in MISREAD:
+            warnings.warn(f'{token} in "{line}" means "you, several people": write YOU_(PLURAL) for that, '
+                          "or THOU or YOU_(SINGULAR) for one person", MisreadWarning, stacklevel=2)
         words.append(row.word)
-        glosses.append(row.gloss.replace(" ", "_"))
+        glosses.append(label(row.name, row.gloss).replace(" ", "_"))
     text = " ".join(words)
     return text, speak(text), " ".join(glosses)
 
@@ -86,6 +113,7 @@ def main():
     ap.add_argument("--lexicon", type=Path, default=ROOT / "out/lexicon.tsv")
     args = ap.parse_args()
 
+    warnings.formatwarning = lambda message, *_args, **_kwargs: f"warning: {message}\n"
     for comments, text, ipa_line, glosses in render_text(args.text.read_text(encoding="utf-8"), Lexicon(args.lexicon)):
         for c in comments:
             print(f"# {c}")

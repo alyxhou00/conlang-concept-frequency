@@ -19,6 +19,20 @@ def test_meaning_of_fixed_words(builder):
     assert fill(builder, "{{en: ö}}") == "I"
 
 
+def test_thou_and_you_are_shown_with_clear_labels(builder):
+    assert fill(builder, "{{en: a}}") == "you (singular)"
+    assert "| YOU (PLURAL) |" in fill(builder, "{{top: 30}}")
+
+
+def test_docs_fail_on_you_that_english_speakers_misread(tmp_path, monkeypatch):
+    (tmp_path / "x.md").write_text("{{w: I SEE YOU}}", encoding="utf-8")
+    monkeypatch.setattr(build_docs, "SRC", tmp_path)
+    with pytest.raises(build_docs.MisreadWarning, match=r"write YOU_\(PLURAL\)"):
+        build_docs.build()
+    (tmp_path / "x.md").write_text("{{w: I SEE YOU_(PLURAL)}}", encoding="utf-8")
+    assert len(build_docs.build()) == 1
+
+
 def test_meaning_fails_for_a_word_that_is_gone(builder):
     with pytest.raises(ValueError, match="zzz: not a word in lexicon"):
         fill(builder, "{{en: hitet zzz}}")
