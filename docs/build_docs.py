@@ -28,6 +28,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "pipeline"))
+from phonetics import pronounce  # noqa: E402
 from render import Lexicon, render_line, render_text  # noqa: E402
 
 SRC, OUT, LEXICON_DIR = ROOT / "docs/src", ROOT / "docs", ROOT / "lexicon"
@@ -76,7 +77,7 @@ class Builder:
     def top(self, n):
         rows = self.table[self.table.kind == "word"].sort_values("rank").head(int(n))
         lines = ["| # | Concept | Word | IPA |", "| --- | --- | --- | --- |"]
-        lines += [f"| {int(r.rank)} | {r.gloss} | {r.word} | [{r.ipa}] |" for r in rows.itertuples()]
+        lines += [f"| {int(r.rank)} | {r.gloss} | {r.word} | [{pronounce([r.word])[0]}] |" for r in rows.itertuples()]
         return "\n".join(lines)
 
     def text(self, path):

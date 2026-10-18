@@ -45,7 +45,7 @@ Some concepts don't get a word of their own:
 | 12 | WITH | ti | [ti] |
 | 13 | ATOP OR UP | ke | [kɛ] |
 | 14 | NO | ut | [ʔut] |
-| 15 | YOU | së | [ɕɤ] |
+| 15 | YOU | së | [sɤ] |
 | 16 | THIS | oh | [ʔɔx] |
 | 17 | YES | ha | [xɑ] |
 | 18 | HOW | il | [ʔil] |

@@ -9,14 +9,14 @@ Lexicon version 0.1.0.
 > All human beings are born free and equal in dignity and rights.
 
 **ken ki etmö poh in ihih önhe in lih po.**  
-[kɛn ki ʔɛt.mø pɔx ʔin ʔi.xix ʔøn.xɛ ʔin lix pɔ]  
+[kɛŋ ki ʔɛp.mø pɔx ʔin ʔi.çiç ʔøn.çɛ ʔin liç pɔ]  
 PERSON ALL BE_BORN FREE AND EQUAL DIGNITY AND RIGHT_(ENTITLEMENT) IN .
 
 > They are endowed with reason and conscience and should act towards one another in a spirit of brotherhood.
 > "are endowed with" is said as "have" (no passive needed); "brotherhood" as "spirit (of) brother".
 
 **ah en lol in etsi, in öh pël etvoh ril nöh kut po.**  
-[ʔɑx ʔɛn lɔl ʔin ʔɛt.ɕi ʔin ʔøx pɤl ʔɛt.ʋɔx ʁil nøx kut pɔ]  
+[ʔɑx ʔɛn lɔl ʔin ʔɛt.si ʔin ʔøç pɤl ʔɛt.ʋɔx ʁil nøç kup pɔ]  
 THEY HAVE REASON AND CONSCIENCE , AND DO SHOULD EACH_OTHER TOWARDS SPIRIT_(ATTITUDE) BROTHER IN .
 
 Notes:
@@ -36,40 +36,40 @@ Translated by CLB (Łügutökü Likine).
 > "wrapped in" is said actively (WRAP CLOAK), like the wrapping later on.
 
 **etlö umöt in urih hitet mö, röl iset vi, ken etli, etpëh hënöl önkën, ël se.**  
-[ʔɛt.lø ʔu.møt ʔin ʔu.ʁix xi.tɛt mø ʁøl ʔi.ɕɛt ʋi kɛn ʔɛt.li ʔɛt.pɤx xɤ.nøl ʔøn.kɤn ʔɤl ɕɛ]  
+[ʔɛt.lø ʔu.møt ʔin ʔu.ʁiç çi.tɛp mø ʁøl ʔi.sɛt ʋi kɛn ʔɛt.li ʔɛp.pɤx xɤ.nøl ʔøŋ.kɤn ʔɤl sɛ]  
 WIND NORTH AND SUN DISPUTE PAST_(PARTICLE) , WHICH STRONG MORE , PERSON TRAVEL , WRAP CLOAK WARM , COME WHEN .
 
 > They agreed that the one who first got the traveller to take off his cloak would be counted the stronger of the two.
 > "would be counted" is left out: "the one who first ..., is stronger than the other".
 
 **ah imël, ot, ku ken etli etsuhsen hënöl e li, iset vi tën itih.**  
-[ʔɑx ʔi.mɤl ʔɔt ku kɛn ʔɛt.li ʔɛt.ɕux.ɕɛn xɤ.nøl ʔɛ li ʔi.ɕɛt ʋi tɤn ʔi.tix]  
+[ʔɑx ʔi.mɤl ʔɔt ku kɛn ʔɛt.li ʔɛt.sux.sɛŋ xɤ.nøl ʔɛ li ʔi.sɛt ʋi tɤn ʔi.tiç]  
 THEY AGREE , ONE , CAUSE_TO_(LET) PERSON TRAVEL TAKE_OFF CLOAK HE FIRST , STRONG MORE OTHER ABOVE .
 
 > Then the north wind blew with all his might, but the harder he blew, the tighter the traveller pulled his cloak around him.
 > "the harder ..., the tighter ..." is said as "when he blew more, ... tighter more".
 
 **it etlö umöt etkal usit ki ti, lo e etkal vi se, ken etli etpëh hënöl e umun vi.**  
-[ʔit ʔɛt.lø ʔu.møt ʔɛt.kɑl ʔu.ɕit ki ti lɔ ʔɛ ʔɛt.kɑl ʋi ɕɛ kɛn ʔɛt.li ʔɛt.pɤx xɤ.nøl ʔɛ ʔu.mun ʋi]  
+[ʔit ʔɛt.lø ʔu.møt ʔɛk.kɑl ʔu.sik ki ti lɔ ʔɛ ʔɛk.kɑl ʋi sɛ kɛn ʔɛt.li ʔɛp.pɤx xɤ.nøl ʔɛ ʔu.mun ʋi]  
 THEN WIND NORTH BLOW_(OF_WIND) STRENGTH ALL WITH , BUT HE BLOW_(OF_WIND) MORE WHEN , PERSON TRAVEL WRAP CLOAK HE TIGHT MORE .
 
 > In the end the north wind gave up trying.
 
 **hon po etlö umöt ukël kit.**  
-[xɔn pɔ ʔɛt.lø ʔu.møt ʔu.kɤl kit]  
+[xɔm pɔ ʔɛt.lø ʔu.møt ʔu.kɤl kit]  
 LAST_(FINAL) IN WIND NORTH ABANDON TRY .
 
 > Then the sun shone out warmly, and the traveller took off his cloak at once.
 
 **it urih hëpa önkën, ken etli etsuhsen hënöl e usëh.**  
-[ʔit ʔu.ʁix xɤ.pɑ ʔøn.kɤn kɛn ʔɛt.li ʔɛt.ɕux.ɕɛn xɤ.nøl ʔɛ ʔu.ɕɤx]  
+[ʔit ʔu.ʁiç xɤ.pɑ ʔøŋ.kɤn kɛn ʔɛt.li ʔɛt.sux.sɛŋ xɤ.nøl ʔɛ ʔu.sɤx]  
 THEN SUN SHINE_(EMITTED_LIGHT) WARM , PERSON TRAVEL TAKE_OFF CLOAK HE IMMEDIATELY .
 
 > So the north wind had to admit that the sun was the stronger of the two.
 > "so" is RESULT IN, "in the result", like LAST IN "in the end"; "of the two" is clear from context.
 
 **inat po, etlö umöt uveh koh, urih iset vi.**  
-[ʔi.nɑt pɔ ʔɛt.lø ʔu.møt ʔu.ʋɛx kɔx ʔu.ʁix ʔi.ɕɛt ʋi]  
+[ʔi.nɑp pɔ ʔɛt.lø ʔu.møt ʔu.ʋɛç kɔx ʔu.ʁiç ʔi.sɛt ʋi]  
 RESULT IN , WIND NORTH ADMIT MUST , SUN STRONG MORE .
 
 Notes:

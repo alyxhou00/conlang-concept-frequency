@@ -20,7 +20,7 @@ def test_glosses_ids_and_punctuation(lexicon):
     [(comments, text, ipa, gloss)] = render_text("# a comment\nI see #900002 .", lexicon)
     assert comments == ["a comment"]
     assert text == "ö ken lih."
-    assert ipa == "ʔø kɛn lix"
+    assert ipa == "ʔø kɛn liç"
     assert gloss == "I SEE RIGHT_(ENTITLEMENT) ."
 
 
@@ -35,3 +35,10 @@ def test_words_like_nan_and_glosses_like_na_survive_reading(lexicon):
 def test_unknown_concept_suggests_close_glosses(lexicon):
     with pytest.raises(KeyError, match="did you mean SEE"):
         render_text("SEEE", lexicon)
+
+
+def test_ipa_uses_the_sound_rules_and_stops_at_pauses(lexicon):
+    # ken lih: n before l stays; lih has [ç] after i. A comma is a pause, so no assimilation across it.
+    assert render_text("SEE I", lexicon)[0][2] == "kɛn ʔø"
+    assert render_text("NA , SEE", lexicon)[0][2] == "nɑn kɛn"
+    assert render_text("NA SEE", lexicon)[0][2] == "nɑŋ kɛn"

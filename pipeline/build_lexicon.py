@@ -47,19 +47,18 @@ from pathlib import Path
 import pandas as pd
 
 from huffman import free_slots, nary_huffman_reserving
+from phonetics import GLOTTAL_STOP, IPA
 from units import Units, load_compounds, load_merges
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "out"
 ZERO = "Ø"
 
-# /m n p t k ɕ x ʋ ʁ l/ written m n p t k s h v r l, plus the zero onset
+# /m n p t k s x ʋ ʁ l/ written m n p t k s h v r l, plus the zero onset
 ONSETS = "Ømnptkshvrl"
 # /i ø ɛ u ɤ ɔ ɑ/
 VOWELS = "iöeuëoa"
 CODAS = "nthlØ"
-GLOTTAL_STOP = "ʔ"
-IPA = {"s": "ɕ", "h": "x", "v": "ʋ", "r": "ʁ", "ö": "ø", "e": "ɛ", "ë": "ɤ", "o": "ɔ", "a": "ɑ"}
 
 
 def letters(s):
@@ -121,7 +120,9 @@ def render(*syllables):
 
 
 def ipa(*syllables):
-    """IPA with syllable dots; a word-initial zero onset is a glottal stop."""
+    """Phonemic IPA with syllable dots; a word-initial zero onset is a glottal stop.
+
+    The sound rules of connected speech are in phonetics.py, not here."""
     out = []
     for i, (o, v, c) in enumerate(syllables):
         o = GLOTTAL_STOP if (o == ZERO and i == 0) else "" if o == ZERO else IPA.get(o, o)

@@ -4,7 +4,9 @@ Text format (see texts/):
   - one sentence per line; lines starting with "# " are comments
   - a token is a concept gloss with "_" for spaces (BE_BORN, SPIRIT_(ATTITUDE)),
     case does not matter, or "#" + a concept ID (#1209)
-  - . , ? ! ; : are kept as punctuation
+  - . , ? ! ; : are kept as punctuation, and are pauses for the sound rules
+
+The IPA line is how the sentence sounds, with the sound rules of phonetics.py.
 
 Because the text names concepts, not words, it stays valid when the lexicon is
 rebuilt: render it again and it uses the new words.
@@ -16,6 +18,8 @@ import difflib
 from pathlib import Path
 
 import pandas as pd
+
+from phonetics import pronounce
 
 ROOT = Path(__file__).resolve().parent.parent
 PUNCTUATION = set(".,?!;:")
@@ -48,16 +52,20 @@ class Lexicon:
 def render_line(line, lexicon):
     """(text in our language, IPA, glosses) for one tagged line."""
     words, ipas, glosses = [], [], []
+    stretch = []  # words since the last pause
     for token in line.split():
         if token in PUNCTUATION:
             if words:
                 words[-1] += token
             glosses.append(token)
+            ipas += pronounce(stretch)
+            stretch = []
             continue
         row = lexicon.lookup(token)
         words.append(row.word)
-        ipas.append(row.ipa)
+        stretch += row.word.split()
         glosses.append(row.gloss.replace(" ", "_"))
+    ipas += pronounce(stretch)
     return " ".join(words), " ".join(ipas), " ".join(glosses)
 
 

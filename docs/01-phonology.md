@@ -3,15 +3,16 @@
 
 ## Consonants / 子音
 
-| | Labial | Alveolar | Alveolo-palatal | Velar | Uvular | Glottal |
-| --- | --- | --- | --- | --- | --- | --- |
-| Nasal | m | n | | | | |
-| Plosive | p | t | | k | | (ʔ) |
-| Fricative | | | ɕ | x | ʁ | |
-| Approximant | ʋ | l | | | | |
+| | Labial | Alveolar | Velar | Uvular | Glottal |
+| --- | --- | --- | --- | --- | --- |
+| Nasal | m | n | | | |
+| Plosive | p | t | k | | (ʔ) |
+| Fricative | | s | x | ʁ | |
+| Approximant | ʋ | l | | | |
 
-- 10 consonants: /m n p t k ɕ x ʋ ʁ l/.
-- [ʔ] is not a phoneme; it is how an empty onset sounds at the start of a word (see below).
+- 10 consonants: /m n p t k s x ʋ ʁ l/.
+- /s/ stays [s] before every vowel, also before i: *si* is [si], not [ɕi], so it stays apart from *hi* [çi].
+- [ʔ], [ç], [ŋ] are not phonemes; they come from the sound rules below.
 
 ## Vowels / 母音
 
@@ -30,7 +31,7 @@ Every syllable is **C V C**, where either consonant may be empty (written Ø in 
 
 | Slot | Possible sounds | Count |
 | --- | --- | --- |
-| Onset (start) | ∅ m n p t k ɕ x ʋ ʁ l | 11 |
+| Onset (start) | ∅ m n p t k s x ʋ ʁ l | 11 |
 | Vowel | i ø ɛ u ɤ ɔ ɑ | 7 |
 | Coda (end) | n t x l ∅ | 5 |
 
@@ -44,7 +45,34 @@ An empty onset at the start of a word is pronounced as a glottal stop [ʔ]:
 - *ö* "I" = [ʔø], *in* "and" = [ʔin].
 - This keeps words apart in connected speech: *et e* = [ʔɛt ʔɛ] vs. *e te* = [ʔɛ tɛ].
 
+## h next to a front vowel / h 的顎化
+
+h is [ç] when the vowel right before or right after it in the same word is front (i, e, ö); otherwise it is [x]:
+
+| Word | Sounds | Why |
+| --- | --- | --- |
+| *hitet* "dispute" | [çi.tɛt] | before i |
+| *utöh* "can" | [ʔu.tøç] | after ö |
+| *hon* "last" | [xɔn] | next to o |
+| *etpëh* "wrap" | [ʔɛp.pɤx] | next to ë, a back vowel |
+
+## Coda assimilation / 音節尾同化
+
+A coda t or n takes the place of the next consonant when that is a labial (m p) or a velar (k, or h said [x]). Only t and n change:
+
+| Next consonant | t becomes | n becomes | Example |
+| --- | --- | --- | --- |
+| m p | [p] | [m] | *hitet mö* [çi.tɛp mø]; *önkën po* [ʔøŋ.kɤm pɔ] |
+| k, [x] | [k] | [ŋ] | *etkal* [ʔɛk.kɑl]; *önkën* [ʔøŋ.kɤn] |
+| anything else | t | n | *ken etli* [kɛn ʔɛt.li] |
+
+- It works inside a word and across words, but not across a pause (a comma or other punctuation).
+- It never happens before [ʔ], so *et e* stays [ʔɛt ʔɛ] and the glottal stop rule still keeps words apart.
+- It does not happen before [ç].
+- Because p, m, k and ŋ never end a syllable otherwise, the listener always knows that [p] or [k] at the end of a syllable is t, and [m] or [ŋ] is n.
+
+The lexicon's IPA column shows each word on its own, without these rules (0.1.0 still has [ɕ] for s). Texts and the tables here show them.
+
 ## Not decided yet / 尚未決定
 
 - Stress or pitch accent.
-- Sound changes or allophony beyond the glottal stop.

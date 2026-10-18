@@ -58,7 +58,7 @@ def test_every_one_and_two_syllable_word_is_spelled_uniquely():
 
 def test_word_initial_zero_onset_is_a_glottal_stop():
     assert ipa((ZERO, "a", "n"), ("t", "ë", ZERO)) == "ʔɑn.tɤ"
-    assert ipa(("s", "o", "h")) == "ɕɔx"
+    assert ipa(("s", "o", "h")) == "sɔx"
 
 
 def test_one_and_two_syllable_word_pairs_never_sound_the_same():
